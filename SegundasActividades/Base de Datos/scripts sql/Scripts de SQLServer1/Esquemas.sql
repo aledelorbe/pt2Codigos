@@ -8,7 +8,7 @@ go
 -- Creacion de Entidades
 create table Estado(
 	id_estado int not null identity(1,1),
-	nombre varchar(40),
+	nombre varchar(40) not null,
 
 	constraint PK_id_estado primary key (id_estado)
 )
@@ -16,7 +16,7 @@ go
 
 create table Escolaridad(
 	id_escolaridad int not null identity(1,1),
-	nombre varchar(40),
+	nombre varchar(40) not null,
 
 	constraint PK_id_escolaridad primary key (id_escolaridad)
 )
@@ -24,7 +24,7 @@ go
 
 create table Cancer(
 	id_cancer int not null identity(1,1),
-	nombre varchar(40),
+	nombre varchar(40) not null,
 
 	constraint PK_id_cancer primary key (id_cancer)
 )
@@ -32,7 +32,7 @@ go
 
 create table Ocupacion(
 	id_ocupacion int not null identity(1,1),
-	nombre varchar(90),
+	nombre varchar(90) not null,
 
 	constraint PK_id_ocupacion primary key (id_ocupacion)
 )
@@ -43,7 +43,6 @@ create table EstadoCancer(
 	id_estado int not null,
 	id_cancer int not null,
 	cantidad int not null,
-	parametro varchar(11) not null,
 	cluster int not null,
 	--anio varchar(6),
 
@@ -55,8 +54,7 @@ go
 create table EstadoEscolaridad(
 	id_estado int not null,
 	id_escolaridad int not null,
-	cantidad int,
-	parametro varchar(11) not null,
+	cantidad int not null,
 	cluster int not null,
 	--anio varchar(6),
 
@@ -68,8 +66,7 @@ go
 create table EstadoOcupacion(
 	id_estado int not null,
 	id_ocupacion int not null,
-	cantidad int,
-	parametro varchar(11) not null,
+	cantidad int not null,
 	cluster int not null,
 	--anio varchar(6),
 
