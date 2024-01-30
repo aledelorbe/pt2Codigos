@@ -16,3 +16,9 @@ go
 select *
 from Ocupacion
 go
+
+
+
+select *
+from EstadoCancer
+go
