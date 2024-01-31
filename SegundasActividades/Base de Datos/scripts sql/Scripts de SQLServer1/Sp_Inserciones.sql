@@ -60,7 +60,7 @@ DELETE FROM EstadoEscolaridad
 -- Sp para insertar en la tabla 'EstadoOcupacion' ----------------------------------
 
 CREATE OR ALTER PROCEDURE sp_insertarEstadoOcupacion
-	@estado varchar(40), @ocupacion varchar(40), @cantidad int, @cluster int
+	@estado varchar(40), @ocupacion varchar(90), @cantidad int, @cluster int
 AS
 BEGIN
 	IF EXISTS(select id_estado from Estado where nombre = @estado) AND EXISTS(select id_ocupacion from Ocupacion where nombre = @ocupacion)
@@ -77,7 +77,7 @@ BEGIN
 END
 
 -- Test del sp_insertarEstadoOcupacion
-Exec sp_insertarEstadoOcupacion 'Aguascalientes', 'No trabaja', 12, 6
+Exec sp_insertarEstadoOcupacion 'Aguascalientes', 'Comerciantes, empleados en ventas y agentes de ventas', 12, 6
 
 select *
 from EstadoOcupacion

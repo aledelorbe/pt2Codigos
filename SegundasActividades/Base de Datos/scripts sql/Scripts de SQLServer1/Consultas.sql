@@ -22,3 +22,7 @@ go
 select *
 from EstadoCancer
 go
+
+select *
+from EstadoOcupacion
+go

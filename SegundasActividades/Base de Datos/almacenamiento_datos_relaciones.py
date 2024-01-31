@@ -48,33 +48,59 @@ try:
     #     # Deshacer todo lo que se haya hecho en la db
     #     conn.rollback()
 
+    # contador = 0
+    # # ITERAR LOS DATOS DEL ESTADO CON OCUPACION PARA SER ALMACENADOS
+    # for index, row in dfEstados.iterrows():
+    #     estado = row["estado"]
+    #     numCluster = int(gruposEmpleos.iloc[index].values)
+    #     print(f'Índice: {index}, Estado: {estado}, numCluster: {numCluster}')
+    #     for i in range(0, 26, 2): # 13*2 = 26. 13 categorias de empleos y de 2 en dos.
+    #         descrip = dfEstados.iloc[index, 73 + i]
+    #         cant = int(dfEstados.iloc[index, 74 + i])
+    #         print(f'Descrip: {descrip}, Cant: {cant}')
+    #         # Mandar a llamar el sp que inserta datos de estado con categoria de ocupacion
+    #         cursor.execute("{CALL sp_insertarEstadoOcupacion (?, ?, ?, ?)}", (estado, descrip, cant, numCluster))
+    #         if cursor.rowcount == 1:
+    #             contador += 1
+    
+    # # Solo si se hicieron las inserciones que se debieron hacer entonces...
+    # if contador == 416: # 32 estado x 13 categorias de ocupacion = 1152 registros
+    #     print('Se almacenaron correctamente los datos de estado con categoria de ocupacion.')
+    #     # Guardar las inserciones realizadas.
+    #     conn.commit()
+    # else:
+    #     print('Se almacenaron incorrectamente los datos de estado con categoria de ocupacion.')
+    #     # Deshacer todo lo que se haya hecho en la db
+    #     conn.rollback()
+
+
+
 
 
     contador = 0
-    # ITERAR LOS DATOS DEL ESTADO CON OCUPACION PARA SER ALMACENADOS
+    # ITERAR LOS DATOS DEL ESTADO CON EDUCACION PARA SER ALMACENADOS
     for index, row in dfEstados.iterrows():
         estado = row["estado"]
-        numCluster = int(gruposEmpleos.iloc[index].values)
+        numCluster = int(gruposEducaciones.iloc[index].values)
         print(f'Índice: {index}, Estado: {estado}, numCluster: {numCluster}')
-        for i in range(0, 26, 2): # 13*2 = 26. 13 categorias de empleos y de 2 en dos.
-            descrip = dfEstados.iloc[index, 73 + i]
-            cant = int(dfEstados.iloc[index, 74 + i])
+        for i in range(0, 20, 2): # 10*2 = 20. 10 niveles academicos y de 2 en dos.
+            descrip = dfEstados.iloc[index, 99 + i]
+            cant = int(dfEstados.iloc[index, 100 + i])
             print(f'Descrip: {descrip}, Cant: {cant}')
-            # Mandar a llamar el sp que inserta datos de estado con cancer
-            cursor.execute("{CALL sp_insertarEstadoOcupacion (?, ?, ?, ?)}", (estado, descrip, cant, numCluster))
+            # Mandar a llamar el sp que inserta datos de estado con nivel escolar
+            cursor.execute("{CALL sp_insertarEstadoEscolaridad (?, ?, ?, ?)}", (estado, descrip, cant, numCluster))
             if cursor.rowcount == 1:
                 contador += 1
     
     # Solo si se hicieron las inserciones que se debieron hacer entonces...
-    if contador == 416: # 32 estado x 13 categorias de ocupacion = 1152 registros
-        print('Se almacenaron correctamente los datos de estado con categoria de ocupacion.')
+    if contador == 320: # 32 estado x 10 niveles educativos = 320 registros
+        print('Se almacenaron correctamente los datos de estado con niveles educativos.')
         # Guardar las inserciones realizadas.
         conn.commit()
     else:
-        print('Se almacenaron incorrectamente los datos de estado con categoria de ocupacion.')
+        print('Se almacenaron incorrectamente los datos de estado con niveles educativos.')
         # Deshacer todo lo que se haya hecho en la db
         conn.rollback()
-
 
 except Exception as e:
     print(f'Error: {e}')

@@ -4,7 +4,7 @@
     <LogicalFolder Name="Conexiones" Type="2" Sorted="true">
       <Items>
         <ConnectionNode Name="192.168.0.14\MSSQL3:sa">
-          <Created>2024-01-29T13:07:29.1794281-06:00</Created>
+          <Created>2024-01-30T13:43:49.3930695-06:00</Created>
           <Type>SQL</Type>
           <Server>192.168.0.14\MSSQL3</Server>
           <UserName>sa</UserName>
@@ -13,16 +13,16 @@
           <LoginTimeout>30</LoginTimeout>
           <ExecutionTimeout>0</ExecutionTimeout>
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
-          <ApplicationName>Microsoft SQL Server Management Studio - Consulta</ApplicationName>
+          <ApplicationName />
         </ConnectionNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Consultas" Type="0" Sorted="true">
       <Items>
         <FileNode Name="Altas Catalogos.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:192.168.0.14\MSSQL3:False:sa</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>192.168.0.14\MSSQL3</AssociatedConnSrvName>
-          <AssociatedConnUserName>sa</AssociatedConnUserName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
           <FullPath>Altas Catalogos.sql</FullPath>
         </FileNode>
         <FileNode Name="Consultas.sql">
