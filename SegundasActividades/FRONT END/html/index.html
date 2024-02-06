@@ -7,19 +7,6 @@
 		<!-- Estilos CSS -->
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
 		<link id="theme" rel="stylesheet" type="text/css" href="../css/styles.css" />
-
-		<!-- jQuery -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="js/jquery-ui/jquery-ui.min.css" />
-		<link rel="stylesheet" href="js/jquery-ui/jquery-ui.structure.min.css" />
-		<link rel="stylesheet" href="js/jquery-ui/jquery-ui.theme.min.css" />
-		<script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js"></script>
-
-		<!-- Plugin validacion -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-
-		<!-- Scripts -->
-		<script type="text/javascript" src="../js/programa.js"></script>
 	</head>
 	<body>
 
@@ -38,62 +25,63 @@
 					
 					<div class="limpiador"></div>
 				</div>
-				
 
-				<div id="logo">
+				<!-- Contenedor del titulo -->
+				<div class="color" id="content-titulo">
 					<h1>Impacto de variables sociodemográficas en cáncer usando técnicas de Ciencia de Datos</h1>
-					<!-- <div class="limpiador"></div> -->
 				</div>
 
-				<div class="clearfix"></div>
-
+				<!--  -->
 				<nav id="menu">
 					<ul>
 						<li><a href="index.html">Inicio</a></li>
-						<li><a href="reloj.html">Reloj</a></li>
+						<li><a href="reloj.html">Aplicación</a></li>
 						<li><a href="about.html">Sobre mi</a></li>
 					</ul>
 				</nav>
 			</header>
 
-            <section>
-				<h1> Controles </h1>
+			<!-- CONTENEDOR DE LOS CONTROLES (SELECTORES) -->
+			<div id="content-controles">	
+				<span class="flotador" id="renglon2">&nbsp</span>	
+				<h2> Controles </h2>	
+				<span class="flotador" id="renglon3">&nbsp</span>	
 
-				<div id="content-controles">					
-					<span class="flotador" id="separadorControlUno">&nbsp</span>
+				<span class="flotador" id="separadorControlUno">&nbsp</span>
 
-					<h4 class="flotador textosControles" id="textoControl-par">Parametro: </h4>
-					<select class="flotador control" name="select">
-						<option value="value1">Tipo de Cáncer</option>
-						<option value="value2" selected>Categoría de Empleo</option>
-						<option value="value3">Nivel Académico</option>
-					</select>
-	
-					<span class="flotador" id="separadorControles">&nbsp</span>
+				<h4 class="flotador textosControles" id="textoControl-par">Parametro: </h4>
+				<select class="flotador control" name="select">
+					<option value="value1">Tipo de Cáncer</option>
+					<option value="value2" selected>Categoría de Empleo</option>
+					<option value="value3">Nivel Académico</option>
+				</select>
 
-					<h4 class="flotador textosControles" id="textoControl-grup">Grupo: </h4>
-					<select class="flotador control" id="controlMenu" name="select">
-						<option value="value1">Muy Alto Riesgo</option>
-						<option value="value2" selected>Alto Riesgo</option>
-						<option value="value3">Mediano Alto Riesgo</option>
-					</select>
+				<span class="flotador" id="separadorControles">&nbsp</span>
 
-					<div class="limpiador"></div>
-				</div>
+				<h4 class="flotador textosControles" id="textoControl-grup">Grupo: </h4>
+				<select class="flotador control" id="controlMenu" name="select">
+					<option value="value1">Muy Alto Riesgo</option>
+					<option value="value2" selected>Alto Riesgo</option>
+					<option value="value3">Mediano Alto Riesgo</option>
+				</select>
 
-				<div id="content-dash">
-					<img id="imgPais" src="https://previews.123rf.com/images/carenas1/carenas11006/carenas1100600086/7215889-hay-un-mapa-del-pa%C3%ADs-de-m%C3%A9xico.jpg">
-				</div>
-                
-				<div id="contendorGrafico">
-					<h1> Resultado de la Busqueda </h1>
+				<div class="limpiador"></div>
+			</div>
 
-					<img id="imgGrafico" src="https://w7.pngwing.com/pngs/824/578/png-transparent-histogram-diagram-chart-statistics-data-histogram-blue-angle-text-thumbnail.png">
-				</div>
- 
-            </section>
+			<!-- CONTENEDOR DEL DASHBOARD (MAPA) -->
+			<div id="content-dash">
+				<img id="imgPais" src="https://previews.123rf.com/images/carenas1/carenas11006/carenas1100600086/7215889-hay-un-mapa-del-pa%C3%ADs-de-m%C3%A9xico.jpg">
+			</div>
+			
+			<!-- CONTENEDOR DE LA CONSULTA -->
+			<div id="contendorGrafico">
+				<h1> Resultado de la Busqueda </h1>
+
+				<img id="imgGrafico" src="https://w7.pngwing.com/pngs/824/578/png-transparent-histogram-diagram-chart-statistics-data-histogram-blue-angle-text-thumbnail.png">
+			</div>
 		</section>
 
+		<!-- FOOTER -->
 		<footer>
 			Derechos Reservados por Alejandro Granados &copy;
 		</footer>
