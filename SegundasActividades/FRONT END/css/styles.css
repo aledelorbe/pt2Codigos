@@ -3,16 +3,57 @@
 	padding: 0px;
 }
 
+/* Para que multiples elementos floten */
+.flotador{
+	float: left;
+}
+
+/* HEADER */
+#content-logos {
+    background-color: #235E3D;
+    height: 120px;
+    width: 100%;
+}
+
+#aux{
+	width: 100%;
+	height: 20px;
+}
+
+/* Separador entre la pagina web y la pimer imagen (ipn) */
+#separadorImg1{
+	width: 50px;
+}
+
+/* Separador entre las dos imagenes  */
+#separadorEntreImg{
+	width: 534px;
+}
+
+/* Dimensiones de la imagen del ipn */
+#imgHeaderPol {
+    height: 94px;
+    width: 94px;
+	border-radius: 10px;
+}
+
+/* Dimensiones de la imagen de upiita */
+#imgHeaderUpiita {
+    height: 110px;
+    width: 125px;
+}
+
+img {
+    cursor: pointer;
+}
+
 /* CONTENEDOR DE LOS CONTROLES */
 #content-controles{
 	border: solid red 2px;
 	margin-top: 4px;
 }
 
-/* Para que multiples elementos floten */
-.flotador{
-	float: left;
-}
+
 
 /* estilos de los 2 controles */
 .textosControles{
@@ -56,7 +97,6 @@
 
 #imgPais{
 	display: block;
-	/* width: 80%;  */
 	width: 40%;
 	margin: 0 auto;
 	margin-top: 20px;
@@ -95,90 +135,23 @@ body{
 	box-shadow: 0px 0px 2px gray;
 }
 
-/* Titulo aplicaciones distribuidas */
-#logo{
-	font-family: Verdana, Arial;
-	font-size: 20px;
-	letter-spacing: 4px;
-	line-height: 75px;
-	color: white;
-	text-align: center;
-	width: 881px;
-	height: 80px;
-	margin-bottom: 20px;
-	float: left;
-	text-transform: uppercase;
-}
 
-/* Contenedor de formulario */
-#content{
-	margin: 0px auto;
-	width: 66%;
-	margin-top: 20px
-}
 
-/* titulo identificate e 2autenticacion */
-.titulos{
-	width: 36%;
-	text-transform: uppercase;
-	margin: 0 auto;
-	margin-bottom: 20px;
-	font-family: Helvetica, Arial;
-	font-size: 30px;
-	color:#333;
-}
 
-#centrado{
-	width: 47%;
-}
-
-/* HEADER */
-#arribaHeader {
-    background-color: #235E3D;
-    height: 100px;
-    width: 100%;
-}
-
-#bajoHeader{
-    height: 180px;
-    width: 100%;
-    /* background-color: #fff; */
-}
-
-#flexImgHeader {
-    display: flex;
-    justify-content: space-around;
-    align-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-#imgHeaderPol {
-    height: 110px;
-    width: 410px;
-}
-
-#imgHeaderUpiita {
-    height: 110px;
-    width: 125px;
-}
-
-img {
-    cursor: pointer;
-}
 
 /* Titulo principal */
 #logo{
 	font-family: Verdana, Arial;
-	font-size: 28px;
-	letter-spacing: 4px;
-	line-height: 75px;
+	font-size: 13px;
+	letter-spacing: 5px;
+	line-height: 28px;
 	color: white;
 	text-align: center;
 	width: 100%;
 	height: 80px;
 	margin-bottom: 20px;
-	float: left;
+	padding-top: 20px;
+	/* float: left; */
 	text-transform: uppercase;
 }
 
