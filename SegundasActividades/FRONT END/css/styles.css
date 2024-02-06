@@ -37,7 +37,8 @@ body{
     width: 100%;
 }
 
-#aux{
+/* Espacio vertical entre el contendor de logos y el primer hijo */
+#renglon1{
 	width: 100%;
 	height: 20px;
 }
@@ -117,7 +118,7 @@ img {
 
 /* CONTENEDOR DE LOS CONTROLES */
 #content-controles{
-	border: solid red 2px;
+	/* border: solid red 2px; */
 	margin-top: 4px;
 	height: 80px;
 }
