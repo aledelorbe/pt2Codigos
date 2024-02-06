@@ -27,20 +27,20 @@
 
 /* Separador entre las dos imagenes  */
 #separadorEntreImg{
-	width: 534px;
+	width: 566px;
 }
 
 /* Dimensiones de la imagen del ipn */
 #imgHeaderPol {
-    height: 94px;
-    width: 94px;
+    height: 110px;
+    width: 80px;
 	border-radius: 10px;
 }
 
 /* Dimensiones de la imagen de upiita */
 #imgHeaderUpiita {
-    height: 110px;
-    width: 125px;
+    height: 120px;
+    width: 120px;
 }
 
 img {
