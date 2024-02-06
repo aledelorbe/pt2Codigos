@@ -33,19 +33,60 @@
 
 				<div class="clearfix"></div>
 			</header> -->
+			<!-- Cabecera -->
+			<header>
+				<div id="arribaHeader">
+					<div id="flexImgHeader">
+						<img id="imgHeaderPol" src="https://www.ipn.mx/assets/files/ccs/img/comunicados/2020/01/1920x500-3.jpg" alt="imagen">                
+						<img id="imgHeaderUpiita" src="https://miccastletorri.files.wordpress.com/2017/08/upiita.png" alt="imagen">                
+					</div>
+				</div>
+				
+
+				<div id="logo">
+					<h1>Proyecto JS</h1>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<nav id="menu">
+					<ul>
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="reloj.html">Reloj</a></li>
+						<li><a href="about.html">Sobre mi</a></li>
+					</ul>
+				</nav>
+			</header>
 
             <section>
+				<h1> Controles </h1>
 
-				<h1> Control </h1>
+				<div id="content-controles">					
+					<span class="flotador" id="separadorControlUno">&nbsp</span>
 
-				<select id="controlMenu" name="select">
-					<option value="value1">Tipo de Cáncer</option>
-					<option value="value2" selected>Categoría de Empleo</option>
-					<option value="value3">Nivel Académico</option>
-				</select>
+					<h4 class="flotador textosControles" id="textoControl-par">Parametro: </h4>
+					<select class="flotador control" name="select">
+						<option value="value1">Tipo de Cáncer</option>
+						<option value="value2" selected>Categoría de Empleo</option>
+						<option value="value3">Nivel Académico</option>
+					</select>
+	
+					<span class="flotador" id="separadorControles">&nbsp</span>
 
-                <img id="imgPais" src="https://previews.123rf.com/images/carenas1/carenas11006/carenas1100600086/7215889-hay-un-mapa-del-pa%C3%ADs-de-m%C3%A9xico.jpg">
+					<h4 class="flotador textosControles" id="textoControl-grup">Grupo: </h4>
+					<select class="flotador control" id="controlMenu" name="select">
+						<option value="value1">Muy Alto Riesgo</option>
+						<option value="value2" selected>Alto Riesgo</option>
+						<option value="value3">Mediano Alto Riesgo</option>
+					</select>
 
+					<div class="limpiador"></div>
+				</div>
+
+				<div id="content-dash">
+					<img id="imgPais" src="https://previews.123rf.com/images/carenas1/carenas11006/carenas1100600086/7215889-hay-un-mapa-del-pa%C3%ADs-de-m%C3%A9xico.jpg">
+				</div>
+                
 				<div id="contendorGrafico">
 					<h1> Resultado de la Busqueda </h1>
 
@@ -53,7 +94,6 @@
 				</div>
  
             </section>
-
 		</section>
 
 		<footer>

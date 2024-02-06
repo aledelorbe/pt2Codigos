@@ -1,6 +1,58 @@
-#controlMenu{
-	height: 29px;
+*{
+	margin: 0px;
+	padding: 0px;
 }
+
+/* CONTENEDOR DE LOS CONTROLES */
+#content-controles{
+	border: solid red 2px;
+	margin-top: 4px;
+}
+
+/* Para que multiples elementos floten */
+.flotador{
+	float: left;
+}
+
+/* estilos de los 2 controles */
+.textosControles{
+	height: 48px;
+}
+
+/* estilos de los 2 selectores */
+.control{
+	height: 29px;
+	width: 21%;
+}
+
+/* espacio entre un texto con control y otro */
+#separadorControles{
+	width: 229px;
+}
+
+/* Espacio entre el lado izq y el primer texto con control */
+#separadorControlUno{
+	width: 45px;
+}
+
+/* Espacio entre el texto 'parametro' y su respectivo selector */
+#textoControl-par{
+	width: 100px;
+}
+
+/* Espacio entre el texto 'grupo' y su respectivo selector */
+#textoControl-grup{
+	width: 73px;
+}
+
+/*  */
+.limpiador{
+	clear: left;
+}
+
+
+
+
 
 #imgPais{
 	display: block;
@@ -18,10 +70,7 @@
 	margin-top: 20px;
 }
 
-*{
-	margin: 0px;
-	padding: 0px;
-}
+
 
 /* FONDO DE LA PAGINA WEB */
 body{
@@ -83,118 +132,88 @@ body{
 	width: 47%;
 }
 
-/* MENU */
-/* Login y registrarse */
+/* HEADER */
+#arribaHeader {
+    background-color: #235E3D;
+    height: 100px;
+    width: 100%;
+}
+
+#bajoHeader{
+    height: 180px;
+    width: 100%;
+    /* background-color: #fff; */
+}
+
+#flexImgHeader {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#imgHeaderPol {
+    height: 110px;
+    width: 410px;
+}
+
+#imgHeaderUpiita {
+    height: 110px;
+    width: 125px;
+}
+
+img {
+    cursor: pointer;
+}
+
+/* Titulo principal */
+#logo{
+	font-family: Verdana, Arial;
+	font-size: 28px;
+	letter-spacing: 4px;
+	line-height: 75px;
+	color: white;
+	text-align: center;
+	width: 100%;
+	height: 80px;
+	margin-bottom: 20px;
+	float: left;
+	text-transform: uppercase;
+}
+
+/* Nav bar*/
 #menu{
 	font-family: Helvetica, Arial;
 	background: #333;
-	width: 50%;
+	width: 100%;
 	text-transform: uppercase;
-	margin: 0 auto;
 	margin-bottom: 20px;
 }
 
+/* La lista (en gral) del nav bar */
 #menu ul{
 	line-height: 46px;
 	list-style: none;
 }
 
+/* Cada elemento de la lista */
 #menu ul li{
 	height: 46px;
 	display: inline-block;
 	transition: all 300ms;
+}
+
+/* Los enlaces de la lista */
+#menu a{
+	display: block;
 	color:white;
 	text-decoration: none;
-	text-align: center;
-	cursor: pointer;
-}
-
-#opc1{
-	width: 39%;
-}
-
-#opc2{
-	width: 172px;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 
-
-
-/* TODOS LOS FORMULARIOS */
-form input[type="text"],
-form input[type="password"],
-form input[type="email"],
-form input[type="number"],
-select{
-	padding: 5px;
-	border-radius: 2px;
-	border:1px solid #ccc;
-	width: 96%;
-	margin-bottom: 10px;
-	margin-top: 5px;
-	height: 18px;
-}
-
-form input[type="submit"]{
-	padding: 10px;
-	border: 0px solid #fff;
-	color: #FFF;
-	cursor: pointer;
-	margin-top: 10px;
-    border-radius: 10px;
-	height: 35px;
-}
-
-.formulario{
-	width: 50%;
-	font-family: Helvetica, Arial;
-	margin: 0px auto;
-	margin-bottom: 20px;
-}
-
-.formulario label{
-	display: block;
-	width: 100%;
-	margin-top: 5px;
-}
-
-/* Para centrar botones */
-#boton, #botonLog, #boton2Aute{
-	padding-left: 104px;
-}
-
-
-/* MENSAJE EXITOSO (EN REGISTRO) */
-/* Contenedor */
-#contenedorExitoso{
-	margin: 10px 10px;
-}
-
-/* Mensaje */
-span{
-	font-family: Helvetica, Arial;
-	font-size: 18px;
-	text-align: justify;
-}
-
-
-/* 2 AUTENTICACION */
-/* Texto Informacion 2 autenticacion */
-#contenedorForm2Autenticacion p{
-	font-family: Helvetica, Arial;
-	font-size: 18px;
-	width: 54%;
-    margin-left: 145px;
-    margin-bottom: 15px;
-}
-
-#contenedorFormRegistrarse, #contendor2Autenticacion, #contenedorExitoso, #contenedorError{
-	display: none;
-}
-
-#contenedorError{
-	color: red;
-}
 
 
 /* FOOTER */
