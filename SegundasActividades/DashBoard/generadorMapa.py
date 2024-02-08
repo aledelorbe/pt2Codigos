@@ -2,13 +2,15 @@ import json
 import plotly.graph_objects as go
 
 # Lee el archivo GeoJSON
-with open('aguascalientes.geojson') as f:
+with open('mexico.geojson', encoding='utf-8') as f:
+# with open('aguascalientes.geojson') as f:
 # with open('baja california sur.geojson') as f:
     data = json.load(f)
 
+# print(data)
 # Extrae las coordenadas y las propiedades
-coordinates = data['geometry']['coordinates'][0]
-properties = data['properties']
+coordinates = data['features'][1]['geometry']['coordinates'][0]
+properties = data['features'][1]['properties']
 
 # Extrae los datos específicos que deseas mostrar
 entidad = properties['ENTIDAD']
