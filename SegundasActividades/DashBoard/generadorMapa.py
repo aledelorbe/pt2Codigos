@@ -83,7 +83,7 @@ import json
 import plotly.graph_objects as go
 
 # Lee el archivo GeoJSON
-with open('mexico3.geojson') as f:
+with open('baja california.geojson') as f:
     data = json.load(f)
 
 # Extrae las coordenadas y las propiedades
