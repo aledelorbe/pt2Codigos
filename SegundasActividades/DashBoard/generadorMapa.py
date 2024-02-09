@@ -30,7 +30,7 @@ for feature in data['features']:
         lon = longitudes,
         lat = latitudes,
         mode = 'lines',
-        line = dict(width = 1,color = 'blue'),
+        line = dict(width = 1, color = 'blue'),
         fill = 'toself',
         fillcolor = 'rgba(0, 255, 0, 0.1)',
         name = entidad
@@ -38,21 +38,27 @@ for feature in data['features']:
 
 # Define el diseño del mapa
 fig.update_geos(
-    projection_type="mercator",
+    projection_type="equirectangular",
     showland = True,
     landcolor = "rgb(243, 243, 243)",
     countrycolor = "rgb(204, 204, 204)",
     showlakes = True,
     lakecolor = "rgb(255, 255, 255)",
+    projection_scale=9.5,
+    center=dict(lon=-102, lat=23.6345)
 )
 
 # Ajusta el título y las leyendas
 fig.update_layout(
     title = 'Áreas de los estados de México',
+    showlegend=False,
     geo = dict(
-        scope='north america',
+        scope='world',
         showland=True,
-    )
+    ),
+    margin=dict(l=20, r=20, t=50, b=50),
+    width=1320,  # ajusta el ancho de la figura
+    height=680   # ajusta el alto de la figura
 )
 
 # Muestra el mapa
