@@ -3,39 +3,38 @@ import plotly.graph_objects as go
 
 # Lee el archivo GeoJSON
 with open('mexico.geojson', encoding='utf-8') as f:
-# with open('aguascalientes.geojson') as f:
-# with open('baja california sur.geojson') as f:
     data = json.load(f)
-
-# print(data)
-# Extrae las coordenadas y las propiedades
-coordinates = data['features'][1]['geometry']['coordinates'][0]
-properties = data['features'][1]['properties']
-
-# Extrae los datos específicos que deseas mostrar
-entidad = properties['ENTIDAD']
-capital = properties['CAPITAL']
-area = properties['AREA']
-perimetro = properties['PERIMETER']
-
-# Extrae las longitudes y latitudes de las coordenadas
-longitudes = [coord[0] for coord in coordinates]
-latitudes = [coord[1] for coord in coordinates]
 
 # Crea la figura
 fig = go.Figure()
 
-# Agrega la capa de polígono para el mapa
-fig.add_trace(go.Scattergeo(
-    locationmode = 'country names',
-    lon = longitudes,
-    lat = latitudes,
-    mode = 'lines',
-    line = dict(width = 1,color = 'blue'),
-    fill = 'toself',
-    fillcolor = 'rgba(0, 255, 0, 0.1)',
-    name = entidad
-))
+# Itera sobre todas las características (features) en el archivo GeoJSON
+for feature in data['features']:
+    # Extrae las coordenadas y las propiedades de la característica actual
+    coordinates = feature['geometry']['coordinates'][0]
+    properties = feature['properties']
+    
+    # Extrae los datos específicos que deseas mostrar
+    entidad = properties['ENTIDAD']
+    capital = properties['CAPITAL']
+    area = properties['AREA']
+    perimetro = properties['PERIMETER']
+    
+    # Extrae las longitudes y latitudes de las coordenadas
+    longitudes = [coord[0] for coord in coordinates]
+    latitudes = [coord[1] for coord in coordinates]
+    
+    # Agrega la capa de polígono para el mapa
+    fig.add_trace(go.Scattergeo(
+        locationmode = 'country names',
+        lon = longitudes,
+        lat = latitudes,
+        mode = 'lines',
+        line = dict(width = 1,color = 'blue'),
+        fill = 'toself',
+        fillcolor = 'rgba(0, 255, 0, 0.1)',
+        name = entidad
+    ))
 
 # Define el diseño del mapa
 fig.update_geos(
@@ -49,7 +48,7 @@ fig.update_geos(
 
 # Ajusta el título y las leyendas
 fig.update_layout(
-    title = f'Datos de {entidad}',
+    title = 'Áreas de los estados de México',
     geo = dict(
         scope='north america',
         showland=True,
@@ -58,5 +57,3 @@ fig.update_layout(
 
 # Muestra el mapa
 fig.show()
-
-
