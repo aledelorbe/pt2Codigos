@@ -78,4 +78,4 @@ from Estado e
 inner join EstadoCancer ec
 on ec.id_estado = e.id_estado
 group by e.id_estado, e.nombre, ec.cluster
-having ec.cluster = 0
+having ec.cluster = 4
