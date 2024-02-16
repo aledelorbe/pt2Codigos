@@ -201,6 +201,7 @@ fig.update_layout(
 # Muestra el mapa
 fig.show()
 
+pyo.plot(fig, filename="mapaMexicoTipoCancer.html")
 
 # Creacion del mapa estado con niveles de educacion
 # Crea la figura
@@ -263,6 +264,8 @@ fig.update_layout(
 
 # Muestra el mapa
 fig.show()
+
+pyo.plot(fig, filename="mapaMexicoEducacion.html")
 
 
 # Creacion del mapa estado con categorias de empleo
@@ -327,4 +330,4 @@ fig.update_layout(
 # Muestra el mapa
 fig.show()
 
-# pyo.plot(fig, filename="mapaMexico.html")
+pyo.plot(fig, filename="mapaMexicoOcupacion.html")
