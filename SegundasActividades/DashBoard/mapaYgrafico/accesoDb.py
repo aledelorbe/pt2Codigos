@@ -120,7 +120,7 @@ def extraerClustersEstadoEducacion():
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
-                    from EstadoEducacion
+                    from EstadoEscolaridad
                     group by id_estado, cluster
                     order by 1
                     """
