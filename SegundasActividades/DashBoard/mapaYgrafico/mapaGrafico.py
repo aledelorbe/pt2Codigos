@@ -47,12 +47,38 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
 
     return estados
 
+# Genera la figura
+fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoCancer(), db.coloresMapaEstadoCancer))
+
+# Define el diseño del mapa
+fig.update_geos(
+    projection_type="equirectangular",
+    showland = True,
+    showcountries=True,
+    landcolor = "rgb(243, 243, 243)",
+    countrycolor = "rgb(204, 204, 204)",
+    showlakes = True,
+    lakecolor = "rgb(255, 255, 255)",
+    projection_scale=9.5,
+    center=dict(lon=-102, lat=23.6345)
+)
+
+# Ajusta el título y las leyendas
+fig.update_layout(
+    title = 'Estados de México feat tipos de cancer',
+    geo = dict(
+        scope='world',
+        showland=True,
+    ),
+    margin=dict(l=20, r=20, t=50, b=50),
+    width=1320,  # ajusta el ancho de la figura
+    height=680   # ajusta el alto de la figura
+)
+
 app.layout = html.Div([
     dcc.Graph(
         id='mapa',
-        figure={
-            'data': generadorDeMapas(db.extraerClustersEstadoCancer(), db.coloresMapaEstadoCancer)
-        }
+        figure=fig
     )
     
     
