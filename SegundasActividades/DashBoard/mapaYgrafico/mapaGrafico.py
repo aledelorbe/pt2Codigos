@@ -151,7 +151,7 @@ def actualizarMapa(parametro):
 )
 def extractorInformacionClick(informacion, parametro):
     parsed_data = json.loads(json.dumps(informacion))
-    curve_number = parsed_data['points'][0]['curveNumber']
+    curve_number = parsed_data['points'][0]['curveNumber'] + 1
     return curve_number, parametro
 
 # ACTUALIZADOR DE BARRA
@@ -162,19 +162,38 @@ def extractorInformacionClick(informacion, parametro):
 )
 def actualizarBarra(parametro, informacion):
 
-    # De la infrormacion del click, extraer el id del pais
+    # Seleccionar el diccionario de colores que le toque segun el parametro
+    diccColores = None
+    if parametro == 'Tipo de Cancer':
+        diccColores = db.coloresMapaEstadoCancer
+    elif parametro == 'Nivel Educativo':
+        diccColores = db.coloresMapaEstadoEducacion
+    else:
+        diccColores = db.coloresMapaEstadoOcupacion
+
+    # De la informacion del click, extraer el id del pais
     parsed_data = json.loads(json.dumps(informacion))
-    numeroId = parsed_data['points'][0]['curveNumber']
+    numeroId = parsed_data['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
 
     # Consultar los datos que permiten la creacion del grafico
     estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
     print(estado, numCluster, etiquetas, cantidades)
 
-    dataBarra = [go.Bar(x=etiquetas, y=cantidades)] #queda pendiente el color
+    dataBarra = [go.Bar(x=etiquetas, 
+                        y=cantidades,
+                        marker=dict(
+                            color=diccColores[str(numCluster)],  
+                            line=dict(color='black')  
+                        ))] 
     estilosFigura = go.Layout(
         title=f"Cantidad de personas con cancer por cada {parametro} en el estado de {estado}",
         xaxis=dict(title=parametro),
-        yaxis=dict(title="cantidad")
+        yaxis=dict(title="cantidad"),
+        font=dict(
+            family='Verdana',
+            size=16,
+            color='black'
+        )
     )
     figura = go.Figure(data=dataBarra, layout=estilosFigura)
 
