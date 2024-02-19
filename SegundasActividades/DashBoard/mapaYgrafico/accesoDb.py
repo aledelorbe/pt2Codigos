@@ -187,3 +187,61 @@ def extraerClustersEstadoOcupacion():
             conn.close()
     
     return clustersEstadoOcupacion
+
+
+# METODO PARA CONSULTAR DATOS PARA REALIZAR LA GRAFICA DE BARRAS
+def consultaBarras(parametro, numeroId):
+    
+    tablaRelacion = None
+    tablaCatalogo = None
+    nombreId = None
+    if parametro == 'tipo cancer':
+        tablaRelacion = 'EstadoCancer'
+        tablaCatalogo = 'Cancer'
+        nombreId = 'id_cancer'
+    elif parametro == 'educacion':
+        tablaRelacion = 'EstadoEscolaridad'
+        tablaCatalogo = 'Escolaridad'
+        nombreId = 'id_escolaridad'
+    else:
+        tablaRelacion = 'EstadoOcupacion'
+        tablaCatalogo = 'Ocupacion'
+        nombreId = 'id_ocupacion'
+
+    try:
+        # INTENTA ESTABLECER LA CONEXION
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        # Prepara la consulta para traerse los datos de estado con cancer
+        sqlString = f"""
+                    select e.nombre, ec.cluster, c.nombre, ec.cantidad  
+                    from {tablaRelacion} ec
+                    inner join Estado e
+                    on e.id_estado = ec.id_estado
+                    inner join {tablaCatalogo} c
+                    on c.{nombreId} = ec.{nombreId}
+                    where e.id_estado = {numeroId}
+                    """
+        cursor.execute(sqlString) # Ejecuta la consulta
+        consultaEstadoParametro = cursor.fetchall()
+
+        estado = None
+        numCluster = None
+        etiquetas = []
+        cantidades = []
+        for renglon in consultaEstadoParametro:
+            estado, numCluster, etiqueta, cantidad = renglon
+            etiquetas.append(etiqueta)
+            cantidades.append(cantidad)
+
+    except Exception as e:
+        print(f'Error: {e}')
+        conn.rollback()
+
+    finally:
+        # Cierra la conexión
+        if 'conn' in locals():
+            conn.close()
+    
+    return estado, numCluster, etiquetas, cantidades

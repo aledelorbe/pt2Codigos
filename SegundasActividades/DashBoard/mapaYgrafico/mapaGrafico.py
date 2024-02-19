@@ -40,10 +40,14 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             lat = latitudes,
             mode = 'lines',
             line = dict(width = 1, color = 'blue'),
+            # mode = 'markers',
+            # marker=dict(size=10),
             fill = 'toself',
             fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
             name = entidad,
-            visible="legendonly"
+            hoverinfo='text',
+            hovertext=entidad,
+            #visible="legendonly"
         ))
 
     return estados
@@ -72,7 +76,7 @@ def aplicarEstilosMapa(fig, tituloX):
         ),
         margin=dict(l=20, r=20, t=50, b=50),
         width=1320,  # ajusta el ancho de la figura
-        height=680   # ajusta el alto de la figura
+        height=680,   # ajusta el alto de la figura
     )
 
     return fig
@@ -94,7 +98,14 @@ app.layout = html.Div([
     dcc.Graph(
         id='mapa',
         figure=fig
-    )
+    ),
+    html.Div([
+        html.Pre(id='informacionClick')
+    ]),
+    dcc.Graph(
+        id='barra',
+        # figure=fig
+    ),
 ])
 
 
@@ -131,7 +142,36 @@ def actualizarMapa(parametro):
         
     return fig
 
+# EVENTO CLICK
+# Cuando se le de click sobre el mapa se extraera informacion util, especialmente
+# sobre cual estado se dio click para mostrar la informacion de dicho estado.
+@app.callback(
+    Output('informacionClick', 'children'),
+    [Input('mapa', 'clickData')]
+)
+def extractorInformacionClick(informacion):
+    return json.dumps(informacion, indent=2)
 
+# ACTUALIZADOR DE BARRA
+# Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
+@app.callback(
+    Output('barra', 'figure'),
+    [Input('mapa', 'clickData')]
+)
+def actualizarBarra(parametro):
+    # Consultar los datos que permiten la creacion del grafico
+    estado, numCluster, etiquetas, cantidades = db.consultaBarras('ocupacion', 1)
+    print(estado, numCluster, etiquetas, cantidades)
+
+    dataBarra = [go.Bar(etiquetas, cantidades, mode='lines')] #queda pendiente el color
+    estilosFigura = go.Layout(
+        title="nombretitulo",
+        xaxis=dict(title="nombreTituloEjeX"),
+        yaxis=dict(title="cantidad")
+    )
+    figura = go.Figure(data=dataBarra, layout=estilosFigura)
+
+    return figura
 
 if __name__ == '__main__':
     app.run_server()

@@ -66,6 +66,38 @@ having ec.cluster = 2
 
 
 
+-- Para consultar en la tabla 'EstadoCancer' ---------------------------------------
+
+select e.nombre, ec.cluster, c.nombre, ec.cantidad  
+from EstadoCancer ec
+inner join Estado e
+on e.id_estado = ec.id_estado
+inner join Cancer c
+on c.id_cancer = ec.id_cancer
+where e.id_estado = 1 -- 36 tipos de cancer
+
+
+-- Para consultar en la tabla 'EstadoEscolaridad' ----------------------------------
+
+select e.nombre, ee.cluster, esc.nombre, ee.cantidad  
+from EstadoEscolaridad ee
+inner join Estado e
+on e.id_estado = ee.id_estado
+inner join Escolaridad esc
+on esc.id_escolaridad = ee.id_escolaridad
+where e.id_estado = 1 -- 10 niveles escolares
+
+
+-- Para consultar en la tabla 'EstadoEscolaridad' ----------------------------------
+
+select e.nombre, ee.cluster, esc.nombre, ee.cantidad  
+from EstadoOcupacion ee
+inner join Estado e
+on e.id_estado = ee.id_estado
+inner join Ocupacion esc
+on esc.id_ocupacion = ee.id_ocupacion
+where e.id_estado = 1 -- 13 categorias de ocupacion
+
 
 
 
