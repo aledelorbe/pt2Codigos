@@ -147,26 +147,33 @@ def actualizarMapa(parametro):
 # sobre cual estado se dio click para mostrar la informacion de dicho estado.
 @app.callback(
     Output('informacionClick', 'children'),
-    [Input('mapa', 'clickData')]
+    [Input('mapa', 'clickData'), Input('parametro', 'value')]
 )
-def extractorInformacionClick(informacion):
-    return json.dumps(informacion, indent=2)
+def extractorInformacionClick(informacion, parametro):
+    parsed_data = json.loads(json.dumps(informacion))
+    curve_number = parsed_data['points'][0]['curveNumber']
+    return curve_number, parametro
 
 # ACTUALIZADOR DE BARRA
 # Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
 @app.callback(
     Output('barra', 'figure'),
-    [Input('mapa', 'clickData')]
+    [Input('parametro', 'value'), Input('mapa', 'clickData')]
 )
-def actualizarBarra(parametro):
+def actualizarBarra(parametro, informacion):
+
+    # De la infrormacion del click, extraer el id del pais
+    parsed_data = json.loads(json.dumps(informacion))
+    numeroId = parsed_data['points'][0]['curveNumber']
+
     # Consultar los datos que permiten la creacion del grafico
-    estado, numCluster, etiquetas, cantidades = db.consultaBarras('ocupacion', 1)
+    estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
     print(estado, numCluster, etiquetas, cantidades)
 
-    dataBarra = [go.Bar(etiquetas, cantidades, mode='lines')] #queda pendiente el color
+    dataBarra = [go.Bar(x=etiquetas, y=cantidades)] #queda pendiente el color
     estilosFigura = go.Layout(
-        title="nombretitulo",
-        xaxis=dict(title="nombreTituloEjeX"),
+        title=f"Cantidad de personas con cancer por cada {parametro} en el estado de {estado}",
+        xaxis=dict(title=parametro),
         yaxis=dict(title="cantidad")
     )
     figura = go.Figure(data=dataBarra, layout=estilosFigura)

@@ -71,10 +71,6 @@ def extraerClustersEstadoCancer():
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
 
-        # Lee el archivo GeoJSON
-        with open('mexico.geojson', encoding='utf-8') as f:
-            data = json.load(f)
-
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
@@ -113,9 +109,9 @@ def extraerClustersEstadoEducacion():
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
 
-        # Lee el archivo GeoJSON
-        with open('mexico.geojson', encoding='utf-8') as f:
-            data = json.load(f)
+        # # Lee el archivo GeoJSON
+        # with open('mexico.geojson', encoding='utf-8') as f:
+        #     data = json.load(f)
 
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
@@ -155,9 +151,9 @@ def extraerClustersEstadoOcupacion():
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
 
-        # Lee el archivo GeoJSON
-        with open('mexico.geojson', encoding='utf-8') as f:
-            data = json.load(f)
+        # # Lee el archivo GeoJSON
+        # with open('mexico.geojson', encoding='utf-8') as f:
+        #     data = json.load(f)
 
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
@@ -195,11 +191,11 @@ def consultaBarras(parametro, numeroId):
     tablaRelacion = None
     tablaCatalogo = None
     nombreId = None
-    if parametro == 'tipo cancer':
+    if parametro == 'Tipo de Cancer':
         tablaRelacion = 'EstadoCancer'
         tablaCatalogo = 'Cancer'
         nombreId = 'id_cancer'
-    elif parametro == 'educacion':
+    elif parametro == 'Nivel Educativo':
         tablaRelacion = 'EstadoEscolaridad'
         tablaCatalogo = 'Escolaridad'
         nombreId = 'id_escolaridad'
