@@ -6,8 +6,6 @@ import plotly.graph_objects as go
 import accesoDb as db
 from dash.dependencies import Input, Output
 
-app = dash.Dash()
-
 
 def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     estados = []
@@ -82,6 +80,26 @@ def aplicarEstilosMapa(fig, tituloX):
     return fig
 
 
+def corregirIndice(numero):
+    if numero == 5:
+        numero = 7
+    elif numero == 6:
+        numero = 8
+    elif numero == 7:
+        numero = 5
+    elif numero == 8:
+        numero = 6
+    elif numero == 15:
+        numero = 17
+    elif numero == 16:
+        numero = 15
+    elif numero == 17:
+        numero = 16
+
+    return numero
+
+app = dash.Dash()
+
 
 # MAPA QUE SE MOSTRARA POR DEFECTO
 # Genera la figura
@@ -152,7 +170,7 @@ def actualizarMapa(parametro):
 def extractorInformacionClick(informacion, parametro):
     parsed_data = json.loads(json.dumps(informacion))
     curve_number = parsed_data['points'][0]['curveNumber'] + 1
-    return curve_number, parametro
+    return curve_number, parametro, corregirIndice(curve_number)
 
 # ACTUALIZADOR DE BARRA
 # Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
@@ -174,6 +192,7 @@ def actualizarBarra(parametro, informacion):
     # De la informacion del click, extraer el id del pais
     parsed_data = json.loads(json.dumps(informacion))
     numeroId = parsed_data['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+    numeroId = corregirIndice(numeroId) # Corregir indice
 
     # Consultar los datos que permiten la creacion del grafico
     estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
