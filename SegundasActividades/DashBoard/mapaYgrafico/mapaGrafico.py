@@ -38,11 +38,10 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             lat = latitudes,
             mode = 'lines',
             line = dict(width = 1, color = 'blue'),
-            # mode = 'markers',
-            # marker=dict(size=10),
             fill = 'toself',
             fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
             name = entidad,
+            legendgroup = db.gruposX[str(numCluster)],
             hoverinfo='text',
             hovertext=entidad,
             #visible="legendonly"

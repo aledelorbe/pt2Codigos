@@ -42,6 +42,15 @@ coloresMapaEstadoOcupacion = {
 # 4682B4 azul
 # 753a88 morado
 
+gruposX = {
+    "0": "Grupo 0",
+	"1": "Grupo 1",
+	"2": "Grupo 2",
+	"3": "Grupo 3", 
+    "4": "Grupo 4",
+    "5": "Grupo 5" 
+}
+
 # Lo que sucede es que en la db los paises estan ordenados alfabeticamente (A - Z)
 # pero el archivo geojson tambien estan ordenados alfabeticamente pero solo utilizando
 # la primera letra del estado, es decir, que estados que empiezan con c la segunda letra
