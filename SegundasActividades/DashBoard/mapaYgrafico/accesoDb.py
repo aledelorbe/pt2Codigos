@@ -11,45 +11,7 @@ password = '123456'
 # Construye la cadena de conexión
 conn_str = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
-# METODOS Y DICCIONARIOS QUE NO SE MANDAN A LLAMAR FUERA DEL ARCHIVO
-# Diccionarios con los colores para los 3 mapas
-coloresMapaEstadoCancer = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
-}
-coloresMapaEstadoEducacion = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88",
-    "5": "#8A0707"
-}
-coloresMapaEstadoOcupacion = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
-}
-# 8A0707 rojo
-# FF4500 naranja
-# FFD700 amarillo
-# 228B22 verde 
-# 4682B4 azul
-# 753a88 morado
-
-gruposX = {
-    "0": "Grupo 0",
-	"1": "Grupo 1",
-	"2": "Grupo 2",
-	"3": "Grupo 3", 
-    "4": "Grupo 4",
-    "5": "Grupo 5" 
-}
+# METODOS QUE NO SE MANDAN A LLAMAR FUERA DEL ARCHIVO
 
 # Lo que sucede es que en la db los paises estan ordenados alfabeticamente (A - Z)
 # pero el archivo geojson tambien estan ordenados alfabeticamente pero solo utilizando
@@ -71,7 +33,7 @@ def actualizacionClusters(lista):
     return aux
 
 
-# METODOS QUE SE MANDAN A LLAMAR FUERA DEL ARCHIVO
+# METODOS QUE SE MANDAN A LLAMAR FUERA DEL ARCHIVO PARA CONECTARSE CON LA DB
 def extraerClustersEstadoCancer():
     clustersEstadoCancer = []
 
@@ -91,7 +53,7 @@ def extraerClustersEstadoCancer():
         consultaEstadoCancer = cursor.fetchall()
 
         for renglon in consultaEstadoCancer:
-            # Extra el id_pais y el numero de cluster
+            # Extrae el id_pais y el numero de cluster
             _, numCluster = renglon
             clustersEstadoCancer.append(numCluster)
 
@@ -118,10 +80,6 @@ def extraerClustersEstadoEducacion():
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
 
-        # # Lee el archivo GeoJSON
-        # with open('mexico.geojson', encoding='utf-8') as f:
-        #     data = json.load(f)
-
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
@@ -133,7 +91,7 @@ def extraerClustersEstadoEducacion():
         consultaEstadoEducacion = cursor.fetchall()
 
         for renglon in consultaEstadoEducacion:
-            # Extra el id_pais y el numero de cluster
+            # Extrae el id_pais y el numero de cluster
             _, numCluster = renglon
             clustersEstadoEducacion.append(numCluster)
 
@@ -159,10 +117,6 @@ def extraerClustersEstadoOcupacion():
         # INTENTA ESTABLECER LA CONEXION
         conn = pyodbc.connect(conn_str)
         cursor = conn.cursor()
-
-        # # Lee el archivo GeoJSON
-        # with open('mexico.geojson', encoding='utf-8') as f:
-        #     data = json.load(f)
 
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
@@ -194,7 +148,7 @@ def extraerClustersEstadoOcupacion():
     return clustersEstadoOcupacion
 
 
-# METODO PARA CONSULTAR DATOS PARA REALIZAR LA GRAFICA DE BARRAS
+# Funcion para consultar datos que permiten la creacion de la grafica de barras
 def consultaBarras(parametro, numeroId):
     
     tablaRelacion = None

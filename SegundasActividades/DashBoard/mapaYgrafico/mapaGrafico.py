@@ -4,6 +4,7 @@ from dash import html
 import json
 import plotly.graph_objects as go
 import accesoDb as db
+import funcionesAuxiliares as funcAux
 from dash.dependencies import Input, Output
 
 
@@ -41,7 +42,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             fill = 'toself',
             fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
             name = entidad,
-            legendgroup = db.gruposX[str(numCluster)],
+            legendgroup = funcAux.gruposX[str(numCluster)],
             text='hola',
             hoverinfo='text',
             hovertext=entidad,
@@ -104,7 +105,7 @@ app = dash.Dash()
 
 # MAPA QUE SE MOSTRARA POR DEFECTO
 # Genera la figura
-fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoCancer(), db.coloresMapaEstadoCancer))
+fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoCancer(), funcAux.coloresMapaEstadoCancer))
 
 # Aplicar estilos
 fig = aplicarEstilosMapa(fig, 'Estados de México feat tipos de cancer')
@@ -149,15 +150,15 @@ def actualizarMapa(parametro):
     if parametro == 'Tipo de Cancer':
         titulo = 'Estados de México feat tipos de cancer'
         indicesClustersX = db.extraerClustersEstadoCancer()
-        coloresMapa = db.coloresMapaEstadoCancer 
+        coloresMapa = funcAux.coloresMapaEstadoCancer 
     elif parametro == 'Nivel Educativo':
         titulo = 'Estados de México feat Nivel Educativo'
         indicesClustersX = db.extraerClustersEstadoEducacion()
-        coloresMapa = db.coloresMapaEstadoEducacion 
+        coloresMapa = funcAux.coloresMapaEstadoEducacion 
     else:
         titulo = 'Estados de México feat Ocupacion'
         indicesClustersX = db.extraerClustersEstadoOcupacion()
-        coloresMapa = db.coloresMapaEstadoOcupacion 
+        coloresMapa = funcAux.coloresMapaEstadoOcupacion 
 
     # MAPA QUE SE MOSTRARA TRAS LA ACTUALIZACION
     # Genera una nueva figura
@@ -176,10 +177,10 @@ def actualizarMapa(parametro):
     [Input('mapa', 'clickData'), Input('parametro', 'value')]
 )
 def extractorInformacionClick(informacion, parametro):
-    return json.dumps(informacion, indent=2)
+    # return json.dumps(informacion, indent=2)
     # parsed_data = json.loads(json.dumps(informacion))
-    # curve_number = parsed_data['points'][0]['curveNumber'] + 1
-    # return parsed_data, parametro, corregirIndice(curve_number)
+    curve_number = informacion['points'][0]['curveNumber'] + 1
+    return curve_number, parametro, corregirIndice(curve_number)
 
 # ACTUALIZADOR DE BARRA
 # Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
@@ -192,11 +193,11 @@ def actualizarBarra(parametro, informacion):
     # Seleccionar el diccionario de colores que le toque segun el parametro
     diccColores = None
     if parametro == 'Tipo de Cancer':
-        diccColores = db.coloresMapaEstadoCancer
+        diccColores = funcAux.coloresMapaEstadoCancer
     elif parametro == 'Nivel Educativo':
-        diccColores = db.coloresMapaEstadoEducacion
+        diccColores = funcAux.coloresMapaEstadoEducacion
     else:
-        diccColores = db.coloresMapaEstadoOcupacion
+        diccColores = funcAux.coloresMapaEstadoOcupacion
 
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
