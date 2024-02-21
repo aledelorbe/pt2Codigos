@@ -42,6 +42,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
             name = entidad,
             legendgroup = db.gruposX[str(numCluster)],
+            text='hola',
             hoverinfo='text',
             hovertext=entidad,
             #visible="legendonly"
@@ -74,6 +75,7 @@ def aplicarEstilosMapa(fig, tituloX):
         margin=dict(l=20, r=20, t=50, b=50),
         width=1320,  # ajusta el ancho de la figura
         height=680,   # ajusta el alto de la figura
+        # hovermode='closest' Esta por defecto asi
     )
 
     return fig
@@ -109,6 +111,7 @@ fig = aplicarEstilosMapa(fig, 'Estados de México feat tipos de cancer')
 
 
 app.layout = html.Div([
+    # APLICACION
     dcc.Dropdown(id='parametro', 
                  options=['Tipo de Cancer', 'Nivel Educativo', 'Categoria de Empleo'], 
                  value='Tipo de Cancer'),
@@ -123,6 +126,12 @@ app.layout = html.Div([
         id='barra',
         # figure=fig
     ),
+
+    # CONJUNTOS DE DATOS
+    html.Span("Conjunto de Datos del año 2010"),
+    html.Button("Download", id="btn-download-set-2010"),
+    dcc.Download(id="download-set-2010"),
+
 ])
 
 
@@ -167,9 +176,10 @@ def actualizarMapa(parametro):
     [Input('mapa', 'clickData'), Input('parametro', 'value')]
 )
 def extractorInformacionClick(informacion, parametro):
-    parsed_data = json.loads(json.dumps(informacion))
-    curve_number = parsed_data['points'][0]['curveNumber'] + 1
-    return curve_number, parametro, corregirIndice(curve_number)
+    return json.dumps(informacion, indent=2)
+    # parsed_data = json.loads(json.dumps(informacion))
+    # curve_number = parsed_data['points'][0]['curveNumber'] + 1
+    # return parsed_data, parametro, corregirIndice(curve_number)
 
 # ACTUALIZADOR DE BARRA
 # Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
@@ -189,13 +199,12 @@ def actualizarBarra(parametro, informacion):
         diccColores = db.coloresMapaEstadoOcupacion
 
     # De la informacion del click, extraer el id del pais
-    parsed_data = json.loads(json.dumps(informacion))
-    numeroId = parsed_data['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+    numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
     numeroId = corregirIndice(numeroId) # Corregir indice
 
     # Consultar los datos que permiten la creacion del grafico
     estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
-    print(estado, numCluster, etiquetas, cantidades)
+    # print(estado, numCluster, etiquetas, cantidades)
 
     dataBarra = [go.Bar(x=etiquetas, 
                         y=cantidades,
