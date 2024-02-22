@@ -10,13 +10,15 @@ from dash.dependencies import Input, Output
 
 def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     estados = []
-    grupos = []
+    grupos = [] # Para que solo un estado por grupo se agregue a la leyenda
+    apariciones = []
 
     # Lee el archivo GeoJSON
     # with open('mexico.geojson', encoding='utf-8') as f:
     with open('../mexico.geojson', encoding='utf-8') as f:
         data = json.load(f)
 
+    ordenLegend = 0 # Para que las leyendas salgan en orden ascendente
     # Itera sobre todas las características (features) en el archivo GeoJSON
     for feature, numCluster in zip(data['features'], clustersEstadoParametroX):
         # Extrae las coordenadas y las propiedades de la característica actual
@@ -33,7 +35,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
         longitudes = [coord[0] for coord in coordinates]
         latitudes = [coord[1] for coord in coordinates]
         
-        if numCluster not in grupos:
+        if numCluster not in grupos and numCluster == ordenLegend:
             # Agrega la capa de polígono para el mapa
             estados.append(go.Scattergeo(
                 locationmode = 'country names',
@@ -43,15 +45,14 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 line = dict(width = 1, color = 'blue'),
                 fill = 'toself',
                 fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
-                # name = entidad,
                 name=funcAux.gruposX[str(numCluster)],
                 legendgroup = funcAux.gruposX[str(numCluster)],
                 hoverinfo='text',
                 hovertext=entidad,
-                #visible="legendonly"
             ))
 
             grupos.append(numCluster)
+            ordenLegend += 1
         else:
             # Agrega la capa de polígono para el mapa
             estados.append(go.Scattergeo(
@@ -62,32 +63,17 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 line = dict(width = 1, color = 'blue'),
                 fill = 'toself',
                 fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
-                # name = entidad,
                 name=funcAux.gruposX[str(numCluster)],
                 legendgroup = funcAux.gruposX[str(numCluster)],
                 hoverinfo='text',
                 hovertext=entidad,
-                #visible="legendonly"
                 showlegend=False
             ))
 
-
-        # estados.append(go.Scattergeo(
-        #     locationmode = 'country names',
-        #     lon = [funcAux.calcular_centro_x(longitudes)],
-        #     lat = [funcAux.calcular_centro_y(latitudes)],
-        #     mode='markers',
-        #     marker=dict(
-        #         size=10,
-        #         color='blue',
-        #         symbol='circle'
-        #     )
-        # ))
-
-    return estados
+    return estados, apariciones
 
 
-def aplicarEstilosMapa(fig, tituloX):
+def aplicarEstilosMapa(fig, tituloX, aparicionesX):
     # Define el diseño del mapa
     fig.update_geos(
         projection_type="equirectangular",
@@ -100,6 +86,8 @@ def aplicarEstilosMapa(fig, tituloX):
         projection_scale=9.6,
         center=dict(lon=-102, lat=23.6345)
     )
+
+    orden_personalizado = [2, 0, 3, 1]
 
     # Ajusta el título y las leyendas
     fig.update_layout(
@@ -114,6 +102,16 @@ def aplicarEstilosMapa(fig, tituloX):
         # hovermode='closest' Esta por defecto asi
     )
 
+    # Reordenar las leyendas según el orden personalizado
+    print(aparicionesX)
+    # aparicionesX.sort()
+    # fig.data = [fig.data[i] for i in aparicionesX]
+    # fig.data[aparicionesX.index(0)].showlegend=True
+    # fig.data[aparicionesX.index(1)].showlegend=True
+    # fig.data[aparicionesX.index(2)].showlegend=True
+    # fig.data[aparicionesX.index(3)].showlegend=True
+    # fig.data[aparicionesX.index(4)].showlegend=True
+
     return fig
 
 
@@ -124,10 +122,11 @@ app = dash.Dash()
 
 # MAPA QUE SE MOSTRARA POR DEFECTO
 # Genera la figura
-fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoCancer(), funcAux.coloresMapaEstadoCancer))
+mapa, apariciones = generadorDeMapas(db.extraerClustersEstadoCancer(), funcAux.coloresMapaEstadoCancer)
+fig = go.Figure(data=mapa)
 
 # Aplicar estilos
-fig = aplicarEstilosMapa(fig, 'Estados de México feat tipos de cancer')
+fig = aplicarEstilosMapa(fig, 'Estados de México feat tipos de cancer', apariciones)
 
 
 app.layout = html.Div([
@@ -181,10 +180,11 @@ def actualizarMapa(parametro):
 
     # MAPA QUE SE MOSTRARA TRAS LA ACTUALIZACION
     # Genera una nueva figura
-    fig = go.Figure(data=generadorDeMapas(indicesClustersX, coloresMapa))
+    mapa, apariciones = generadorDeMapas(indicesClustersX, coloresMapa)
+    fig = go.Figure(data=mapa)
 
     # Aplicar los nuevos estilos
-    fig = aplicarEstilosMapa(fig, titulo)
+    fig = aplicarEstilosMapa(fig, titulo, apariciones)
         
     return fig
 
