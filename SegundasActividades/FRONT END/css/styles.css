@@ -221,3 +221,55 @@ footer {
 #menu ul li:hover{
 	background: #235E3D;
 }
+
+
+
+/* ESTILOS DE CONJUNTOS DE DATOS */
+/* Textos de la descarga */
+.textosDescarga{
+	margin-left: 18px;
+    font-size: 20px;
+    font-family: verdana, arial;
+	letter-spacing: 1px;
+	display: inline-block;
+    width: 310px;
+}
+
+/* Botones de la descarga */
+.btnDescarga{
+	margin-left: 72px;
+    height: 31px;
+    width: 83px;
+    border-radius: 9px;
+	color: white;
+	border: 1px solid white;
+	margin-right: 126px;
+}
+
+.btnDescarga:hover {
+	cursor: pointer;
+}
+
+/* La separacion vertical entre el content y los primeros textos con botones*/
+#margin-top-download{
+	width: 100%;
+	height: 25px;
+}
+
+/* Espacio horizontal entre content y el txt */
+.margin-left-download{
+	width: 57px;	
+}
+
+/* Espacio horizontal entre un texto y su boton */
+.margin-between-download{
+	width: 156px;
+}
+
+/* Espacio vertical entre un txt con bton y otro */
+.sepTextoBtn{
+	width: 100%;
+	height: 10px;
+}
+
+
