@@ -10,6 +10,7 @@ from dash.dependencies import Input, Output
 
 def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     estados = []
+    grupos = []
 
     # Lee el archivo GeoJSON
     # with open('mexico.geojson', encoding='utf-8') as f:
@@ -32,22 +33,56 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
         longitudes = [coord[0] for coord in coordinates]
         latitudes = [coord[1] for coord in coordinates]
         
-        # Agrega la capa de polígono para el mapa
-        estados.append(go.Scattergeo(
-            locationmode = 'country names',
-            lon = longitudes,
-            lat = latitudes,
-            mode = 'lines',
-            line = dict(width = 1, color = 'blue'),
-            fill = 'toself',
-            fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
-            name = entidad,
-            legendgroup = funcAux.gruposX[str(numCluster)],
-            text='hola',
-            hoverinfo='text',
-            hovertext=entidad,
-            #visible="legendonly"
-        ))
+        if numCluster not in grupos:
+            # Agrega la capa de polígono para el mapa
+            estados.append(go.Scattergeo(
+                locationmode = 'country names',
+                lon = longitudes,
+                lat = latitudes,
+                mode = 'lines',
+                line = dict(width = 1, color = 'blue'),
+                fill = 'toself',
+                fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
+                # name = entidad,
+                name=funcAux.gruposX[str(numCluster)],
+                legendgroup = funcAux.gruposX[str(numCluster)],
+                hoverinfo='text',
+                hovertext=entidad,
+                #visible="legendonly"
+            ))
+
+            grupos.append(numCluster)
+        else:
+            # Agrega la capa de polígono para el mapa
+            estados.append(go.Scattergeo(
+                locationmode = 'country names',
+                lon = longitudes,
+                lat = latitudes,
+                mode = 'lines',
+                line = dict(width = 1, color = 'blue'),
+                fill = 'toself',
+                fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
+                # name = entidad,
+                name=funcAux.gruposX[str(numCluster)],
+                legendgroup = funcAux.gruposX[str(numCluster)],
+                hoverinfo='text',
+                hovertext=entidad,
+                #visible="legendonly"
+                showlegend=False
+            ))
+
+
+        # estados.append(go.Scattergeo(
+        #     locationmode = 'country names',
+        #     lon = [funcAux.calcular_centro_x(longitudes)],
+        #     lat = [funcAux.calcular_centro_y(latitudes)],
+        #     mode='markers',
+        #     marker=dict(
+        #         size=10,
+        #         color='blue',
+        #         symbol='circle'
+        #     )
+        # ))
 
     return estados
 
@@ -82,23 +117,7 @@ def aplicarEstilosMapa(fig, tituloX):
     return fig
 
 
-def corregirIndice(numero):
-    if numero == 5:
-        numero = 7
-    elif numero == 6:
-        numero = 8
-    elif numero == 7:
-        numero = 5
-    elif numero == 8:
-        numero = 6
-    elif numero == 15:
-        numero = 17
-    elif numero == 16:
-        numero = 15
-    elif numero == 17:
-        numero = 16
 
-    return numero
 
 app = dash.Dash()
 
@@ -178,9 +197,8 @@ def actualizarMapa(parametro):
 )
 def extractorInformacionClick(informacion, parametro):
     # return json.dumps(informacion, indent=2)
-    # parsed_data = json.loads(json.dumps(informacion))
     curve_number = informacion['points'][0]['curveNumber'] + 1
-    return curve_number, parametro, corregirIndice(curve_number)
+    return curve_number, parametro, funcAux.corregirIndice(curve_number)
 
 # ACTUALIZADOR DE BARRA
 # Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
@@ -201,7 +219,7 @@ def actualizarBarra(parametro, informacion):
 
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
-    numeroId = corregirIndice(numeroId) # Corregir indice
+    numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
 
     # Consultar los datos que permiten la creacion del grafico
     estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
