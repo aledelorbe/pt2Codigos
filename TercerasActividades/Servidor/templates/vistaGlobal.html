@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<title>Proyecto con JavaScript</title>
+
+		<!-- Estilos CSS -->
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<link id="theme" rel="stylesheet" type="text/css" href="../css/styles.css" />
+	</head>
+	<body>
+
+		<section id="global">
+
+			<!-- HEADER -->
+			<header>
+
+				<!-- Contenedor de imagenes -->
+				<div id="content-logos">
+					<span class="flotador" id="renglon1">&nbsp</span>
+					<span class="flotador" id="separadorImg1">&nbsp</span>
+					<img class="flotador" id="imgHeaderPol" src="https://i.pinimg.com/564x/78/9c/06/789c067732ec9b594dda59c23286028a.jpg" alt="imagen">                
+					<span class="flotador" id="separadorEntreImg">&nbsp</span>
+					<img class="flotador" id="imgHeaderUpiita" src="https://www.upiita.ipn.mx/images/logo_upiita_ipn_varios_colores_logo_upiita_oro.png" alt="imagen">  
+					
+					<div class="limpiador"></div>
+				</div>
+
+				<!-- Contenedor del titulo -->
+				<div class="color" id="content-titulo">
+					<h1>Impacto de variables sociodemográficas en cáncer usando técnicas de Ciencia de Datos</h1>
+				</div>
+
+				<!-- Contenedor del menu de navegacion -->
+				<nav id="menu">
+					<ul>
+						<li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+						<li><a href="{{ url_for('aplicacion') }}">Aplicación</a></li>
+						<li><a href="{{ url_for('conjuntos') }}">Conjuntos de Datos</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			{% block contenidoPagina %}
+
+            {% endblock %}
+			
+		</section>
+		<!-- FOOTER -->
+		<footer>
+			Derechos Reservados por Alejandro Granados &copy;
+		</footer>
+	</body>
+</html>
+
+
