@@ -2,11 +2,14 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<title>Proyecto con JavaScript</title>
+		<title> 
+			{% block titulo %}
+
+			{% endblock %} | Proyecto Terminal 
+		</title>
 
 		<!-- Estilos CSS -->
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<link id="theme" rel="stylesheet" type="text/css" href="../css/styles.css" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/estilosGlobales.css') }}"/> 
 	</head>
 	<body>
 
