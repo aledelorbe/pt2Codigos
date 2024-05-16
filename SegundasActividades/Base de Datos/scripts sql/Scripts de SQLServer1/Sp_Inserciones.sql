@@ -3,8 +3,8 @@ go
 
 -- Sp para insertar en la tabla 'EstadoCancer' ----------------------------------
 
-CREATE OR ALTER PROCEDURE sp_insertarEstadoCancer 
-	@estado varchar(40), @cancer varchar(40), @cantidad int, @cluster int
+CREATE OR ALTER PROCEDURE sp_insertarEstadoCancer
+	@estado varchar(40), @cancer varchar(40), @cantidad int, @cluster int, @porcentaje decimal(5, 4)
 AS
 BEGIN
 	IF EXISTS(select id_estado from Estado where nombre = @estado) AND EXISTS(select id_cancer from Cancer where nombre = @cancer)
@@ -14,14 +14,14 @@ BEGIN
 		set @id_estado = (select id_estado from Estado where nombre = @estado)
 		set @id_cancer = (select id_cancer from Cancer where nombre = @cancer)
 
-		INSERT INTO EstadoCancer VALUES (@id_estado, @id_cancer, @cantidad, @cluster);
+		INSERT INTO EstadoCancer VALUES (@id_estado, @id_cancer, @cantidad, @cluster, @porcentaje);
 	END
 	ELSE
 		PRINT('NO HUBO COINCIDENCIAS')	
 END
 
 -- Test del sp_insertarEstadoCancer
-Exec sp_insertarEstadoCancer 'Aguascalientes', 'Bladder', 10, 1
+Exec sp_insertarEstadoCancer 'Aguascalientes', 'Bladder', 10, 1, 0.2456
 
 select *
 from EstadoCancer
@@ -32,7 +32,7 @@ DELETE FROM EstadoCancer
 -- Sp para insertar en la tabla 'EstadoEscolaridad' ----------------------------------
 
 CREATE OR ALTER PROCEDURE sp_insertarEstadoEscolaridad 
-	@estado varchar(40), @escolaridad varchar(40), @cantidad int, @cluster int
+	@estado varchar(40), @escolaridad varchar(40), @cantidad int, @cluster int, @porcentaje decimal(5, 4)
 AS
 BEGIN
 	IF EXISTS(select id_estado from Estado where nombre = @estado) AND EXISTS(select id_escolaridad from Escolaridad where nombre = @escolaridad)
@@ -42,14 +42,14 @@ BEGIN
 		set @id_estado = (select id_estado from Estado where nombre = @estado)
 		set @id_escolaridad = (select id_escolaridad from Escolaridad where nombre = @escolaridad)
 
-		INSERT INTO EstadoEscolaridad VALUES (@id_estado, @id_escolaridad, @cantidad, @cluster);
+		INSERT INTO EstadoEscolaridad VALUES (@id_estado, @id_escolaridad, @cantidad, @cluster, @porcentaje);
 	END
 	ELSE
 		PRINT('NO HUBO COINCIDENCIAS')	
 END
 
 -- Test del sp_insertarEstadoEscolariad
-Exec sp_insertarEstadoEscolaridad 'Aguascalientes', 'Preescolar', 10, 1
+Exec sp_insertarEstadoEscolaridad 'Aguascalientes', 'Preescolar', 10, 1, 0.5124
 
 select *
 from EstadoEscolaridad
@@ -60,7 +60,7 @@ DELETE FROM EstadoEscolaridad
 -- Sp para insertar en la tabla 'EstadoOcupacion' ----------------------------------
 
 CREATE OR ALTER PROCEDURE sp_insertarEstadoOcupacion
-	@estado varchar(40), @ocupacion varchar(90), @cantidad int, @cluster int
+	@estado varchar(40), @ocupacion varchar(90), @cantidad int, @cluster int, @porcentaje decimal(5, 4)
 AS
 BEGIN
 	IF EXISTS(select id_estado from Estado where nombre = @estado) AND EXISTS(select id_ocupacion from Ocupacion where nombre = @ocupacion)
@@ -70,14 +70,14 @@ BEGIN
 		set @id_estado = (select id_estado from Estado where nombre = @estado)
 		set @id_ocupacion = (select id_ocupacion from Ocupacion where nombre = @ocupacion)
 
-		INSERT INTO EstadoOcupacion VALUES (@id_estado, @id_ocupacion, @cantidad, @cluster);
+		INSERT INTO EstadoOcupacion VALUES (@id_estado, @id_ocupacion, @cantidad, @cluster, @porcentaje);
 	END
 	ELSE
 		PRINT('NO HUBO COINCIDENCIAS')	
 END
 
 -- Test del sp_insertarEstadoOcupacion
-Exec sp_insertarEstadoOcupacion 'Aguascalientes', 'Comerciantes, empleados en ventas y agentes de ventas', 12, 6
+Exec sp_insertarEstadoOcupacion 'Aguascalientes', 'Comerciantes, empleados en ventas y agentes de ventas', 12, 6, 0.3465
 
 select *
 from EstadoOcupacion

@@ -44,6 +44,7 @@ create table EstadoCancer(
 	id_cancer int not null,
 	cantidad int not null,
 	cluster int not null,
+	porcentaje decimal(5, 4) not null,
 	--anio varchar(6),
 
 	constraint FK_id_estado_can foreign key (id_estado) references Estado(id_estado),
@@ -56,6 +57,7 @@ create table EstadoEscolaridad(
 	id_escolaridad int not null,
 	cantidad int not null,
 	cluster int not null,
+	porcentaje decimal(5, 4) not null,
 	--anio varchar(6),
 
 	constraint FK_id_estado_esco foreign key (id_estado) references Estado(id_estado),
@@ -68,9 +70,11 @@ create table EstadoOcupacion(
 	id_ocupacion int not null,
 	cantidad int not null,
 	cluster int not null,
+	porcentaje decimal(5, 4) not null,
 	--anio varchar(6),
 
 	constraint FK_id_estado_ocu foreign key (id_estado) references Estado(id_estado),
 	constraint FK_id_ocupacion foreign key (id_ocupacion) references Ocupacion(id_ocupacion)
 )
 go
+
