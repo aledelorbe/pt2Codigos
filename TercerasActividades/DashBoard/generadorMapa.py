@@ -7,35 +7,35 @@ import pandas as pd
 import numpy as np
 import pyodbc # Este modulo se tuvo que instalar de la siguiente manera: 'pip install pyodbc'
 
-# Diccionarios con los colores para los 3 mapas
-coloresMapaEstadoCancer = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
+# Diccionarios con los colores para los 2 mapas
+coloresEducacion = {
+    "0": "#4682B4", # Azul metalico
+	"1": "#FF4500", # Naranja
+	"2": "#C71585", # Rosa Oscuro
+	"3": "#006847", # Verde bandera
+    "4": "#753a88", # Morado oscuro
+    "5": "#8B4513", # Cafe
+    "6": "#FF0000", # Rojo
+    "7": "#00FF00", # Verde lima
+    "8": "#FFFF00", # Amarillo
+    "9": "#00FFFF", # Cian
 }
-coloresMapaEstadoEducacion = {
+coloresOcupacion = {
     "0": "#4682B4",
 	"1": "#228B22",
 	"2": "#FF4500",
 	"3": "#FFD700", 
     "4": "#753a88",
-    "5": "#8A0707"
+    "5": "#8A0707", #asfsdfdsf
+    "6": "#FF0000", # Rojo
+    "7": "#00FF00", # Verde
+    "8": "#FFFF00", # Amarillo
+    "9": "#00FFFF", # Cian
+    "10": "#FF00FF", # Magenta
+    "11": "#FFA500", # FFA500
+    "12": "#00FF7F", #asfsdfdsf
 }
-coloresMapaEstadoOcupacion = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
-}
-# 8A0707 rojo
-# FF4500 naranja
-# FFD700 amarillo
-# 228B22 verde 
-# 4682B4 azul
-# 753a88 morado
+
 
 # Lo que sucede es que en la db los paises estan ordenados alfabeticamente (A - Z)
 # pero el archivo geojson tambien estan ordenados alfabeticamente pero solo utilizando
@@ -57,7 +57,8 @@ def actualizacionClusters(lista):
     return aux
 
 # Configura la cadena de conexión
-server = '192.168.0.14\MSSQL3'
+# server = '192.168.0.14\MSSQL3'
+server = '192.168.1.103\MSSQL3'
 database = 'Sociodemografico'
 username = 'sa'
 password = '123456'
@@ -139,70 +140,6 @@ clustersEstadoOcupacion = actualizacionClusters(clustersEstadoOcupacion)
 
 # CREACION DE LOS MAPAS
 
-# Creacion del mapa estado con tipo de canceres
-# Crea la figura
-fig = px.line()
-
-# Itera sobre todas las características (features) en el archivo GeoJSON
-for feature, numCluster in zip(data['features'], clustersEstadoCancer):
-    # Extrae las coordenadas y las propiedades de la característica actual
-    coordinates = feature['geometry']['coordinates'][0]
-    properties = feature['properties']
-    
-    # Extrae los datos específicos que deseas mostrar
-    entidad = properties['ENTIDAD']
-    capital = properties['CAPITAL']
-    area = properties['AREA']
-    perimetro = properties['PERIMETER']
-    
-    # Extrae las longitudes y latitudes de las coordenadas
-    longitudes = [coord[0] for coord in coordinates]
-    latitudes = [coord[1] for coord in coordinates]
-    
-    # Agrega la capa de polígono para el mapa
-    fig.add_trace(go.Scattergeo(
-        locationmode = 'country names',
-        lon = longitudes,
-        lat = latitudes,
-        mode = 'lines',
-        line = dict(width = 1, color = 'blue'),
-        fill = 'toself',
-        # fillcolor = 'rgba(0, 255, 0, 0.1)',
-        fillcolor = coloresMapaEstadoCancer[str(numCluster)],
-        name = entidad,
-        visible="legendonly"
-    ))
-
-# Define el diseño del mapa
-fig.update_geos(
-    projection_type="equirectangular",
-    showland = True,
-    showcountries=True,
-    landcolor = "rgb(243, 243, 243)",
-    countrycolor = "rgb(204, 204, 204)",
-    showlakes = True,
-    lakecolor = "rgb(255, 255, 255)",
-    projection_scale=9.5,
-    center=dict(lon=-102, lat=23.6345)
-)
-
-# Ajusta el título y las leyendas
-fig.update_layout(
-    title = 'Estados de México feat tipos de cancer',
-    geo = dict(
-        scope='world',
-        showland=True,
-    ),
-    margin=dict(l=20, r=20, t=50, b=50),
-    width=1320,  # ajusta el ancho de la figura
-    height=680   # ajusta el alto de la figura
-)
-
-# Muestra el mapa
-fig.show()
-
-pyo.plot(fig, filename="mapaMexicoTipoCancer.html")
-
 # Creacion del mapa estado con niveles de educacion
 # Crea la figura
 fig = px.line()
@@ -222,6 +159,8 @@ for feature, numCluster in zip(data['features'], clustersEstadoEducacion):
     # Extrae las longitudes y latitudes de las coordenadas
     longitudes = [coord[0] for coord in coordinates]
     latitudes = [coord[1] for coord in coordinates]
+
+    print('numCluster', numCluster)
     
     # Agrega la capa de polígono para el mapa
     fig.add_trace(go.Scattergeo(
@@ -231,8 +170,7 @@ for feature, numCluster in zip(data['features'], clustersEstadoEducacion):
         mode = 'lines',
         line = dict(width = 1, color = 'blue'),
         fill = 'toself',
-        # fillcolor = 'rgba(0, 255, 0, 0.1)',
-        fillcolor = coloresMapaEstadoEducacion[str(numCluster)],
+        fillcolor = coloresEducacion[str(numCluster)],
         name = entidad,
         visible="legendonly"
     ))
@@ -265,69 +203,69 @@ fig.update_layout(
 # Muestra el mapa
 fig.show()
 
-pyo.plot(fig, filename="mapaMexicoEducacion.html")
+# pyo.plot(fig, filename="mapaMexicoEducacion.html")
 
 
-# Creacion del mapa estado con categorias de empleo
-# Crea la figura
-fig = px.line()
+# # Creacion del mapa estado con categorias de empleo
+# # Crea la figura
+# fig = px.line()
 
-# Itera sobre todas las características (features) en el archivo GeoJSON
-for feature, numCluster in zip(data['features'], clustersEstadoOcupacion):
-    # Extrae las coordenadas y las propiedades de la característica actual
-    coordinates = feature['geometry']['coordinates'][0]
-    properties = feature['properties']
+# # Itera sobre todas las características (features) en el archivo GeoJSON
+# for feature, numCluster in zip(data['features'], clustersEstadoOcupacion):
+#     # Extrae las coordenadas y las propiedades de la característica actual
+#     coordinates = feature['geometry']['coordinates'][0]
+#     properties = feature['properties']
     
-    # Extrae los datos específicos que deseas mostrar
-    entidad = properties['ENTIDAD']
-    capital = properties['CAPITAL']
-    area = properties['AREA']
-    perimetro = properties['PERIMETER']
+#     # Extrae los datos específicos que deseas mostrar
+#     entidad = properties['ENTIDAD']
+#     capital = properties['CAPITAL']
+#     area = properties['AREA']
+#     perimetro = properties['PERIMETER']
     
-    # Extrae las longitudes y latitudes de las coordenadas
-    longitudes = [coord[0] for coord in coordinates]
-    latitudes = [coord[1] for coord in coordinates]
+#     # Extrae las longitudes y latitudes de las coordenadas
+#     longitudes = [coord[0] for coord in coordinates]
+#     latitudes = [coord[1] for coord in coordinates]
     
-    # Agrega la capa de polígono para el mapa
-    fig.add_trace(go.Scattergeo(
-        locationmode = 'country names',
-        lon = longitudes,
-        lat = latitudes,
-        mode = 'lines',
-        line = dict(width = 1, color = 'blue'),
-        fill = 'toself',
-        # fillcolor = 'rgba(0, 255, 0, 0.1)',
-        fillcolor = coloresMapaEstadoOcupacion[str(numCluster)],
-        name = entidad,
-        visible="legendonly"
-    ))
+#     # Agrega la capa de polígono para el mapa
+#     fig.add_trace(go.Scattergeo(
+#         locationmode = 'country names',
+#         lon = longitudes,
+#         lat = latitudes,
+#         mode = 'lines',
+#         line = dict(width = 1, color = 'blue'),
+#         fill = 'toself',
+#         # fillcolor = 'rgba(0, 255, 0, 0.1)',
+#         fillcolor = coloresOcupacion[str(numCluster)],
+#         name = entidad,
+#         visible="legendonly"
+#     ))
 
-# Define el diseño del mapa
-fig.update_geos(
-    projection_type="equirectangular",
-    showland = True,
-    showcountries=True,
-    landcolor = "rgb(243, 243, 243)",
-    countrycolor = "rgb(204, 204, 204)",
-    showlakes = True,
-    lakecolor = "rgb(255, 255, 255)",
-    projection_scale=9.5,
-    center=dict(lon=-102, lat=23.6345)
-)
+# # Define el diseño del mapa
+# fig.update_geos(
+#     projection_type="equirectangular",
+#     showland = True,
+#     showcountries=True,
+#     landcolor = "rgb(243, 243, 243)",
+#     countrycolor = "rgb(204, 204, 204)",
+#     showlakes = True,
+#     lakecolor = "rgb(255, 255, 255)",
+#     projection_scale=9.5,
+#     center=dict(lon=-102, lat=23.6345)
+# )
 
-# Ajusta el título y las leyendas
-fig.update_layout(
-    title = 'Estados de México feat Ocupacion',
-    geo = dict(
-        scope='world',
-        showland=True,
-    ),
-    margin=dict(l=20, r=20, t=50, b=50),
-    width=1320,  # ajusta el ancho de la figura
-    height=680   # ajusta el alto de la figura
-)
+# # Ajusta el título y las leyendas
+# fig.update_layout(
+#     title = 'Estados de México feat Ocupacion',
+#     geo = dict(
+#         scope='world',
+#         showland=True,
+#     ),
+#     margin=dict(l=20, r=20, t=50, b=50),
+#     width=1320,  # ajusta el ancho de la figura
+#     height=680   # ajusta el alto de la figura
+# )
 
-# Muestra el mapa
-fig.show()
+# # Muestra el mapa
+# fig.show()
 
-pyo.plot(fig, filename="mapaMexicoOcupacion.html")
+# pyo.plot(fig, filename="mapaMexicoOcupacion.html")
