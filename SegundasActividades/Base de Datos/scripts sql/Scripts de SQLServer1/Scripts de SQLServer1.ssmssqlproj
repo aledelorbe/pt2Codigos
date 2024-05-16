@@ -27,6 +27,18 @@
           <ConnectionProtocol>NotSpecified</ConnectionProtocol>
           <ApplicationName />
         </ConnectionNode>
+        <ConnectionNode Name="192.168.1.103\MSSQL3:DESKTOP-GEAT7IL\LENOVO">
+          <Created>2024-05-15T21:19:34.6111899-06:00</Created>
+          <Type>SQL</Type>
+          <Server>192.168.1.103\MSSQL3</Server>
+          <UserName />
+          <Authentication>Autenticación de Windows</Authentication>
+          <InitialDB />
+          <LoginTimeout>30</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Consulta</ApplicationName>
+        </ConnectionNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Consultas" Type="0" Sorted="true">
@@ -38,8 +50,8 @@
           <FullPath>Altas Catalogos.sql</FullPath>
         </FileNode>
         <FileNode Name="Consultas.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:192.168.0.14\MSSQL3:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>192.168.0.14\MSSQL3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:192.168.1.103\MSSQL3:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>192.168.1.103\MSSQL3</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Consultas.sql</FullPath>
         </FileNode>
