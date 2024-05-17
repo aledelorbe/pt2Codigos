@@ -22,12 +22,12 @@ coloresEducacion = {
 }
 coloresOcupacion = {
     "0": "#4682B4", # Azul metalico
-	"1": "#FF4500", # Naranja
-	"2": "#C71585", # Rosa Oscuro
-	"3": "#006847", # Verde bandera
+	"3": "#FF4500", # Naranja
+	"6": "#C71585", # Rosa Oscuro
+	"1": "#006847", # Verde bandera
     "4": "#753a88", # Morado oscuro
     "5": "#8B4513", # Cafe
-    "6": "#FF0000", # Rojo
+    "2": "#FF0000", # Rojo
     "7": "#00FF00", # Verde lima
     "8": "#FFFF00", # Amarillo
     "9": "#00FFFF", # Cian
@@ -132,7 +132,7 @@ finally:
     if 'conn' in locals():
         conn.close()
 
-# Actuliazar los clusters
+# Actualizar los clusters
 clustersEstadoCancer = actualizacionClusters(clustersEstadoCancer)
 clustersEstadoEducacion = actualizacionClusters(clustersEstadoEducacion)
 clustersEstadoOcupacion = actualizacionClusters(clustersEstadoOcupacion)
@@ -140,68 +140,72 @@ clustersEstadoOcupacion = actualizacionClusters(clustersEstadoOcupacion)
 
 # CREACION DE LOS MAPAS
 
-# # Creacion del mapa estado con niveles de educacion
-# # Crea la figura
-# fig = px.line()
+# Creacion del mapa estado con niveles de educacion
+# Crea la figura
+fig = px.line()
 
-# # Itera sobre todas las características (features) en el archivo GeoJSON
-# for feature, numCluster in zip(data['features'], clustersEstadoEducacion):
-#     # Extrae las coordenadas y las propiedades de la característica actual
-#     coordinates = feature['geometry']['coordinates'][0]
-#     properties = feature['properties']
+# Itera sobre todas las características (features) en el archivo GeoJSON
+for feature, numCluster in zip(data['features'], clustersEstadoEducacion):
+    # Extrae las coordenadas y las propiedades de la característica actual
+    coordinates = feature['geometry']['coordinates'][0]
+    properties = feature['properties']
     
-#     # Extrae los datos específicos que deseas mostrar
-#     entidad = properties['ENTIDAD']
-#     capital = properties['CAPITAL']
-#     area = properties['AREA']
-#     perimetro = properties['PERIMETER']
+    # Extrae los datos específicos que deseas mostrar
+    entidad = properties['ENTIDAD']
+    capital = properties['CAPITAL']
+    area = properties['AREA']
+    perimetro = properties['PERIMETER']
     
-#     # Extrae las longitudes y latitudes de las coordenadas
-#     longitudes = [coord[0] for coord in coordinates]
-#     latitudes = [coord[1] for coord in coordinates]
+    # Extrae las longitudes y latitudes de las coordenadas
+    longitudes = [coord[0] for coord in coordinates]
+    latitudes = [coord[1] for coord in coordinates]
 
-#     print('numCluster', numCluster)
+    print('numCluster', numCluster)
     
-#     # Agrega la capa de polígono para el mapa
-#     fig.add_trace(go.Scattergeo(
-#         locationmode = 'country names',
-#         lon = longitudes,
-#         lat = latitudes,
-#         mode = 'lines',
-#         line = dict(width = 1, color = 'blue'),
-#         fill = 'toself',
-#         fillcolor = coloresEducacion[str(numCluster)],
-#         name = entidad,
-#         visible="legendonly"
-#     ))
+    # Agrega la capa de polígono para el mapa
+    fig.add_trace(go.Scattergeo(
+        locationmode = 'country names',
+        lon = longitudes,
+        lat = latitudes,
+        mode = 'lines',
+        line = dict(width = 1, color = 'blue'),
+        fill = 'toself',
+        fillcolor = coloresEducacion[str(numCluster)],
+        name = entidad,
+        visible="legendonly"
+    ))
 
-# # Define el diseño del mapa
-# fig.update_geos(
-#     projection_type="equirectangular",
-#     showland = True,
-#     showcountries=True,
-#     landcolor = "rgb(243, 243, 243)",
-#     countrycolor = "rgb(204, 204, 204)",
-#     showlakes = True,
-#     lakecolor = "rgb(255, 255, 255)",
-#     projection_scale=9.5,
-#     center=dict(lon=-102, lat=23.6345)
-# )
+# Define el diseño del mapa
+fig.update_geos(
+    projection_type="equirectangular",
+    showland = True,
+    showcountries=True,
+    landcolor = "rgb(243, 243, 243)",
+    countrycolor = "rgb(204, 204, 204)",
+    showlakes = True,
+    lakecolor = "rgb(255, 255, 255)",
+    projection_scale=9.5,
+    center=dict(lon=-102, lat=23.6345)
+)
 
-# # Ajusta el título y las leyendas
-# fig.update_layout(
-#     title = 'Estados de México feat niveles de educacion',
-#     geo = dict(
-#         scope='world',
-#         showland=True,
-#     ),
-#     margin=dict(l=20, r=20, t=50, b=50),
-#     width=1320,  # ajusta el ancho de la figura
-#     height=680   # ajusta el alto de la figura
-# )
+# Ajusta el título y las leyendas
+fig.update_layout(
+    title = 'Estados de México feat niveles de educacion',
+    geo = dict(
+        scope='world',
+        showland=True,
+    ),
+    margin=dict(l=20, r=20, t=50, b=50),
+    width=1320,  # ajusta el ancho de la figura
+    height=680   # ajusta el alto de la figura
+)
 
-# # Muestra el mapa
-# fig.show()
+# Oculta los números en los ejes
+fig.update_xaxes(visible=False)
+fig.update_yaxes(visible=False)
+
+# Muestra el mapa
+fig.show()
 
 # pyo.plot(fig, filename="mapaMexicoEducacion.html")
 
@@ -264,6 +268,10 @@ fig.update_layout(
     width=1320,  # ajusta el ancho de la figura
     height=680   # ajusta el alto de la figura
 )
+
+# Oculta los números en los ejes
+fig.update_xaxes(visible=False)
+fig.update_yaxes(visible=False)
 
 # Muestra el mapa
 fig.show()
