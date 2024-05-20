@@ -2,51 +2,50 @@
 # METODOS Y DICCIONARIOS QUE SI SE MANDAN A LLAMAR FUERA DEL ARCHIVO
 
 # Diccionarios con los colores para los 3 mapas
-coloresMapaEstadoCancer = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
+coloresEducacion = {
+    "0": "#4682B4", # Azul metalico
+	"1": "#FF4500", # Naranja
+	"2": "#C71585", # Rosa Oscuro
+	"3": "#006847", # Verde bandera
+    "4": "#753a88", # Morado oscuro
+    "5": "#8B4513", # Cafe
+    "6": "#FF0000", # Rojo
+    "7": "#00FF00", # Verde lima
+    "8": "#FFFF00", # Amarillo
+    "9": "#00FFFF", # Cian
 }
-coloresMapaEstadoEducacion = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88",
-    "5": "#8A0707"
+coloresOcupacion = {
+    "0": "#4682B4", # Azul metalico
+	"3": "#FF4500", # Naranja
+	"6": "#C71585", # Rosa Oscuro
+	"1": "#006847", # Verde bandera
+    "4": "#753a88", # Morado oscuro
+    "5": "#8B4513", # Cafe
+    "2": "#FF0000", # Rojo
+    "7": "#00FF00", # Verde lima
+    "8": "#FFFF00", # Amarillo
+    "9": "#00FFFF", # Cian
+    "10": "#FF69B4", # Rosa metalico
+    "11": "#1A195D", # Azul marino
+    "12": "#B22222", # Rojo metalico
 }
-coloresMapaEstadoOcupacion = {
-    "0": "#4682B4",
-	"1": "#228B22",
-	"2": "#FF4500",
-	"3": "#FFD700", 
-    "4": "#753a88" 
-}
-# 8A0707 rojo
-# FF4500 naranja
-# FFD700 amarillo
-# 228B22 verde 
-# 4682B4 azul
-# 753a88 morado
 
 # Para que cada estado se agrupe con su cluster correspondiente
 gruposX = {
-    "0": "Grupo 0",
-	"1": "Grupo 1",
-	"2": "Grupo 2",
-	"3": "Grupo 3", 
-    "4": "Grupo 4",
-    "5": "Grupo 5" 
+    "0": "Grupo 1",
+	"1": "Grupo 2",
+	"2": "Grupo 3",
+	"3": "Grupo 4", 
+    "4": "Grupo 5",
+    "5": "Grupo 6",
+    "6": "Grupo 7",
+	"7": "Grupo 8",
+	"8": "Grupo 9", 
+    "9": "Grupo 10",
+    "10": "Grupo 11",
+	"11": "Grupo 12", 
+    "12": "Grupo 13",
 }
-
-# Para calcular el centro de las areas geograficas
-def calcular_centro_x(longitudes):
-    return sum(longitudes) / len(longitudes)
-
-def calcular_centro_y(latitudes):
-    return sum(latitudes) / len(latitudes)
 
 # Para corregir el problema de tener unos indices en el mapa y otros en la db (de mapa a db)
 def corregirIndice(numero):

@@ -13,8 +13,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     grupos = [] # Para que solo un estado por grupo se agregue a la leyenda
 
     # Lee el archivo GeoJSON
-    # with open('mexico.geojson', encoding='utf-8') as f:
-    with open('../mexico.geojson', encoding='utf-8') as f:
+    with open('mexico.geojson', encoding='utf-8') as f:
         data = json.load(f)
 
     # Itera sobre todas las características (features) en el archivo GeoJSON
@@ -106,17 +105,17 @@ app = dash.Dash()
 
 # MAPA QUE SE MOSTRARA POR DEFECTO
 # Genera la figura
-fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoCancer(), funcAux.coloresMapaEstadoCancer))
+fig = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoEducacion(), funcAux.coloresEducacion))
 
 # Aplicar estilos
-fig = aplicarEstilosMapa(fig, 'Estados de México feat tipos de cancer')
+fig = aplicarEstilosMapa(fig, 'Estados de México feat Nivel Educativo y Cáncer')
 
 
 app.layout = html.Div([
     # APLICACION
     dcc.Dropdown(id='parametro', 
-                 options=['Tipo de Cancer', 'Nivel Educativo', 'Categoria de Empleo'], 
-                 value='Tipo de Cancer'),
+                 options=['Nivel Educativo y Cáncer', 'Categoria de Empleo y Cáncer'], 
+                 value='Nivel Educativo y Cáncer'),
     dcc.Graph(
         id='mapa',
         figure=fig
@@ -125,15 +124,21 @@ app.layout = html.Div([
         html.Pre(id='informacionClick')
     ]),
     dcc.Graph(
-        id='barra',
+        id='barraParametro',
         # figure=fig
     ),
-
-    # CONJUNTOS DE DATOS
-    html.Span("Conjunto de Datos del año 2010"),
-    html.Button("Download", id="btn-download-set-2010"),
-    dcc.Download(id="download-set-2010"),
-
+    # dcc.Graph(
+    #     id='barraCancer',
+    #     # figure=fig
+    # ),
+    dcc.Graph(
+        id='barraParametro_0_1',
+        # figure=fig
+    ),
+    # dcc.Graph(
+    #     id='barraCancer_0_1',
+    #     # figure=fig
+    # ),
 ])
 
 
@@ -147,19 +152,14 @@ def actualizarMapa(parametro):
     titulo = None
     indicesClustersX = None
     coloresMapa = None 
-
-    if parametro == 'Tipo de Cancer':
-        titulo = 'Estados de México feat tipos de cancer'
-        indicesClustersX = db.extraerClustersEstadoCancer()
-        coloresMapa = funcAux.coloresMapaEstadoCancer 
-    elif parametro == 'Nivel Educativo':
+    if parametro == 'Nivel Educativo y Cáncer':
         titulo = 'Estados de México feat Nivel Educativo'
         indicesClustersX = db.extraerClustersEstadoEducacion()
-        coloresMapa = funcAux.coloresMapaEstadoEducacion 
+        coloresMapa = funcAux.coloresEducacion 
     else:
         titulo = 'Estados de México feat Ocupacion'
         indicesClustersX = db.extraerClustersEstadoOcupacion()
-        coloresMapa = funcAux.coloresMapaEstadoOcupacion 
+        coloresMapa = funcAux.coloresOcupacion 
 
     # MAPA QUE SE MOSTRARA TRAS LA ACTUALIZACION
     # Genera una nueva figura
@@ -183,49 +183,69 @@ def extractorInformacionClick(informacion, parametro):
     return curve_number, parametro, funcAux.corregirIndice(curve_number)
 
 # ACTUALIZADOR DE BARRA
-# Cambia la grafica de barras dependientemenete del estado que se selccione en el mapa
+# Cambia las graficas de barras dependientemenete del estado que se seleccione en el mapa
 @app.callback(
-    Output('barra', 'figure'),
+    [Output('barraParametro', 'figure'), Output('barraParametro_0_1', 'figure')],
     [Input('parametro', 'value'), Input('mapa', 'clickData')]
 )
 def actualizarBarra(parametro, informacion):
-
     # Seleccionar el diccionario de colores que le toque segun el parametro
     diccColores = None
-    if parametro == 'Tipo de Cancer':
-        diccColores = funcAux.coloresMapaEstadoCancer
-    elif parametro == 'Nivel Educativo':
-        diccColores = funcAux.coloresMapaEstadoEducacion
+    parametroVerda = None
+    if parametro == 'Nivel Educativo y Cáncer':
+        diccColores = funcAux.coloresEducacion
+        parametroVerda = 'Nivel Educativo'
     else:
-        diccColores = funcAux.coloresMapaEstadoOcupacion
+        diccColores = funcAux.coloresOcupacion
+        parametroVerda = 'Categoria de Empleo'
 
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
 
     # Consultar los datos que permiten la creacion del grafico
-    estado, numCluster, etiquetas, cantidades = db.consultaBarras(parametro, numeroId)
+    estado, numCluster, etiquetas, cantidades, porcentajes = db.consultaBarras(parametroVerda, numeroId)
     # print(estado, numCluster, etiquetas, cantidades)
 
-    dataBarra = [go.Bar(x=etiquetas, 
+    # Crear la grafica de barras para el parametro seleccionado (forma cruda)
+    dataBarraParam = [go.Bar(x=etiquetas, 
                         y=cantidades,
                         marker=dict(
                             color=diccColores[str(numCluster)],  
                             line=dict(color='black')  
                         ))] 
-    estilosFigura = go.Layout(
-        title=f"Cantidad de personas con cancer por cada {parametro} en el estado de {estado}",
-        xaxis=dict(title=parametro),
-        yaxis=dict(title="cantidad"),
+    estilosFiguraParam = go.Layout(
+        title=f"Cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} en el \n \testado de {estado}",
+        xaxis=dict(title=parametroVerda),
+        yaxis=dict(title="Cantidad"),
         font=dict(
             family='Verdana',
             size=16,
             color='black'
         )
     )
-    figura = go.Figure(data=dataBarra, layout=estilosFigura)
+    figuraParam = go.Figure(data=dataBarraParam, layout=estilosFiguraParam)
 
-    return figura
+    # Crear la grafica de barras para el parametro seleccionado (forma porcentual)
+    dataBarraParam_0_1 = [go.Bar(x=etiquetas, 
+                        y=porcentajes,
+                        marker=dict(
+                            color=diccColores[str(numCluster)],  
+                            line=dict(color='black')  
+                        ))] 
+    estilosFiguraParam_0_1 = go.Layout(
+        title=f"Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} \n \ten el estado de {estado}",
+        xaxis=dict(title=parametroVerda),
+        yaxis=dict(title="Porcentaje"),
+        font=dict(
+            family='Verdana',
+            size=16,
+            color='black'
+        )
+    )
+    figuraParam_0_1 = go.Figure(data=dataBarraParam_0_1, layout=estilosFiguraParam_0_1)
+
+    return figuraParam, figuraParam_0_1
 
 if __name__ == '__main__':
     app.run_server()

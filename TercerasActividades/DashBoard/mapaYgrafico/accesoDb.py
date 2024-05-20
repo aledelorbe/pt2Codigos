@@ -3,8 +3,8 @@ import json
 
 
 # Configura la cadena de conexión
-#server = '192.168.0.14\MSSQL3'
-server = '10.87.19.82\MSSQL3'
+server = '192.168.0.14\MSSQL3'
+# server = '192.168.1.103\MSSQL3'
 database = 'Sociodemografico'
 username = 'sa'
 password = '123456'
@@ -75,7 +75,7 @@ def extraerClustersEstadoCancer():
 
 def extraerClustersEstadoEducacion():
     clustersEstadoEducacion = []
-
+    
     try:
         # INTENTA ESTABLECER LA CONEXION
         conn = pyodbc.connect(conn_str)
@@ -175,7 +175,7 @@ def consultaBarras(parametro, numeroId):
 
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = f"""
-                    select e.nombre, ec.cluster, c.nombre, ec.cantidad  
+                    select e.nombre, ec.cluster, c.nombre, ec.cantidad, ec.porcentaje 
                     from {tablaRelacion} ec
                     inner join Estado e
                     on e.id_estado = ec.id_estado
@@ -190,10 +190,12 @@ def consultaBarras(parametro, numeroId):
         numCluster = None
         etiquetas = []
         cantidades = []
+        porcentajes = []
         for renglon in consultaEstadoParametro:
-            estado, numCluster, etiqueta, cantidad = renglon
+            estado, numCluster, etiqueta, cantidad, porcentaje = renglon
             etiquetas.append(etiqueta)
             cantidades.append(cantidad)
+            porcentajes.append(porcentaje)
 
     except Exception as e:
         print(f'Error: {e}')
@@ -204,4 +206,4 @@ def consultaBarras(parametro, numeroId):
         if 'conn' in locals():
             conn.close()
     
-    return estado, numCluster, etiquetas, cantidades
+    return estado, numCluster, etiquetas, cantidades, porcentajes

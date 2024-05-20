@@ -30,3 +30,8 @@ go
 select *
 from EstadoEscolaridad
 go
+
+select id_estado, cluster
+                    from EstadoEscolaridad
+                    group by id_estado, cluster
+                    order by 1
