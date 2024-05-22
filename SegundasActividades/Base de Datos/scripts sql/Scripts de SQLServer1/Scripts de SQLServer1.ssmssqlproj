@@ -50,8 +50,8 @@
           <FullPath>Altas Catalogos.sql</FullPath>
         </FileNode>
         <FileNode Name="Consultas.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:192.168.1.103\MSSQL3:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>192.168.1.103\MSSQL3</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:192.168.0.14\MSSQL3:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>192.168.0.14\MSSQL3</AssociatedConnSrvName>
           <AssociatedConnUserName />
           <FullPath>Consultas.sql</FullPath>
         </FileNode>
