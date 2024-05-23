@@ -99,14 +99,15 @@ def aplicarEstilosMapa(fig, tituloX):
 
 
 def generadorGraficos(parametroVerda, numeroId, diccColores):
-    print('generadorGraficos: diccColores', diccColores)
+    print(f'generadorGraficos: parametroVerda: {parametroVerda}, numeroId: {numeroId}, diccColoresdiccColores: {diccColores}')
 
     # Consultar los datos que permiten la creacion de los graficos referentes al parametro seleccionado
     estado, numCluster, etiquetasParam, cantidadesParam, porcentajesParam = db.consultaBarras(parametroVerda, numeroId)
 
     # Consultar los datos que permiten la creacion de los graficos referentes a los tipos de cáncer
-    estado, numCluster, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
+    estado, _, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
 
+    print(f'generadorGraficos: Color: {diccColores[str(numCluster)]}, estado: {estado}, numCluster: {numCluster},')
     # Crear la grafica de barras para el parametro seleccionado (forma cruda)
     dataBarraParam = [go.Bar(x=etiquetasParam, 
                         y=cantidadesParam,
@@ -262,7 +263,9 @@ mapaDefecto = aplicarEstilosMapa(mapaDefecto, 'Estados de México feat Nivel Edu
 
 # GRAFICOS QUE SE MOSTRARAN POR DEFECTO
 # Graficos crudos y porcentuales
-figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Nivel Educativo', 1, funcAux.coloresEducacion)
+# figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Nivel Educativo', 1, funcAux.coloresEducacion)
+
+figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Categoría de Empleo', 2, funcAux.coloresOcupacion)
 
 
 app.layout = html.Div([
@@ -358,7 +361,7 @@ def actualizarBarra(parametro, informacion):
         diccColores = funcAux.coloresOcupacion
         parametroVerda = 'Categoria de Empleo'
 
-    print('actulizarBarra, Parametro:', parametro)
+    print(f'actulizarBarra, Parametro: {parametro}, parametroVerda: {parametroVerda}, diccColores: {diccColores}')
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
