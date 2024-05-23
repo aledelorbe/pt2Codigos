@@ -99,6 +99,8 @@ def aplicarEstilosMapa(fig, tituloX):
 
 
 def generadorGraficos(parametroVerda, numeroId, diccColores):
+    print('generadorGraficos: diccColores', diccColores)
+
     # Consultar los datos que permiten la creacion de los graficos referentes al parametro seleccionado
     estado, numCluster, etiquetasParam, cantidadesParam, porcentajesParam = db.consultaBarras(parametroVerda, numeroId)
 
@@ -115,13 +117,23 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     estilosFiguraParam = go.Layout(
         title=f"""         Cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} en el 
                 <br>                                 estado de {estado}""",
-        xaxis=dict(title=parametroVerda),
-        yaxis=dict(title="Cantidad"),
+        xaxis=dict(title=parametroVerda,
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=1,
+                    tickangle=-45  
+        ),
+        yaxis=dict(title="Cantidad",
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=1,
+        ),
         font=dict(
             family='Verdana',
             size=16,
             color='black'
-        )
+        ),
+        height=590 
     )
     figuraParam = go.Figure(data=dataBarraParam, layout=estilosFiguraParam)
 
@@ -135,17 +147,36 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     estilosFiguraCancer = go.Layout(
         title=f"""Cantidad de personas con cáncer en los años 2010 a 2019 por cada Tipo de Cáncer en el 
                 <br>                                 estado de {estado}""",
-        xaxis=dict(title='Tipos de Cáncer'),
-        yaxis=dict(title="Cantidad"),
+        xaxis=dict(title='Tipos de Cáncer',
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=1,
+                    tickangle=-45 
+        ),
+        yaxis=dict(title="Cantidad",
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=1  
+        ),
         font=dict(
             family='Verdana',
             size=16,
             color='black'
-        )
+        ),
+        height=590 
     )
     figuraCancer = go.Figure(data=dataBarraCancer, layout=estilosFiguraCancer)
 
     # Crear la grafica de barras para el parametro seleccionado (forma porcentual)
+    if parametroVerda == 'Nivel Educativo':
+        increParam = 0.025
+        maxiParam = 0.36
+    else:
+        increParam = 0.025
+        maxiParam = 0.63
+    yticksValores = [i*increParam for i in range(0, int(maxiParam/increParam)+1)]
+    yticksTexto = [str(round(i, 3)) for i in yticksValores]
+
     dataBarraParam_0_1 = [go.Bar(x=etiquetasParam, 
                         y=porcentajesParam,
                         marker=dict(
@@ -155,17 +186,35 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     estilosFiguraParam_0_1 = go.Layout(
         title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} 
                 <br>                                 en el estado de {estado}""",
-        xaxis=dict(title=parametroVerda),
-        yaxis=dict(title="Porcentaje"),
+        xaxis=dict(title=parametroVerda,
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=2,
+                    tickangle=-45
+        ),
+        yaxis=dict(title="Porcentaje",
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=2,
+                    tickvals=yticksValores,  
+                    ticktext=yticksTexto,
+                    range=[0, maxiParam] 
+        ),
         font=dict(
             family='Verdana',
             size=16,
             color='black'
-        )
+        ),
+        height=590 
     )
     figuraParam_0_1 = go.Figure(data=dataBarraParam_0_1, layout=estilosFiguraParam_0_1)
 
     # Crear la grafica de barras para los tipo de cancer (forma porcentual)
+    increCancer = 0.01
+    maxiCancer = 0.16
+    yticksValores = [i*increCancer for i in range(0, int(maxiCancer/increCancer)+1)]
+    yticksTexto = [str(round(i, 3)) for i in yticksValores]
+
     dataBarraCancer_0_1 = [go.Bar(x=etiquetasCancer, 
                         y=porcentajesCancer,
                         marker=dict(
@@ -175,13 +224,26 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     estilosFiguraCancer_0_1 = go.Layout(
         title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 por cada Tipo de Cáncer 
                 <br>                                 en el estado de {estado}""",
-        xaxis=dict(title='Tipo de Cáncer'),
-        yaxis=dict(title="Porcentaje"),
+        xaxis=dict(title='Tipo de Cáncer',
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=2,
+                    tickangle=-45
+        ),
+        yaxis=dict(title="Porcentaje",
+                    showgrid=True,  
+                    gridcolor='lightgray', 
+                    gridwidth=2,  
+                    tickvals=yticksValores,  
+                    ticktext=yticksTexto,
+                    range=[0, maxiCancer] 
+        ),
         font=dict(
             family='Verdana',
             size=16,
             color='black'
-        )
+        ),
+        height=590 
     )
     figuraCancer_0_1 = go.Figure(data=dataBarraCancer_0_1, layout=estilosFiguraCancer_0_1)
 
@@ -206,7 +268,7 @@ figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos
 app.layout = html.Div([
     # APLICACION
     dcc.Dropdown(id='parametro', 
-                 options=['Nivel Educativo y Cáncer', 'Categoria de Empleo y Cáncer'], 
+                 options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
                  value='Nivel Educativo y Cáncer'),
     dcc.Graph(
         id='mapa',
@@ -296,6 +358,7 @@ def actualizarBarra(parametro, informacion):
         diccColores = funcAux.coloresOcupacion
         parametroVerda = 'Categoria de Empleo'
 
+    print('actulizarBarra, Parametro:', parametro)
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
