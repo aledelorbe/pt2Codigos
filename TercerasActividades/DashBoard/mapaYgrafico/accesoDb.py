@@ -3,8 +3,9 @@ import json
 
 
 # Configura la cadena de conexión
-server = '192.168.0.14\MSSQL3'
+# server = '192.168.0.14\MSSQL3'
 # server = '192.168.1.103\MSSQL3'
+server = '192.168.1.101\MSSQL3'
 database = 'Sociodemografico'
 username = 'sa'
 password = '123456'
@@ -207,3 +208,36 @@ def consultaBarras(parametro, numeroId):
             conn.close()
     
     return estado, numCluster, etiquetas, cantidades, porcentajes
+
+
+# Funcion para consultar la cantidad total de personas que hay con cancer
+def consultaTotal(numeroId):
+    try:
+        # INTENTA ESTABLECER LA CONEXION
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        # Prepara la consulta para traerse los datos de estado con cancer
+        sqlString = f"""
+                    select e.id_estado, e.nombre, sum(ec.cantidad)
+                    from EstadoCancer ec
+                    inner join Estado e
+                    on e.id_estado = ec.id_estado
+                    group by e.id_estado, e.nombre
+                    having e.id_estado = {numeroId}
+                    """
+        cursor.execute(sqlString) # Ejecuta la consulta
+        consultaTotalEstado = cursor.fetchone()
+
+        _, estado, total = consultaTotalEstado
+
+    except Exception as e:
+        print(f'Error: {e}')
+
+    finally:
+        # Cierra la conexión
+        if 'conn' in locals():
+            conn.close()
+    
+    print(f'idEstado: {numeroId}, Estado: {estado}, Total: {total}')
+    return estado, total

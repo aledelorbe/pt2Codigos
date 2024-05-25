@@ -99,15 +99,12 @@ def aplicarEstilosMapa(fig, tituloX):
 
 
 def generadorGraficos(parametroVerda, numeroId, diccColores):
-    print(f'generadorGraficos: parametroVerda: {parametroVerda}, numeroId: {numeroId}, diccColoresdiccColores: {diccColores}')
-
     # Consultar los datos que permiten la creacion de los graficos referentes al parametro seleccionado
     estado, numCluster, etiquetasParam, cantidadesParam, porcentajesParam = db.consultaBarras(parametroVerda, numeroId)
 
     # Consultar los datos que permiten la creacion de los graficos referentes a los tipos de cáncer
     estado, _, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
 
-    print(f'generadorGraficos: Color: {diccColores[str(numCluster)]}, estado: {estado}, numCluster: {numCluster},')
     # Crear la grafica de barras para el parametro seleccionado (forma cruda)
     dataBarraParam = [go.Bar(x=etiquetasParam, 
                         y=cantidadesParam,
@@ -251,6 +248,12 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     return figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1
 
 
+def generadorTotal(numeroId):
+    estado, total = db.consultaTotal(numeroId)
+    totalString = f'En los años 2010 a 2019 en {estado} se registrarón un total de {total:,} personas con algun tipo de cancer'
+
+    return totalString
+
 
 app = dash.Dash()
 
@@ -261,11 +264,13 @@ mapaDefecto = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoEducacion(
 # Aplicar estilos
 mapaDefecto = aplicarEstilosMapa(mapaDefecto, 'Estados de México feat Nivel Educativo y Cáncer')
 
+# CANTIDAD TOTAL QUE SE MOSTRARA POR DEFECTO
+totalString = generadorTotal(1)
+
 # GRAFICOS QUE SE MOSTRARAN POR DEFECTO
 # Graficos crudos y porcentuales
-# figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Nivel Educativo', 1, funcAux.coloresEducacion)
+figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Nivel Educativo', 1, funcAux.coloresEducacion)
 
-figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Categoría de Empleo', 2, funcAux.coloresOcupacion)
 
 
 app.layout = html.Div([
@@ -280,6 +285,11 @@ app.layout = html.Div([
     html.Div([
         html.Pre(id='informacionClick')
     ]),
+    # TOTAL DE PERSONAS CON CANCER
+    html.H1(
+        id='totalEstado',
+        children=totalString
+    ),
     # GRAFICOS CRUDOS
     dcc.Graph(
         id='barraParametro',
@@ -361,12 +371,28 @@ def actualizarBarra(parametro, informacion):
         diccColores = funcAux.coloresOcupacion
         parametroVerda = 'Categoria de Empleo'
 
-    print(f'actulizarBarra, Parametro: {parametro}, parametroVerda: {parametroVerda}, diccColores: {diccColores}')
     # De la informacion del click, extraer el id del pais
     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
 
     return generadorGraficos(parametroVerda, numeroId, diccColores)
+
+
+# ACTUALIZADOR DE CANTIDAD TOTAL
+# Cambia cantidad total de personas con cancer dependientemente del estado que se seleccione en el mapa
+@app.callback(
+    Output('totalEstado', 'children'),
+    Input('mapa', 'clickData')
+)
+def cantidadTotal(informacion):
+    # De la informacion del click, extraer el id del pais
+    numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+    numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
+
+    # Almacenar total
+    totalString = generadorTotal(numeroId)
+    
+    return totalString
 
 
 if __name__ == '__main__':

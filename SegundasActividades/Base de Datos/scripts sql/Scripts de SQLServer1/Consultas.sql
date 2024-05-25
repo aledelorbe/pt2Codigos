@@ -30,3 +30,11 @@ go
 select *
 from EstadoEscolaridad
 go
+
+-- Para saber el no total de personas con cancer
+select e.id_estado, e.nombre, sum(ec.cantidad) --, sum(ec.porcentaje) 
+from EstadoCancer ec
+inner join Estado e
+on e.id_estado = ec.id_estado
+group by e.id_estado, e.nombre
+order by 1
