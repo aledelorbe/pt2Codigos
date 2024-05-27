@@ -46,6 +46,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 legendgroup = funcAux.gruposX[str(numCluster)],
                 hoverinfo='text',
                 hovertext=entidad,
+                marker=dict(size=20, opacity=1)
             ))
 
             grupos.append(numCluster)
@@ -63,6 +64,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 legendgroup = funcAux.gruposX[str(numCluster)],
                 hoverinfo='text',
                 hovertext=entidad,
+                marker=dict(size=20, opacity=1),
                 showlegend=False
             ))
 

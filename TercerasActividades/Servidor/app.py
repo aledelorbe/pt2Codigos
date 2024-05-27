@@ -18,9 +18,6 @@ def inicio():
 def aplicacion():
    return render_template('aplicacion.html')
 
-@app.route('/conjuntos') 
-def conjuntos():
-   return render_template('conjuntos.html')
 
 # Correr la app
 if __name__ == '__name__':
