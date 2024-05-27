@@ -98,12 +98,21 @@ def aplicarEstilosMapa(fig, tituloX):
     return fig
 
 
+# Función para insertar un salto de línea cada N caracteres
+def insertar_saltos_linea(texto, intervalo=39):
+    return '<br>'.join([texto[i:i+intervalo] for i in range(0, len(texto), intervalo)])
+
+
 def generadorGraficos(parametroVerda, numeroId, diccColores):
     # Consultar los datos que permiten la creacion de los graficos referentes al parametro seleccionado
     estado, numCluster, etiquetasParam, cantidadesParam, porcentajesParam = db.consultaBarras(parametroVerda, numeroId)
 
     # Consultar los datos que permiten la creacion de los graficos referentes a los tipos de cáncer
     estado, _, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
+
+    # Aplicar la función a cada etiqueta en la lista etiquetasParam
+    etiquetasParam = [insertar_saltos_linea(etiqueta) for etiqueta in etiquetasParam]
+    alturaFiguras = 780
 
     # Crear la grafica de barras para el parametro seleccionado (forma cruda)
     dataBarraParam = [go.Bar(x=etiquetasParam, 
@@ -131,7 +140,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=590 
+        height=alturaFiguras 
     )
     figuraParam = go.Figure(data=dataBarraParam, layout=estilosFiguraParam)
 
@@ -161,7 +170,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=590 
+        height=alturaFiguras 
     )
     figuraCancer = go.Figure(data=dataBarraCancer, layout=estilosFiguraCancer)
 
@@ -203,7 +212,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=590 
+        height=alturaFiguras 
     )
     figuraParam_0_1 = go.Figure(data=dataBarraParam_0_1, layout=estilosFiguraParam_0_1)
 
@@ -241,7 +250,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=590 
+        height=alturaFiguras 
     )
     figuraCancer_0_1 = go.Figure(data=dataBarraCancer_0_1, layout=estilosFiguraCancer_0_1)
 
@@ -250,7 +259,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
 
 def generadorTotal(numeroId):
     estado, total = db.consultaTotal(numeroId)
-    totalString = f'En los años 2010 a 2019 en {estado} se registrarón un total de {total:,} personas con algun tipo de cancer'
+    totalString = f'En los años 2010 a 2019 en {estado} se registrarón un total de {total:,} personas con algun tipo de cáncer'
 
     return totalString
 
