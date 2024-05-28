@@ -1,24 +1,8 @@
-from flask import Flask
-from flask import render_template
+from flask_app import flask_app
+from dash_app import crearDashApp
 
-# Crear la app
-app = Flask(__name__)
+# Crear la aplicación Dash y conectarla a la aplicación Flask
+dash_app = crearDashApp(flask_app)
 
-
-# DEFINICION DE RUTAS
-@app.route('/') 
-def index():
-   return render_template('inicio.html')
-
-@app.route('/inicio') 
-def inicio():
-   return render_template('inicio.html')
-
-@app.route('/aplicacion') 
-def aplicacion():
-   return render_template('aplicacion.html')
-
-
-# Correr la app
-if __name__ == '__name__':
-    app.run(debug=True) 
+if __name__ == "__main__":
+    flask_app.run(debug=True)
