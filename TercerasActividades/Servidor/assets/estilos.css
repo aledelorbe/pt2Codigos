@@ -145,7 +145,22 @@ img {
 
 
 /* ESTILOS DE LA APLICACION */
+/* Estilos de: total de personas con cancer en un estado */
+#totalEstado{
+	font-family: Verdana, Arial;
+	font-size: 24px;
+	letter-spacing: 4px;
+	line-height: 31px;
+	height: 108px;
+	text-transform: uppercase;
+	color: #1C1C1C;
+}
+
+/* Estilos de: representacion porcentual de los datos */
 #tituloPorcenData{
-	margin-top: 41px;
+	margin-top: 45px;
     margin-bottom: 10px;
+	color: #1C1C1C;
+	font-family: Verdana, Arial;
+	letter-spacing: 2px;
 }
