@@ -93,7 +93,7 @@ def aplicarEstilosMapa(fig, tituloX):
             showland=True,
         ),
         margin=dict(l=20, r=20, t=50, b=50),
-        width=1320,  # ajusta el ancho de la figura
+        # width=1320,  # ajusta el ancho de la figura
         height=680,   # ajusta el alto de la figura
     )
 
@@ -286,43 +286,95 @@ def crearDashApp(flask_app):
 
     # LAYOUT
     app.layout = html.Div([
-        # APLICACION
-        dcc.Dropdown(id='parametro', 
-                    options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
-                    value='Nivel Educativo y Cáncer'),
-        dcc.Graph(
-            id='mapa',
-            figure=mapaDefecto
+        html.Section(
+            id='global',
+            children=[
+                html.Header(
+                    children=[
+                        # IMAGENES
+                        html.Div(
+                            id='content-logos',
+                            children=[
+                                html.Span(className='flotador', id='renglon1', children="d "),
+                                html.Span(className='flotador', id='separadorImg1', children="d "),
+                                html.Img(className='flotador', id='imgHeaderPol', src='/static/img/ipnLogo.png'),
+                                html.Span(className='flotador', id='separadorEntreImg', children="d "),
+                                html.Img(className='flotador', id='imgHeaderUpiita', src='https://www.upiita.ipn.mx/images/logo_upiita_ipn_varios_colores_logo_upiita_oro.png', alt='imagen'),
+                                html.Div(className='limpiador')
+                            ]
+                        ),
+
+                        # TITULO
+                        html.Div(
+                            id='content-titulo',
+                            className='color',
+                            children=[
+                                html.H1('Impacto de variables sociodemográficas en cáncer usando técnicas de Ciencia de Datos')
+                            ]
+                        ),
+
+                        # MENU
+                        html.Nav(
+                            id='menu',
+                            children=[
+                                html.Ul(
+                                    children=[
+                                        html.Li(html.A('Inicio', href='/inicio')),
+                                        html.Li(html.A('Aplicación', href='/aplicacion'))
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                ),
+
+                # APLICACION
+                dcc.Dropdown(id='parametro', 
+                            options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
+                            value='Nivel Educativo y Cáncer'),
+                dcc.Graph(
+                    id='mapa',
+                    figure=mapaDefecto
+                ),
+                html.Div([
+                    html.Pre(id='informacionClick')
+                ]),
+
+                # TOTAL DE PERSONAS CON CANCER
+                html.H1(
+                    id='totalEstado',
+                    children=totalString
+                ),
+
+                # GRAFICOS CRUDOS
+                dcc.Graph(
+                    id='barraParametro',
+                    figure=figuraParam
+                ),
+                dcc.Graph(
+                    id='barraCancer',
+                    figure=figuraCancer
+                ),
+
+                # GRAFICOS PORCENTUALES
+                html.H2(
+                    ' - Representacion porcentual de los datos - '
+                ),
+                dcc.Graph(
+                    id='barraParametro_0_1',
+                    figure=figuraParam_0_1
+                ),
+                dcc.Graph(
+                    id='barraCancer_0_1',
+                    figure=figuraCancer_0_1
+                ),
+            ]
         ),
-        html.Div([
-            html.Pre(id='informacionClick')
-        ]),
-        # TOTAL DE PERSONAS CON CANCER
-        html.H1(
-            id='totalEstado',
-            children=totalString
-        ),
-        # GRAFICOS CRUDOS
-        dcc.Graph(
-            id='barraParametro',
-            figure=figuraParam
-        ),
-        dcc.Graph(
-            id='barraCancer',
-            figure=figuraCancer
-        ),
-        # GRAFICOS PORCENTUALES
-        html.H2(
-            'Representacion porcentual de los datos'
-        ),
-        dcc.Graph(
-            id='barraParametro_0_1',
-            figure=figuraParam_0_1
-        ),
-        dcc.Graph(
-            id='barraCancer_0_1',
-            figure=figuraCancer_0_1
-        ),
+
+        html.Div(
+            id="footerId",
+            children="Derechos Reservados por Alejandro Granados ©"
+        )
     ])
 
 
@@ -407,10 +459,3 @@ def crearDashApp(flask_app):
         return totalString
 
     return app
-
-
-
-
-
-# if __name__ == '__main__':
-#     app.run_server()

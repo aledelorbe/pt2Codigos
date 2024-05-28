@@ -1,0 +1,142 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Para que multiples elementos floten */
+.flotador{
+	float: left;
+	color: rgba(0, 0, 0, 0);
+}
+
+/* Para que limpie los elementos float */
+.limpiador{
+	clear: left;
+}
+
+/* FONDO DE LA PAGINA WEB */
+body{
+	background: url("https://p1.pxfuel.com/preview/234/634/343/leaves-foliage-tree-spring-leaves.jpg");
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+/* CONTENEDOR GLOBAL (CONTIENE TODOS LOS ELEMENTOS) */
+#global{
+	width: 65%;
+	margin: 0px auto;
+	margin-top: 30px;
+	padding: 25px;
+	background: white;
+	box-shadow: 0px 0px 2px gray;
+}
+
+/* HEADER */
+#content-logos {
+    background-color: #235E3D;
+    height: 120px;
+    width: 100%;
+}
+
+/* Espacio vertical entre el contendor de logos y el primer hijo */
+#renglon1{
+	width: 100%;
+	height: 20px;
+}
+
+/* Separador entre la pagina web y la pimer imagen (ipn) */
+#separadorImg1{
+	width: 50px;
+}
+
+/* Separador entre las dos imagenes  */
+#separadorEntreImg{
+	width: 578px;
+}
+
+/* Dimensiones de la imagen del ipn */
+#imgHeaderPol {
+    height: 100px;
+    width: 72px;
+	border-radius: 10px;
+}
+
+/* Dimensiones de la imagen de upiita */
+#imgHeaderUpiita {
+    height: 120px;
+    width: 120px;
+}
+
+img {
+    cursor: pointer;
+}
+
+/* CONTENEDOR DEL TITULO */
+#content-titulo{
+	font-family: Verdana, Arial;
+	font-size: 13px;
+	letter-spacing: 5px;
+	line-height: 28px;
+	color: white;
+	text-align: center;
+	width: 100%;
+	height: 80px;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	text-transform: uppercase;
+}
+
+/* MENU */
+#menu{
+	font-family: Helvetica, Arial;
+	background: #333;
+	width: 100%;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+/* La lista (en gral) del nav bar */
+#menu ul{
+	line-height: 46px;
+	list-style: none;
+}
+
+/* Cada elemento de la lista */
+#menu ul li{
+	height: 46px;
+	display: inline-block;
+	transition: all 300ms;
+}
+
+/* Los enlaces de la lista */
+#menu a{
+	display: block;
+	color:white;
+	text-decoration: none;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+/* FOOTER */
+#footerId {
+	font-family: Helvetica, Arial;
+	color:white;
+	height: 47px;
+	background: rgba(51, 51, 51, 0.70);
+	margin: 0px auto;
+	width: 65%;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 50px;
+	line-height: 47px;
+}
+
+
+/* ESTILOS PARA DARLE UN TEMA VERDE A LA PAGINA */
+.color{
+	background: #235E3D;
+}
+
+#menu ul li:hover{
+	background: #235E3D;
+}
