@@ -140,3 +140,12 @@ img {
 #menu ul li:hover{
 	background: #235E3D;
 }
+
+
+
+
+/* ESTILOS DE LA APLICACION */
+#tituloPorcenData{
+	margin-top: 41px;
+    margin-bottom: 10px;
+}

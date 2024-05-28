@@ -124,8 +124,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraParam = go.Layout(
-        title=f"""         Cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} en el 
-                <br>                                 estado de {estado}""",
+        title=f"""         Cantidad de personas con cáncer en los años 2010 a 2019 por cada 
+                <br>       {parametroVerda} en el estado de {estado}""",
         xaxis=dict(title=parametroVerda,
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -154,8 +154,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraCancer = go.Layout(
-        title=f"""Cantidad de personas con cáncer en los años 2010 a 2019 por cada Tipo de Cáncer en el 
-                <br>                                 estado de {estado}""",
+        title=f"""Cantidad de personas con cáncer en los años 2010 a 2019 por cada 
+                <br>       Tipo de Cáncer en el estado de {estado}""",
         xaxis=dict(title='Tipos de Cáncer',
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -193,8 +193,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraParam_0_1 = go.Layout(
-        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 por cada {parametroVerda} 
-                <br>                                 en el estado de {estado}""",
+        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 
+                <br>    por cada {parametroVerda} en el estado de {estado}""",
         xaxis=dict(title=parametroVerda,
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -231,8 +231,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraCancer_0_1 = go.Layout(
-        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 por cada Tipo de Cáncer 
-                <br>                                 en el estado de {estado}""",
+        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 
+                <br>    por cada Tipo de Cáncer en el estado de {estado}""",
         xaxis=dict(title='Tipo de Cáncer',
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -336,9 +336,9 @@ def crearDashApp(flask_app):
                     id='mapa',
                     figure=mapaDefecto
                 ),
-                html.Div([
-                    html.Pre(id='informacionClick')
-                ]),
+                # html.Div([
+                #     html.Pre(id='informacionClick')
+                # ]),
 
                 # TOTAL DE PERSONAS CON CANCER
                 html.H1(
@@ -358,7 +358,8 @@ def crearDashApp(flask_app):
 
                 # GRAFICOS PORCENTUALES
                 html.H2(
-                    ' - Representacion porcentual de los datos - '
+                    id="tituloPorcenData",
+                    children=' - Representacion porcentual de los datos - '
                 ),
                 dcc.Graph(
                     id='barraParametro_0_1',
