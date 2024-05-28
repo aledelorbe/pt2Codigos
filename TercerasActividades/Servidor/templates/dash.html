@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dash Subvista</title>
+    {% import 'dash_renderer' as renderer %}
+    {{ renderer.render_head() }}
+</head>
+<body>
+    <div id="dash-app"></div>
+    {{ renderer.render_script(dash_layout) }}
+</body>
+</html>

@@ -3,8 +3,8 @@ from dash import dcc
 from dash import html
 import json
 import plotly.graph_objects as go
-import accesoDb as db
-import funcionesAuxiliares as funcAux
+import dashBoards.accesoDb as db
+import dashBoards.funcionesAuxiliares as funcAux
 from dash.dependencies import Input, Output
 
 
@@ -13,7 +13,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     grupos = [] # Para que solo un estado por grupo se agregue a la leyenda
 
     # Lee el archivo GeoJSON
-    with open('mexico.geojson', encoding='utf-8') as f:
+    with open('dashBoards/mexico.geojson', encoding='utf-8') as f:
         data = json.load(f)
 
     # Itera sobre todas las características (features) en el archivo GeoJSON
