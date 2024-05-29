@@ -329,9 +329,34 @@ def crearDashApp(flask_app):
                 ),
 
                 # APLICACION
-                dcc.Dropdown(id='parametro', 
-                            options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
-                            value='Nivel Educativo y Cáncer'),
+                # Dropdown
+                html.Div(
+                    id="content-controles",
+                    children=[
+                        # html.Span(className="flotador", id="renglon3", children="d "),
+                        # html.Span(className="flotador", id="separadorControlUno", children="d "),
+                        html.Div(
+                            id="contenedor",
+                            children=[
+                                html.Div(
+                                    [
+                                        html.H4("Seleccione una opción:", className="hijo")
+                                    ],
+                                    className="padre flotador2 textosControles",
+                                    id="textoControl-par"
+                                ),
+                                dcc.Dropdown(id='parametro', 
+                                        className="flotador2 control",
+                                        options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
+                                        value='Nivel Educativo y Cáncer'),
+                            ]
+                        ),
+                        html.Span(className="flotador", id="separadorControles", children="d "),
+                        html.Div(className="limpiador")
+                    ]
+                ),
+
+                # MAPA
                 dcc.Graph(
                     id='mapa',
                     figure=mapaDefecto

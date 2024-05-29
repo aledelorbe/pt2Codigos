@@ -3,8 +3,8 @@ import json
 
 
 # Configura la cadena de conexión
-server = '192.168.0.14\MSSQL3'
-# server = '192.168.1.101\MSSQL3'
+# server = '192.168.0.14\MSSQL3'
+server = '192.168.1.101\MSSQL3'
 database = 'Sociodemografico'
 username = 'sa'
 password = '123456'
