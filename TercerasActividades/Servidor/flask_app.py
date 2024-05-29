@@ -14,9 +14,6 @@ def index():
 def inicio():
    return render_template('inicio.html')
 
-@flask_app.route('/aplicacion') 
-def aplicacion():
-   return render_template('aplicacion.html')
 
 
 # Correr la app

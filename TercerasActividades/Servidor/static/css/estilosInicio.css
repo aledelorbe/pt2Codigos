@@ -24,3 +24,51 @@ h2{
 	line-height: 17px;
 	word-spacing: 2px;
 }
+
+/* Tablas de las caracteristicas */
+.tabCaractGrupos{
+	width: 45%;
+}
+
+
+/* TITULOS DE GRUPOS Y TABLAS DE GRUPOS */
+.title-Grupos{
+	font-size: 15px;
+	font-family: Verdana, Arial;
+	word-spacing: 3px;
+}
+
+/* Flex para los titulos de los grupos */
+.flex-titulosGrupos {
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: flex-start; /* Alinea los elementos al principio del contenedor */
+    box-sizing: border-box;
+	padding-left: 7px;
+	padding-top: 11px;
+}
+
+.flexItem-titulosGrupos {
+    text-align: left; /* Alinear el contenido a la izquierda */
+    box-sizing: border-box;
+    flex: 1; /* Permite que todos los elementos se distribuyan equitativamente */
+    margin: 5px; /* Espacio entre los elementos flex */
+    font-weight: bold
+}
+
+/* Flex para las tablas de los grupos */
+.flex-tablasGrupos {
+    display: flex;
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: flex-start; /* Alinea los elementos al principio del contenedor */
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+}
+
+.flexItem-tablasGrupos {
+    text-align: left; /* Alinear el contenido a la izquierda */
+    box-sizing: border-box;
+    flex: 1; /* Permite que todos los elementos se distribuyan equitativamente */
+    margin: 5px; /* Espacio entre los elementos flex */
+}
+

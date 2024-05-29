@@ -13,27 +13,35 @@
         </p>
         <br>
         <br>
-        
+
+        <h3> Caracteristicas de los grupos en el parametro Nivel educativo </h3>
+                   
+        {% for i in range(1, 11, 2) %}
+            <div class="flex-titulosGrupos">
+                <div class="flexItem-titulosGrupos title-Grupos">Grupo {{i}}</div>
+                <div class="flexItem-titulosGrupos title-Grupos">Grupo {{i + 1}}</div>
+            </div>
+
+            <div class="flex-tablasGrupos">
+                <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/eduAnaliGrupo' ~ i ~ '.png') }}"/>             
+                <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/eduAnaliGrupo' ~ (i + 1) ~ '.png') }}"/>  
+            </div>
+        {% endfor %}
+
         <h2> - Manual de usuario - </h2>
         
         <span class="subtitulos"> Inicio </span>
         <p class="sermon">
-            En este apartado se encuentra una breve explicacion sobre que se 
-            muestra en cada apartado asi como los pasos a realizar para interactuar
-            con la aplicación.
+            En este apartado se ofrece una breve explicación sobre el contenido de cada sección de la página web, así como una guía sobre los pasos a seguir para interactuar con la aplicación. Además, se incluyen tablas que muestran las características comunes de los elementos pertenecientes a un mismo grupo, tanto para el parámetro de categoría de ocupación como para el parámetro de nivel educativo.
+
         </p>
         <br>
 
         <span class="subtitulos"> Aplicación </span>
         <p class="sermon">
-            En este apartado se encuentra la funcionalidad de la aplicacion.
-            El usuario debera seleccionar uno de los tres siguientes valores como
-            parametro: 'Tipo de cancer', 'Nivel educacional' y 'Categoría de 
-            empleo' posteriormente dar click sobre una entidad federativa en el mapa
-            interactivo y visualizar la informacion que se genera en la grafica de 
-            barras. <br>
-            El usuario podra consultar la informacion con el parametro y entidad federativa 
-            que desee las veces que asi lo requiera. 
+            En este apartado se describe la funcionalidad de la aplicación. El usuario deberá seleccionar uno de los dos parámetros disponibles: "Nivel educativo" o "Categoría de empleo". Luego, deberá hacer clic sobre una entidad federativa en el mapa interactivo. A partir de estas acciones, se desplegarán diversos gráficos que permitirán al usuario visualizar la información.
+            <br>
+            El usuario podrá consultar la información con el parámetro y la entidad federativa que desee, las veces que así lo requiera.
         </p>
         <br>
     </div>
