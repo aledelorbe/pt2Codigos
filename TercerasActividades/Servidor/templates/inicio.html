@@ -14,7 +14,15 @@
         <br>
         <br>
 
-        <h3> Caracteristicas de los grupos en el parametro Nivel educativo </h3>
+        <p class="sermon">
+            A continuación, se mostrarán las tablas donde se observan las características que tienen en común cada grupo de los dos diferentes parámetros.
+        </p>
+        
+        <br>
+        <br>
+
+        <!-- Grupos de Nivel educativo  -->
+        <h3> Características de los grupos en el parametro Nivel educativo </h3>
                    
         {% for i in range(1, 11, 2) %}
             <div class="flex-titulosGrupos">
@@ -27,6 +35,31 @@
                 <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/eduAnaliGrupo' ~ (i + 1) ~ '.png') }}"/>  
             </div>
         {% endfor %}
+
+        <!-- Grupos de Categoria de Empleo  -->
+        <h3> Características de los grupos en el parámetro Categoría de Empleo </h3>
+                   
+        {% for i in range(1, 13, 2) %}
+            <div class="flex-titulosGrupos">
+                <div class="flexItem-titulosGrupos title-Grupos">Grupo {{i}}</div>
+                <div class="flexItem-titulosGrupos title-Grupos">Grupo {{i + 1}}</div>
+            </div>
+
+            <div class="flex-tablasGrupos">
+                <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/empAnaliGrupo' ~ i ~ '.png') }}"/>             
+                <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/empAnaliGrupo' ~ (i + 1) ~ '.png') }}"/>  
+            </div>
+        {% endfor %}
+
+        <div class="flex-titulosGrupos">
+            <div class="flexItem-titulosGrupos title-Grupos">Grupo 13</div>
+            <div class="flexItem-titulosGrupos title-Grupos">&nbsp;</div>
+        </div>
+
+        <div class="flex-tablasGrupos">
+            <img class="flexItem-tablasGrupos tabCaractGrupos" src="{{ url_for('static', filename='img/empAnaliGrupo13.png') }}"/>    
+            <div class="flexItem-titulosGrupos tabCaractGrupos">&nbsp;</div>         
+        </div>
 
         <h2> - Manual de usuario - </h2>
         
