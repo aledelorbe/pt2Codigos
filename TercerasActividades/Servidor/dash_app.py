@@ -320,7 +320,7 @@ def crearDashApp(flask_app):
                                 html.Ul(
                                     children=[
                                         html.Li(html.A('Inicio', href='/inicio')),
-                                        html.Li(html.A('Aplicación', href='/aplicacion'))
+                                        html.Li(html.A('Aplicación', href='/dash'))
                                     ]
                                 )
                             ]
