@@ -94,7 +94,7 @@ def aplicarEstilosMapa(fig, tituloX):
         ),
         margin=dict(l=20, r=20, t=50, b=50),
         # width=1320,  # ajusta el ancho de la figura
-        # height=680,   # ajusta el alto de la figura
+        height=470,   # ajusta el alto de la figura
     )
 
     return fig
