@@ -100,9 +100,19 @@ def aplicarEstilosMapa(fig, tituloX):
     return fig
 
 
-# Función para insertar un salto de línea cada N caracteres
-def insertar_saltos_linea(texto, intervalo=39):
-    return '<br>'.join([texto[i:i+intervalo] for i in range(0, len(texto), intervalo)])
+# Función para insertar un salto de línea
+def insertar_salto_de_linea(lista_de_cadenas):
+    lista_modificada = []
+
+    for cadena in lista_de_cadenas:
+        if len(cadena) > 30:
+            punto_medio = len(cadena) // 2
+            cadena_modificada = cadena[:punto_medio] + "<br>" + cadena[punto_medio:]
+            lista_modificada.append(cadena_modificada)
+        else:
+            lista_modificada.append(cadena)
+    
+    return lista_modificada
 
 
 def generadorGraficos(parametroVerda, numeroId, diccColores):
@@ -113,7 +123,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     estado, _, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
 
     # Aplicar la función a cada etiqueta en la lista etiquetasParam
-    etiquetasParam = [insertar_saltos_linea(etiqueta) for etiqueta in etiquetasParam]
+    etiquetasParam = insertar_salto_de_linea(etiquetasParam)
     alturaFiguras = 780
 
     # Crear la grafica de barras para el parametro seleccionado (forma cruda)
