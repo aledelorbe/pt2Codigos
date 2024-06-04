@@ -11,6 +11,9 @@ from dash.dependencies import Input, Output
 def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     estados = []
     grupos = [] # Para que solo un estado por grupo se agregue a la leyenda
+    longitudesCentrales = []
+    latitudesCentrales = []
+    nombresEstados = []
 
     # Lee el archivo GeoJSON
     with open('dashBoards/mexico.geojson', encoding='utf-8') as f:
@@ -68,19 +71,24 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 showlegend=False
             ))
         
+        # Almacenar el centro de cada region
+        nombresEstados.append(entidad)
+        longitudesCentrales.append(sum(longitudes) / len(longitudes))
+        latitudesCentrales.append(sum(latitudes) / len(latitudes))
+
+    for i in range(32):
         # Agrega la etiqueta de texto sobre el área geográfica
-        centro_lon = sum(longitudes) / len(longitudes)
-        centro_lat = sum(latitudes) / len(latitudes)
         estados.append(go.Scattergeo(
             locationmode = 'country names',
-            lon = [centro_lon],
-            lat = [centro_lat],
+            lon = [longitudesCentrales[i]],
+            lat = [latitudesCentrales[i]],
             mode = 'text',
-            text = entidad,
+            text = nombresEstados[i],
             showlegend=False,
-            hoverinfo='skip'  # Desactiva el cuadro de texto al pasar el cursor
+            hoverinfo='skip',  # Desactiva el cuadro de texto al pasar el cursor
+            textfont=dict(size=9)
         ))
-
+        
     return estados
 
 
