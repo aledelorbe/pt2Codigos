@@ -509,20 +509,22 @@ def crearDashApp(flask_app):
 
     # ACTUALIZADOR DE CANTIDAD TOTAL
     # Cambia cantidad total de personas con cancer dependientemente del estado que se seleccione en el mapa
-    @app.callback(
-        Output('totalEstado', 'children'),
-        Input('mapa', 'clickData')
-    )
-    def cantidadTotal(informacion):
-        # De la informacion del click, extraer el id del pais
-        numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
-        numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
+    # @app.callback(
+    #     Output('totalEstado', 'children'),
+    #     Input('mapa', 'clickData')
+    # )
+    # def cantidadTotal(informacion):
+    #     # De la informacion del click, extraer el id del pais
+    #     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+    #     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
 
-        # Almacenar total
-        totalString = generadorTotal(numeroId)
+    #     # Almacenar total
+    #     totalString = generadorTotal(numeroId)
         
-        return totalString
+    #     return totalString
     
+
+    # EVENTOS PARA LA VERSION 2 (CON DROPDOWN ESTADO) ---------------------------------------------------
 
     # ACTUALIZADOR DE BARRA (VERSION 2)
     # Cambia las graficas de barras dependientemenete del estado que se seleccione en el drop down
@@ -546,6 +548,23 @@ def crearDashApp(flask_app):
         numeroId = db.buscarIdEstado(nombreEstado) 
 
         return  generadorGraficos(parametroVerda, numeroId, diccColores)
+    
+
+    # ACTUALIZADOR DE CANTIDAD TOTAL (VERSION 2)
+    # Cambia cantidad total de personas con cancer dependientemente del estado que se seleccione 
+    # en el dropDown estado
+    @app.callback(
+        Output('totalEstado', 'children'),
+        Input('dropEstado', 'value')
+    )
+    def cantidadTotalVersion2(nombreEstado):
+        # Del estado que se seleccione en el dropDown, extraer el id del pais
+        numeroId = db.buscarIdEstado(nombreEstado) 
+
+        # Almacenar total
+        totalString = generadorTotal(numeroId)
+        
+        return totalString
 
     return app
 
