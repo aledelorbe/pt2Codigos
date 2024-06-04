@@ -9,6 +9,11 @@
 	color: rgba(0, 0, 0, 0);
 }
 
+/* Para unicamente flotar y no ocultar el contenido */
+#flotador2{
+	float: left;
+}
+
 /* Para que limpie los elementos float */
 .limpiador{
 	clear: left;
@@ -168,6 +173,7 @@ img {
 
 
 /* CONTENEDOR DE LOS CONTROLES */
+/* Contiene a las dos parejas de dropdowns */
 #content-controles{
 	margin-top: 4px;
 	height: 50px;
@@ -175,10 +181,17 @@ img {
     padding-left: 27px;
 }
 
-/* Espacio vertical entre el primer texto ('controles') y los textos con sus selectores */
-#renglon3{
-	width: 100%;
-	height: 13px;
+/* De la primer pareja de dropdowns */
+#contenedor{
+	display: inline-flex;
+}
+
+/* De la segunda pareja de dropdowns */
+#contenedor2{
+	display: inline-flex;
+	padding-left: 74px; /* Mueve el espacio entre la primer pareja de dropdown (parametro) y la actual pareja de dropDown (estado) */
+	float: right;
+    margin-right: 65px;
 }
 
 /* estilos de los 2 textos de los selectores */
@@ -186,19 +199,20 @@ img {
 	height: 48px;
 }
 
-/* estilos del dropdown */
-.control{
-	width: 261px;
+/* Controla el ancho del dropdown parametro */
+.drop-par{
+	width: 235px;
 }
 
-/* Espacio entre el lado izq y el primer texto con control */
-#separadorControlUno{
-	width: 45px;
+/* Controla el ancho del dropdown estado */
+.drop-state{
+	width: 235px;
 }
 
 /* Espacio entre el texto 'parametro' y su respectivo selector */
 #textoControl-par{
-	width: 185px;
+	width: 167px;
+	height: 36px;
 }
 
 /* Para centrar verticalmente los textos */
@@ -212,11 +226,9 @@ img {
 	vertical-align: middle;
 }
 
-#flotador2{
-	float: left;
+/* Espacio entre el texto 'estado' y su respectivo selector */
+#textoControl-state{
+	width: 73px;
+	height: 36px;
 }
 
-/*  */
-#contenedor{
-	display: inline-flex;
-}

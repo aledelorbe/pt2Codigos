@@ -343,8 +343,7 @@ def crearDashApp(flask_app):
                 html.Div(
                     id="content-controles",
                     children=[
-                        # html.Span(className="flotador", id="renglon3", children="d "),
-                        # html.Span(className="flotador", id="separadorControlUno", children="d "),
+                        # 
                         html.Div(
                             id="contenedor",
                             children=[
@@ -356,13 +355,37 @@ def crearDashApp(flask_app):
                                     id="textoControl-par"
                                 ),
                                 dcc.Dropdown(id='parametro', 
-                                        className="flotador2 control",
+                                        className="flotador2 drop-par",
                                         options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
                                         value='Nivel Educativo y Cáncer',
                                         clearable=False),
                             ]
                         ),
-                        html.Span(className="flotador", id="separadorControles", children="d "),
+
+                        # Estado y su respectivo dropdown
+                        html.Div(
+                            id="contenedor2",
+                            children=[
+                                html.Div(
+                                    [
+                                        html.H4("Estado:", className="hijo")
+                                    ],
+                                    className="padre flotador2 textosControles",
+                                    id="textoControl-state"
+                                ),
+                                dcc.Dropdown(
+                                    id='controlMenu',
+                                    options=[
+                                        {'label': 'Michoacan de Ocampo', 'value': 'value1'},
+                                        {'label': 'Veracruz de la llave', 'value': 'value2'},
+                                        {'label': 'Distrito Federal', 'value': 'value3'}
+                                    ],
+                                    value='value2',  # Valor seleccionado por defecto
+                                    className="flotador2 drop-state",
+                                    clearable=False
+                                )
+                        ]),
+
                         html.Div(className="limpiador")
                     ]
                 ),
