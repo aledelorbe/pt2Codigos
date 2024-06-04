@@ -77,7 +77,8 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             lat = [centro_lat],
             mode = 'text',
             text = entidad,
-            showlegend=False
+            showlegend=False,
+            hoverinfo='skip'  # Desactiva el cuadro de texto al pasar el cursor
         ))
 
     return estados
