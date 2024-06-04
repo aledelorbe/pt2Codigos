@@ -294,6 +294,10 @@ def crearDashApp(flask_app):
     # Graficos crudos y porcentuales
     figuraParam, figuraCancer, figuraParam_0_1, figuraCancer_0_1 = generadorGraficos('Nivel Educativo', 1, funcAux.coloresEducacion)
 
+    # Para extraer el nombre de todos las entidades federativas
+    nombresEstados = db.consultaEstados()
+    print('Estados', nombresEstados)
+
     # LAYOUT
     app.layout = html.Div([
         html.Section(
@@ -375,12 +379,8 @@ def crearDashApp(flask_app):
                                 ),
                                 dcc.Dropdown(
                                     id='controlMenu',
-                                    options=[
-                                        {'label': 'Michoacan de Ocampo', 'value': 'value1'},
-                                        {'label': 'Veracruz de la llave', 'value': 'value2'},
-                                        {'label': 'Distrito Federal', 'value': 'value3'}
-                                    ],
-                                    value='value2',  # Valor seleccionado por defecto
+                                    options=nombresEstados,
+                                    value=nombresEstados[0],
                                     className="flotador2 drop-state",
                                     clearable=False
                                 )

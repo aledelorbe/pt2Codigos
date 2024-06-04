@@ -238,5 +238,35 @@ def consultaTotal(numeroId):
         if 'conn' in locals():
             conn.close()
     
-    print(f'idEstado: {numeroId}, Estado: {estado}, Total: {total}')
     return estado, total
+
+
+# Funcion para consultar el nombre de cada estado
+def consultaEstados():
+    try:
+        # INTENTA ESTABLECER LA CONEXION
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        # Prepara la consulta para traerse el nombre de todos los estados
+        sqlString = f"""
+                    select nombre
+                    from Estado
+                    """
+        cursor.execute(sqlString) # Ejecuta la consulta
+        consultaEstados = cursor.fetchall()
+
+        estados = []
+        for renglon in consultaEstados:
+            estado = renglon[0]
+            estados.append(estado)
+
+    except Exception as e:
+        print(f'Error: {e}')
+
+    finally:
+        # Cierra la conexión
+        if 'conn' in locals():
+            conn.close()
+    
+    return estados
