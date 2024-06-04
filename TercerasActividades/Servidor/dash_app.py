@@ -296,7 +296,8 @@ def crearDashApp(flask_app):
 
     # Para extraer el nombre de todos las entidades federativas
     nombresEstados = db.consultaEstados()
-    print('Estados', nombresEstados)
+
+    # print('ffffff: ', db.buscarIdEstado(nombresEstados[0]))
 
     # LAYOUT
     app.layout = html.Div([
@@ -343,11 +344,11 @@ def crearDashApp(flask_app):
                 ),
 
                 # APLICACION
-                # Dropdown
+                # Contenedor de los dropdowns
                 html.Div(
                     id="content-controles",
                     children=[
-                        # 
+                        # Parametro y su respectivo dropdown
                         html.Div(
                             id="contenedor",
                             children=[
@@ -362,7 +363,8 @@ def crearDashApp(flask_app):
                                         className="flotador2 drop-par",
                                         options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
                                         value='Nivel Educativo y Cáncer',
-                                        clearable=False),
+                                        clearable=False
+                                )
                             ]
                         ),
 
@@ -378,7 +380,7 @@ def crearDashApp(flask_app):
                                     id="textoControl-state"
                                 ),
                                 dcc.Dropdown(
-                                    id='controlMenu',
+                                    id='dropEstado',
                                     options=nombresEstados,
                                     value=nombresEstados[0],
                                     className="flotador2 drop-state",
@@ -398,6 +400,9 @@ def crearDashApp(flask_app):
                 # html.Div([
                 #     html.Pre(id='informacionClick')
                 # ]),
+                html.Div([
+                    html.Pre(id='prueba')
+                ]),
 
                 # TOTAL DE PERSONAS CON CANCER
                 html.H1(
@@ -480,26 +485,26 @@ def crearDashApp(flask_app):
 
     # ACTUALIZADOR DE BARRA
     # Cambia las graficas de barras dependientemenete del estado que se seleccione en el mapa
-    @app.callback(
-        [Output('barraParametro', 'figure'), Output('barraCancer', 'figure'), Output('barraParametro_0_1', 'figure'), Output('barraCancer_0_1', 'figure')],
-        [Input('parametro', 'value'), Input('mapa', 'clickData')]
-    )
-    def actualizarBarra(parametro, informacion):
-        # Seleccionar el diccionario de colores que le toque segun el parametro
-        diccColores = None
-        parametroVerda = None
-        if parametro == 'Nivel Educativo y Cáncer':
-            diccColores = funcAux.coloresEducacion
-            parametroVerda = 'Nivel Educativo'
-        else:
-            diccColores = funcAux.coloresOcupacion
-            parametroVerda = 'Categoria de Empleo'
+    # @app.callback(
+    #     [Output('barraParametro', 'figure'), Output('barraCancer', 'figure'), Output('barraParametro_0_1', 'figure'), Output('barraCancer_0_1', 'figure')],
+    #     [Input('parametro', 'value'), Input('mapa', 'clickData')]
+    # )
+    # def actualizarBarra(parametro, informacion):
+    #     # Seleccionar el diccionario de colores que le toque segun el parametro
+    #     diccColores = None
+    #     parametroVerda = None
+    #     if parametro == 'Nivel Educativo y Cáncer':
+    #         diccColores = funcAux.coloresEducacion
+    #         parametroVerda = 'Nivel Educativo'
+    #     else:
+    #         diccColores = funcAux.coloresOcupacion
+    #         parametroVerda = 'Categoria de Empleo'
 
-        # De la informacion del click, extraer el id del pais
-        numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
-        numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
+    #     # De la informacion del click, extraer el id del pais
+    #     numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+    #     numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
 
-        return generadorGraficos(parametroVerda, numeroId, diccColores)
+    #     return generadorGraficos(parametroVerda, numeroId, diccColores)
 
 
     # ACTUALIZADOR DE CANTIDAD TOTAL
@@ -517,5 +522,32 @@ def crearDashApp(flask_app):
         totalString = generadorTotal(numeroId)
         
         return totalString
+    
+
+    # ACTUALIZADOR DE BARRA (VERSION 2)
+    # Cambia las graficas de barras dependientemenete del estado que se seleccione en el drop down
+    # y el parametro que se seleccione en el drop down
+    @app.callback(
+        [Output('barraParametro', 'figure'), Output('barraCancer', 'figure'), Output('barraParametro_0_1', 'figure'), Output('barraCancer_0_1', 'figure')],
+        [Input('parametro', 'value'), Input('dropEstado', 'value')]
+    )
+    def actualizarBarraVersion2(parametro, nombreEstado):
+        # Seleccionar el diccionario de colores que le toque segun el parametro
+        diccColores = None
+        parametroVerda = None
+        if parametro == 'Nivel Educativo y Cáncer':
+            diccColores = funcAux.coloresEducacion
+            parametroVerda = 'Nivel Educativo'
+        else:
+            diccColores = funcAux.coloresOcupacion
+            parametroVerda = 'Categoria de Empleo'
+
+        # Del estado que se seleccione en el dropDown, extraer el id del pais
+        numeroId = db.buscarIdEstado(nombreEstado) 
+
+        return  generadorGraficos(parametroVerda, numeroId, diccColores)
 
     return app
+
+
+   

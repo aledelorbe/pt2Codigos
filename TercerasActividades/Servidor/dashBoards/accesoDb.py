@@ -270,3 +270,33 @@ def consultaEstados():
             conn.close()
     
     return estados
+
+
+# Funcion para extraer el id de determinado estado
+def buscarIdEstado(nombreEstado):
+    idEstado = None
+    try:
+        # INTENTA ESTABLECER LA CONEXION
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        # Prepara la consulta para traerse el nombre de todos los estados
+        sqlString = f"""
+                    select id_estado
+                    from Estado
+                    where nombre = '{nombreEstado}'
+                    """
+        cursor.execute(sqlString) # Ejecuta la consulta
+        consultaIdEstado = cursor.fetchone()
+
+        idEstado = consultaIdEstado[0]
+
+    except Exception as e:
+        print(f'Error: {e}')
+
+    finally:
+        # Cierra la conexión
+        if 'conn' in locals():
+            conn.close()
+    
+    return idEstado
