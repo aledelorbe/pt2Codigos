@@ -285,7 +285,7 @@ def crearDashApp(flask_app):
     # Genera la figura
     mapaDefecto = go.Figure(data=generadorDeMapas(db.extraerClustersEstadoEducacion(), funcAux.coloresEducacion))
     # Aplicar estilos
-    mapaDefecto = aplicarEstilosMapa(mapaDefecto, 'Estados de México feat Nivel Educativo y Cáncer')
+    mapaDefecto = aplicarEstilosMapa(mapaDefecto, 'Estados de México')
 
     # CANTIDAD TOTAL QUE SE MOSTRARA POR DEFECTO
     totalString = generadorTotal(1)
@@ -296,8 +296,6 @@ def crearDashApp(flask_app):
 
     # Para extraer el nombre de todos las entidades federativas
     nombresEstados = db.consultaEstados()
-
-    # print('ffffff: ', db.buscarIdEstado(nombresEstados[0]))
 
     # LAYOUT
     app.layout = html.Div([
@@ -454,11 +452,11 @@ def crearDashApp(flask_app):
         indicesClustersX = None
         coloresMapa = None 
         if parametro == 'Nivel Educativo y Cáncer':
-            titulo = 'Estados de México feat Nivel Educativo'
+            titulo = 'Estados de México'
             indicesClustersX = db.extraerClustersEstadoEducacion()
             coloresMapa = funcAux.coloresEducacion 
         else:
-            titulo = 'Estados de México feat Ocupacion'
+            titulo = 'Estados de México'
             indicesClustersX = db.extraerClustersEstadoOcupacion()
             coloresMapa = funcAux.coloresOcupacion 
 
