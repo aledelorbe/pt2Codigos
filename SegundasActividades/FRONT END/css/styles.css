@@ -144,22 +144,22 @@ img {
 /* estilos de los 2 selectores */
 .control{
 	height: 29px;
-	width: 21%;
+	width: 30%;
 }
 
 /* espacio entre un texto con control y otro */
 #separadorControles{
-	width: 229px;
+	width: 32px;
 }
 
 /* Espacio entre el lado izq y el primer texto con control */
 #separadorControlUno{
-	width: 45px;
+	width: 15px;
 }
 
 /* Espacio entre el texto 'parametro' y su respectivo selector */
 #textoControl-par{
-	width: 100px;
+	width: 167px;
 }
 
 /* Espacio entre el texto 'grupo' y su respectivo selector */

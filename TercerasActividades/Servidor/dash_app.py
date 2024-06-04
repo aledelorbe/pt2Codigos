@@ -358,7 +358,8 @@ def crearDashApp(flask_app):
                                 dcc.Dropdown(id='parametro', 
                                         className="flotador2 control",
                                         options=['Nivel Educativo y Cáncer', 'Categoría de Empleo y Cáncer'], 
-                                        value='Nivel Educativo y Cáncer'),
+                                        value='Nivel Educativo y Cáncer',
+                                        clearable=False),
                             ]
                         ),
                         html.Span(className="flotador", id="separadorControles", children="d "),
