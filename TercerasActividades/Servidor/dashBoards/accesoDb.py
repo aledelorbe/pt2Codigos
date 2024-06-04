@@ -300,3 +300,32 @@ def buscarIdEstado(nombreEstado):
             conn.close()
     
     return idEstado
+
+
+# Funcion para extraer el nombre de determinado estado
+def buscarNombreEstado(idEstado):
+    try:
+        # INTENTA ESTABLECER LA CONEXION
+        conn = pyodbc.connect(conn_str)
+        cursor = conn.cursor()
+
+        # Prepara la consulta para traerse el nombre de todos los estados
+        sqlString = f"""
+                    select nombre
+                    from Estado
+                    where id_estado = {idEstado}
+                    """
+        cursor.execute(sqlString) # Ejecuta la consulta
+        consultaNombreEstado = cursor.fetchone()
+
+        nombreEstado = consultaNombreEstado[0]
+
+    except Exception as e:
+        print(f'Error: {e}')
+
+    finally:
+        # Cierra la conexión
+        if 'conn' in locals():
+            conn.close()
+    
+    return nombreEstado

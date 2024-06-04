@@ -563,6 +563,20 @@ def crearDashApp(flask_app):
         totalString = generadorTotal(numeroId)
         
         return totalString
+    
+
+    # ACTUALIZADOR DE BARRA
+    # Cambia las graficas de barras dependientemenete del estado que se seleccione en el mapa
+    @app.callback(
+        Output('dropEstado', 'value'),
+        Input('mapa', 'clickData')
+    )
+    def actualizarBarra(informacion):
+        # De la informacion del click, extraer el id del pais
+        numeroId = informacion['points'][0]['curveNumber'] + 1 # El +1 porque el primer estado es 0 pero en la db es 1
+        numeroId = funcAux.corregirIndice(numeroId) # Corregir indice
+
+        return db.buscarNombreEstado(numeroId)
 
     return app
 
