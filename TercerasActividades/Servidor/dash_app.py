@@ -67,6 +67,18 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 marker=dict(size=20, opacity=1),
                 showlegend=False
             ))
+        
+        # Agrega la etiqueta de texto sobre el área geográfica
+        centro_lon = sum(longitudes) / len(longitudes)
+        centro_lat = sum(latitudes) / len(latitudes)
+        estados.append(go.Scattergeo(
+            locationmode = 'country names',
+            lon = [centro_lon],
+            lat = [centro_lat],
+            mode = 'text',
+            text = entidad,
+            showlegend=False
+        ))
 
     return estados
 
@@ -565,7 +577,7 @@ def crearDashApp(flask_app):
         return totalString
     
 
-    # ACTUALIZADOR DE BARRA
+    # ACTUALIZADOR DE BARRA (VERSION 1)
     # Cambia las graficas de barras dependientemenete del estado que se seleccione en el mapa
     @app.callback(
         Output('dropEstado', 'value'),
