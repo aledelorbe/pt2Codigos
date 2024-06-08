@@ -38,3 +38,18 @@ inner join Estado e
 on e.id_estado = ec.id_estado
 group by e.id_estado, e.nombre
 order by 1
+
+-- Para saber el nombre de los estados en el grupo X (educacion)
+select nombre
+from estado
+where id_estado in (select distinct(id_estado)
+					from EstadoEscolaridad
+					where cluster = 1)
+
+-- Para saber el nombre de los estados en el grupo X (empleo)
+select nombre
+from estado
+where id_estado in (select distinct(id_estado)
+					from EstadoOcupacion
+					where cluster = 1)
+
