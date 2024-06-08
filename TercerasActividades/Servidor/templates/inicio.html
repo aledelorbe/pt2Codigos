@@ -9,15 +9,36 @@
         <h2> - Informacion - </h2>
 
         <p class="sermon">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi reprehenderit debitis, nulla placeat incidunt facere nostrum esse tenetur! Velit nostrum dignissimos qui delectus pariatur illum natus nobis asperiores deserunt id.
-        </p>
-        <br>
-        <br>
+            <h3 class="title-subtitle"> Inicio</h3>
+            En este apartado se ofrece una breve explicación sobre el contenido de cada sección de la página web, 
+            así como una guía sobre los pasos a seguir para interactuar con la aplicación. Además, se incluyen 
+            graficas de barra que muestran las características comunes de los elementos pertenecientes a un mismo 
+            grupo, tanto para el parámetro de categoría de ocupación como para el parámetro de nivel educativo.
 
-        <p class="sermon">
-            A continuación, se mostrarán las tablas donde se observan las características que tienen en común cada grupo de los dos diferentes parámetros.
+            <h3 class="title-subtitle"> Correlación de los datos </h3>
+            En el apartado de correlación de los datos, encontrarás dos mapas de calor. Un mapa representa los 
+            coeficientes de correlación de variables relacionadas con el nivel escolar de una persona con algún 
+            tipo de cáncer, en comparación con variables relacionadas con el tipo de cáncer de una persona,
+            mientras que, el otro mapa representa los coeficientes de correlación de variables relacionadas 
+            con la categoría de empleo de una persona con algún tipo de cáncer, en comparación con variables 
+            relacionadas con el tipo de cáncer de una persona.
+            Estas cifras fueron recopiladas de todas las entidades federativas que conforman el país de 
+            México y, para calcularlas, se utilizó la fórmula de correlación de Pearson.
+
+            <h3 class="title-subtitle"> Caracteristicas de los grupos </h3>
+            En el apartado caracteristicas de los grupos encontraras el porcentaje promedio de las variables 
+
+            <h3 class="title-subtitle"> Aplicación </h3>
+            En este apartado se encuentra la funcionalidad de la aplicación. El usuario deberá seleccionar uno de 
+            los dos parámetros disponibles: "Nivel educativo" o "Categoría de empleo". Luego, deberá hacer clic 
+            sobre una entidad federativa en el mapa interactivo. A partir de estas acciones, se desplegarán 
+            diversos gráficos que permitirán al usuario visualizar la información. El usuario podrá consultar la 
+            información con el parámetro y la entidad federativa que desee, las veces que así lo requiera.
         </p>
         
+        A continuación, se mostrarán las graficas de barra donde se observan las características que tienen 
+        en común cada grupo de los dos diferentes parámetros.
+
         <!-- Grupos de Nivel educativo  -->
         <h3 class="title-caracteristicas"> Características de los grupos en el parametro Nivel educativo </h3>
                    
@@ -36,22 +57,5 @@
             <img class="tabCaractGrupos" src="{{ url_for('static', filename='img/empCanGrupo' ~ i ~ '.png') }}"/> 
         {% endfor %}
 
-
-        <h2> - Manual de usuario - </h2>
-        
-        <span class="subtitulos"> Inicio </span>
-        <p class="sermon">
-            En este apartado se ofrece una breve explicación sobre el contenido de cada sección de la página web, así como una guía sobre los pasos a seguir para interactuar con la aplicación. Además, se incluyen tablas que muestran las características comunes de los elementos pertenecientes a un mismo grupo, tanto para el parámetro de categoría de ocupación como para el parámetro de nivel educativo.
-
-        </p>
-        <br>
-
-        <span class="subtitulos"> Aplicación </span>
-        <p class="sermon">
-            En este apartado se describe la funcionalidad de la aplicación. El usuario deberá seleccionar uno de los dos parámetros disponibles: "Nivel educativo" o "Categoría de empleo". Luego, deberá hacer clic sobre una entidad federativa en el mapa interactivo. A partir de estas acciones, se desplegarán diversos gráficos que permitirán al usuario visualizar la información.
-            <br>
-            El usuario podrá consultar la información con el parámetro y la entidad federativa que desee, las veces que así lo requiera.
-        </p>
-        <br>
     </div>
 {% endblock %}
