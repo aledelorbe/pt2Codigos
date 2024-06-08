@@ -15,3 +15,23 @@ def datosEmpleoCancer():
 
     empGrupos = [empGrupo0, empGrupo1, empGrupo2, empGrupo3, empGrupo4, empGrupo5, empGrupo6, empGrupo7, empGrupo8, empGrupo9, empGrupo10, empGrupo11, empGrupo12]
     return empGrupos
+
+
+def formatoDatosEmpCancer():
+    listaListas = datosEmpleoCancer()
+
+    resultados = []
+    for sublista in listaListas:
+        if len(sublista) == 1:
+            resultados.append(sublista[0])
+        else:
+            if len(sublista) == 2:
+                resultados.append(sublista[0] + ' y ' + sublista[1])
+            else:
+                cadena = ''
+                for elemento in sublista[:-2]:
+                    cadena += elemento + ', '
+                cadena += sublista[-2] + ' y ' + sublista[-1]
+                resultados.append(cadena)
+
+    return resultados

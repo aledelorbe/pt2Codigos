@@ -22,3 +22,22 @@ def datosEducacionCancer():
 
     eduGrupos = [eduGrupo0, eduGrupo1, eduGrupo2, eduGrupo3, eduGrupo4, eduGrupo5, eduGrupo6, eduGrupo7, eduGrupo8, eduGrupo9]
     return eduGrupos
+
+def formatoDatosEduCancer():
+    listaListas = datosEducacionCancer()
+
+    resultados = []
+    for sublista in listaListas:
+        if len(sublista) == 1:
+            resultados.append(sublista[0])
+        else:
+            if len(sublista) == 2:
+                resultados.append(sublista[0] + ' y ' + sublista[1])
+            else:
+                cadena = ''
+                for elemento in sublista[:-2]:
+                    cadena += elemento + ', '
+                cadena += sublista[-2] + ' y ' + sublista[-1]
+                resultados.append(cadena)
+
+    return resultados

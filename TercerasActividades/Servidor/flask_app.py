@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from models import educacionCancer, empleoCancer
 
 # Crear la app
 flask_app = Flask(__name__)
@@ -16,7 +17,9 @@ def inicio():
 
 @flask_app.route('/caracteristicasGrupos') 
 def caracteristicas():
-   return render_template('caracteristicasGrupos.html')
+   return render_template('caracteristicasGrupos.html', 
+                          nombresXgrupoEdu=educacionCancer.formatoDatosEduCancer(), 
+                          nombresXgrupoEmp=empleoCancer.formatoDatosEmpCancer())
 
 @flask_app.route('/correlacion') 
 def correlacion():
