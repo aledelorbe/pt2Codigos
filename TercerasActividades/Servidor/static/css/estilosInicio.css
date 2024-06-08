@@ -3,18 +3,25 @@
 	padding: 19px;
 }
 
-/* Titulos: info y manual */
-h2{
-	margin-bottom: 4px;
+/* Titulos: informacion*/
+.titles{
+	margin-bottom: 15px;
+}
+
+/* Subtitulos */
+.subtitle{
+	word-spacing: 2px;
+	margin-bottom: 11px;
 }
 
 /* El texto que tiene cada subtitulo */
-.sermon{
-	font-size: 14px;
-	font-family: Verdana, Arial;
-	line-height: 17px;
-	word-spacing: 2px;
+.sermones{
+    font-size: 16px;
+    line-height: 20px;
+    word-spacing: 1px;
+    margin-bottom: 24px;
 }
+
 
 
 

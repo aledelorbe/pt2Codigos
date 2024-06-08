@@ -13,6 +13,11 @@
 	clear: left;
 }
 
+/* tipografia */
+.letra {
+	font-family: Verdana, Arial;
+}
+
 /* FONDO DE LA PAGINA WEB */
 body{
 	background: url("https://p1.pxfuel.com/preview/234/634/343/leaves-foliage-tree-spring-leaves.jpg");
