@@ -34,7 +34,7 @@ CREATE TABLE EstadoCancer(
     id_cancer INT NOT NULL,
     cantidad INT NOT NULL,
     cluster INT NOT NULL,
-    porcentaje DECIMAL(5, 4) NOT NULL,
+    porcentaje FLOAT NOT NULL,
     CONSTRAINT FK_id_estado_can FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
     CONSTRAINT FK_id_cancer FOREIGN KEY (id_cancer) REFERENCES Cancer(id_cancer)
 );
@@ -44,7 +44,7 @@ CREATE TABLE EstadoEscolaridad(
     id_escolaridad INT NOT NULL,
     cantidad INT NOT NULL,
     cluster INT NOT NULL,
-    porcentaje DECIMAL(5, 4) NOT NULL,
+    porcentaje FLOAT NOT NULL,
     CONSTRAINT FK_id_estado_esco FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
     CONSTRAINT FK_id_escolaridad FOREIGN KEY (id_escolaridad) REFERENCES Escolaridad(id_escolaridad)
 );
@@ -54,7 +54,7 @@ CREATE TABLE EstadoOcupacion(
     id_ocupacion INT NOT NULL,
     cantidad INT NOT NULL,
     cluster INT NOT NULL,
-    porcentaje DECIMAL(5, 4) NOT NULL,
+    porcentaje FLOAT NOT NULL,
     CONSTRAINT FK_id_estado_ocu FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
     CONSTRAINT FK_id_ocupacion FOREIGN KEY (id_ocupacion) REFERENCES Ocupacion(id_ocupacion)
 );

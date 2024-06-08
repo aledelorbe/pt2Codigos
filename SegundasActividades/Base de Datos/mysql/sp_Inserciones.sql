@@ -8,7 +8,7 @@ CREATE PROCEDURE sp_insertarEstadoCancer(
     IN n_cancer VARCHAR(40), 
     IN n_cantidad INT, 
     IN n_cluster INT, 
-    IN f_porcentaje DECIMAL(5, 4)
+    IN f_porcentaje FLOAT
 )
 BEGIN
     DECLARE d_id_estado INT;
@@ -40,7 +40,7 @@ CREATE PROCEDURE sp_insertarEstadoEscolaridad(
     IN n_escolaridad VARCHAR(40), 
     IN n_cantidad INT, 
     IN n_cluster INT, 
-    IN n_porcentaje DECIMAL(5, 4)
+    IN n_porcentaje FLOAT
 )
 BEGIN
     DECLARE d_id_estado INT;
@@ -72,7 +72,7 @@ CREATE PROCEDURE sp_insertarEstadoOcupacion(
     IN n_ocupacion VARCHAR(90), 
     IN n_cantidad INT, 
     IN n_cluster INT, 
-    IN n_porcentaje DECIMAL(5, 4)
+    IN n_porcentaje FLOAT
 )
 BEGIN
     DECLARE d_id_estado INT;

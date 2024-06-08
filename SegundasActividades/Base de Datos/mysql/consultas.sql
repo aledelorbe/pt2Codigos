@@ -14,13 +14,13 @@ SELECT *
 FROM Ocupacion;
 
 -- Consultas de las relaciones ----------------------------------------
-SELECT *
+SELECT count(*)
 FROM EstadoCancer;
 
-SELECT *
+SELECT count(*)
 FROM EstadoOcupacion;
 
-SELECT *
+SELECT count(*)
 FROM EstadoEscolaridad;
 
 -- Para saber el no total de personas con cáncer
