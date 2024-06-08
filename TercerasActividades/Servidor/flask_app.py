@@ -14,6 +14,14 @@ def index():
 def inicio():
    return render_template('inicio.html')
 
+@flask_app.route('/caracteristicasGrupos') 
+def caracteristicas():
+   return render_template('caracteristicasGrupos.html')
+
+@flask_app.route('/correlacion') 
+def correlacion():
+   return render_template('correlacion.html')
+
 
 
 # Correr la app

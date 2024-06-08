@@ -1,0 +1,34 @@
+
+/* Contenedor del apartado caracteristicas */
+#content-caracteristicas{
+	padding: 19px;
+}
+
+#parrafo{
+    font-family: Verdana, Arial;
+    font-size: 15px;
+    word-spacing: 2px;
+    line-height: 20px;
+}
+
+/* Titulo de 'parametro X' */
+.title-caracteristicas{
+    margin-top: 29px;
+}
+
+/* Titulo de 'Grupo N' */
+.title-Grupos{
+	font-size: 15px;
+	font-family: Verdana, Arial;
+	word-spacing: 3px;
+    margin-bottom: 11px;
+    margin-top: 17px;
+    font-weight: bold;
+}
+
+/* Graficas de barras con las caracteristicas */
+.grafCaractGrupos{
+    display: block;
+    margin: 0 auto;
+	width: 90%;
+}

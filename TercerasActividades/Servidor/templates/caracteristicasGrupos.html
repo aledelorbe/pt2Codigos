@@ -1,0 +1,33 @@
+{% extends 'vistaGlobal.html' %}
+
+{% block titulo %}
+    Caracteristicas
+{% endblock %}
+
+{% block contenidoPagina %}
+    <div id="content-caracteristicas">
+        <p id="parrafo"> 
+            A continuación, se mostrarán las graficas de barra donde se observan las características que tienen 
+            en común cada grupo de los dos diferentes parámetros.
+        </p>
+
+        <!-- Grupos de Nivel educativo  -->
+        <h3 class="title-caracteristicas"> Características de los grupos en el parametro Nivel educativo </h3>
+                   
+        {% for i in range(1, 11, 1) %} 
+            <div class="title-Grupos">Grupo {{i}}</div>
+            <img class="grafCaractGrupos" src="{{ url_for('static', filename='img/eduGrupo' ~ i ~ '.png') }}"/>             
+            <img class="grafCaractGrupos" src="{{ url_for('static', filename='img/eduCanGrupo' ~ i ~ '.png') }}"/> 
+        {% endfor %}
+        
+        <!-- Grupos de Categoria de Empleo  -->
+        <h3 class="title-caracteristicas"> Características de los grupos en el parámetro Categoría de Empleo </h3>
+                   
+        {% for i in range(1, 14, 1) %} 
+            <div class="title-Grupos">Grupo {{i}}</div>
+            <img class="grafCaractGrupos" src="{{ url_for('static', filename='img/empGrupo' ~ i ~ '.png') }}"/>             
+            <img class="grafCaractGrupos" src="{{ url_for('static', filename='img/empCanGrupo' ~ i ~ '.png') }}"/> 
+        {% endfor %}
+
+    </div>
+{% endblock %}
