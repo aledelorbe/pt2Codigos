@@ -1,0 +1,22 @@
+
+/* Contenedor del apartado caracteristicas */
+#content-correlacion{
+	padding: 19px;
+}
+
+/* Titulo de 'Grupo N' */
+.title-mapaCalor{
+    font-size: 15px;
+    font-family: Verdana, Arial;
+    word-spacing: 1px;
+    margin-bottom: 19px;
+    margin-top: 24px;
+    font-weight: bold;
+}
+
+/* Graficas de barras con las caracteristicas */
+.mapaCalor{
+    display: block;
+    margin: 0 auto;
+	width: 96%;
+}

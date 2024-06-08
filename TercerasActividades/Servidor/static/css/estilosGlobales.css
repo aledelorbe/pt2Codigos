@@ -139,3 +139,11 @@ footer {
 #menu ul li:hover{
 	background: #235E3D;
 }
+
+/* Para todos los parrafos de todas las paginas */
+.parrafo{
+    font-family: Verdana, Arial;
+    font-size: 15px;
+    word-spacing: 2px;
+    line-height: 20px;
+}

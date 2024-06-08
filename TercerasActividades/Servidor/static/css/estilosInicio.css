@@ -8,15 +8,6 @@ h2{
 	margin-bottom: 4px;
 }
 
-/* Subtitulos */
-.subtitulos{
-	font-size: 16px;
-	font-family: Verdana, Arial;
-	font-weight: bold;
-	display: block;
-    margin-bottom: 2px;
-}
-
 /* El texto que tiene cada subtitulo */
 .sermon{
 	font-size: 14px;
