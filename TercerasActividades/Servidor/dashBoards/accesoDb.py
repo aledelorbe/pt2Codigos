@@ -1,16 +1,13 @@
-import pyodbc 
-import json
+import mysql.connector
 
 
-# Configura la cadena de conexión
-server = '192.168.0.8\MSSQL3'
-# server = '192.168.1.104\MSSQL3'
-database = 'Sociodemografico'
-username = 'sa'
-password = '123456'
-
-# Construye la cadena de conexión
-conn_str = f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
+# Configura la conexión
+config = {
+    'user': 'root',
+    'password': '12345678',
+    'host': 'localhost',
+    'database': 'Sociodemografico',
+}
 
 # METODOS QUE NO SE MANDAN A LLAMAR FUERA DEL ARCHIVO
 
@@ -40,7 +37,7 @@ def extraerClustersEstadoCancer():
 
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse los datos de estado con cancer
@@ -78,7 +75,7 @@ def extraerClustersEstadoEducacion():
     
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse los datos de estado con cancer
@@ -116,7 +113,7 @@ def extraerClustersEstadoOcupacion():
 
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse los datos de estado con cancer
@@ -170,7 +167,7 @@ def consultaBarras(parametro, numeroId):
 
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse los datos de estado con cancer
@@ -213,7 +210,7 @@ def consultaBarras(parametro, numeroId):
 def consultaTotal(numeroId):
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse los datos de estado con cancer
@@ -245,7 +242,7 @@ def consultaTotal(numeroId):
 def consultaEstados():
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse el nombre de todos los estados
@@ -277,7 +274,7 @@ def buscarIdEstado(nombreEstado):
     idEstado = None
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse el nombre de todos los estados
@@ -306,7 +303,7 @@ def buscarIdEstado(nombreEstado):
 def buscarNombreEstado(idEstado):
     try:
         # INTENTA ESTABLECER LA CONEXION
-        conn = pyodbc.connect(conn_str)
+        conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
 
         # Prepara la consulta para traerse el nombre de todos los estados
