@@ -354,6 +354,8 @@ def crearDashApp(flask_app):
                                 html.Ul(
                                     children=[
                                         html.Li(html.A('Inicio', href='/inicio')),
+                                        html.Li(html.A('Correlación', href='/correlacion')),
+                                        html.Li(html.A('Características', href='/caracteristicasGrupos')),
                                         html.Li(html.A('Aplicación', href='/dash'))
                                     ]
                                 )
