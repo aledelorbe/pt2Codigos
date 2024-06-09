@@ -1,5 +1,9 @@
 import mysql.connector
+import os
+from dotenv import load_dotenv
 
+# Cargar variables de entorno desde el archivo .env
+load_dotenv()
 
 # Configura la conexión (local)
 # config = {
@@ -9,14 +13,26 @@ import mysql.connector
 #     'database': 'Sociodemografico',
 # }
 
+# Obtener las variables de entorno
+# db_user = os.getenv('MYSQLUSER')
+# db_password = os.getenv('MYSQLPASSWORD')
+# db_host = os.getenv('MYSQLHOST')
+# db_name = os.getenv('MYSQLDATABASE')
+# db_port = os.getenv('MYSQLPORT')
+
 # Configura la conexión (nube)
-config = {
-    'user': 'root',
-    'password': 'zqKXrqhbEGIMbUfCiVtxqxrbhqcncrwg',
-    'host': 'monorail.proxy.rlwy.net',
-    'database': 'railway',
-    'port': 34238
-}
+# Estos datos se quitaron por seguridad
+# config = {
+# }
+
+# Configurar la conexión con la base de datos
+# config = {
+#     'user': db_user,
+#     'password': db_password,
+#     'host': db_host,
+#     'database': db_name,
+#     'port': db_port
+# }
 
 
 # METODOS QUE NO SE MANDAN A LLAMAR FUERA DEL ARCHIVO
@@ -53,7 +69,7 @@ def extraerClustersEstadoCancer():
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
-                    from EstadoCancer
+                    from estadocancer
                     group by id_estado, cluster
                     order by 1
                     """
@@ -91,7 +107,7 @@ def extraerClustersEstadoEducacion():
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
-                    from EstadoEscolaridad
+                    from estadoescolaridad
                     group by id_estado, cluster
                     order by 1
                     """
@@ -129,7 +145,7 @@ def extraerClustersEstadoOcupacion():
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = """
                     select id_estado, cluster
-                    from EstadoOcupacion
+                    from estadoocupacion
                     group by id_estado, cluster
                     order by 1
                     """
@@ -163,16 +179,16 @@ def consultaBarras(parametro, numeroId):
     tablaCatalogo = None
     nombreId = None
     if parametro == 'Tipo de Cancer':
-        tablaRelacion = 'EstadoCancer'
-        tablaCatalogo = 'Cancer'
+        tablaRelacion = 'estadocancer'
+        tablaCatalogo = 'cancer'
         nombreId = 'id_cancer'
     elif parametro == 'Nivel Educativo':
-        tablaRelacion = 'EstadoEscolaridad'
-        tablaCatalogo = 'Escolaridad'
+        tablaRelacion = 'estadoescolaridad'
+        tablaCatalogo = 'escolaridad'
         nombreId = 'id_escolaridad'
     else:
-        tablaRelacion = 'EstadoOcupacion'
-        tablaCatalogo = 'Ocupacion'
+        tablaRelacion = 'estadoocupacion'
+        tablaCatalogo = 'ocupacion'
         nombreId = 'id_ocupacion'
 
     try:
@@ -184,7 +200,7 @@ def consultaBarras(parametro, numeroId):
         sqlString = f"""
                     select e.nombre, ec.cluster, c.nombre, ec.cantidad, ec.porcentaje 
                     from {tablaRelacion} ec
-                    inner join Estado e
+                    inner join estado e
                     on e.id_estado = ec.id_estado
                     inner join {tablaCatalogo} c
                     on c.{nombreId} = ec.{nombreId}
@@ -226,8 +242,8 @@ def consultaTotal(numeroId):
         # Prepara la consulta para traerse los datos de estado con cancer
         sqlString = f"""
                     select e.id_estado, e.nombre, sum(ec.cantidad)
-                    from EstadoCancer ec
-                    inner join Estado e
+                    from estadocancer ec
+                    inner join estado e
                     on e.id_estado = ec.id_estado
                     group by e.id_estado, e.nombre
                     having e.id_estado = {numeroId}
@@ -258,7 +274,7 @@ def consultaEstados():
         # Prepara la consulta para traerse el nombre de todos los estados
         sqlString = f"""
                     select nombre
-                    from Estado
+                    from estado
                     """
         cursor.execute(sqlString) # Ejecuta la consulta
         consultaEstados = cursor.fetchall()
@@ -290,7 +306,7 @@ def buscarIdEstado(nombreEstado):
         # Prepara la consulta para traerse el nombre de todos los estados
         sqlString = f"""
                     select id_estado
-                    from Estado
+                    from estado
                     where nombre = '{nombreEstado}'
                     """
         cursor.execute(sqlString) # Ejecuta la consulta
@@ -319,7 +335,7 @@ def buscarNombreEstado(idEstado):
         # Prepara la consulta para traerse el nombre de todos los estados
         sqlString = f"""
                     select nombre
-                    from Estado
+                    from estado
                     where id_estado = {idEstado}
                     """
         cursor.execute(sqlString) # Ejecuta la consulta
