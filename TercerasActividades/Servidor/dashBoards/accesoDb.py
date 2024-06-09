@@ -1,13 +1,23 @@
 import mysql.connector
 
 
-# Configura la conexión
+# Configura la conexión (local)
+# config = {
+#     'user': 'root',
+#     'password': '12345678',
+#     'host': 'localhost',
+#     'database': 'Sociodemografico',
+# }
+
+# Configura la conexión (nube)
 config = {
     'user': 'root',
-    'password': '12345678',
-    'host': 'localhost',
-    'database': 'Sociodemografico',
+    'password': 'zqKXrqhbEGIMbUfCiVtxqxrbhqcncrwg',
+    'host': 'monorail.proxy.rlwy.net',
+    'database': 'railway',
+    'port': 34238
 }
+
 
 # METODOS QUE NO SE MANDAN A LLAMAR FUERA DEL ARCHIVO
 
