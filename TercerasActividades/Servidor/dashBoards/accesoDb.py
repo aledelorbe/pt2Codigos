@@ -1,17 +1,17 @@
 import mysql.connector
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 # Cargar variables de entorno desde el archivo .env
-load_dotenv()
+# load_dotenv()
 
 # Configura la conexión (local)
-# config = {
-#     'user': 'root',
-#     'password': '12345678',
-#     'host': 'localhost',
-#     'database': 'Sociodemografico',
-# }
+config = {
+    'user': 'root',
+    'password': '12345678',
+    'host': 'localhost',
+    'database': 'Sociodemografico',
+}
 
 # Obtener las variables de entorno
 # db_user = os.getenv('MYSQLUSER')
