@@ -17,7 +17,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     nombresEstados = []
 
     # Nombre resumido de los 32 estados
-    nombresEstados = ['Ags.', 'BC', 'BCS', 'Camp.', 'Chis.', 'Chih.', 'Coah.', 'Col.', 'CDMX', 'Dgo.', 'Gto.', 'Gro.', 'Hgo.', 'Jal.', 'Mich.', 'Mor.', 'Edo. Méx.', 'Nay.', 'NL', 'Oax.', 'Pue.', 'Qro.', 'QR', 'SLP', 'Sin.', 'Son.', 'Tab.', 'Tamps.', 'Tlax.', 'Ver.', 'Yuc.', 'Zac.']
+    nombresEstados = ['Ags.', 'BC', 'BCS', 'Camp.', 'Coah.', 'Col.', 'Chis.', 'Chih.', 'CDMX', 'Dgo.', 'Gto.', 'Gro.', 'Hgo.', 'Jal.', 'Mor.', 'Mich.', 'Edo. Méx.', 'Nay.', 'NL', 'Oax.', 'Pue.', 'Qro.', 'QR', 'SLP', 'Sin.', 'Son.', 'Tab.', 'Tamps.', 'Tlax.', 'Ver.', 'Yuc.', 'Zac.']
 
     # Lee el archivo GeoJSON
     with open('dashBoards/mexico.geojson', encoding='utf-8') as f:
