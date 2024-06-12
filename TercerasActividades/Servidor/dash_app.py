@@ -8,12 +8,16 @@ import dashBoards.funcionesAuxiliares as funcAux
 from dash.dependencies import Input, Output
 
 
+
 def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
     estados = []
     grupos = [] # Para que solo un estado por grupo se agregue a la leyenda
     longitudesCentrales = []
     latitudesCentrales = []
     nombresEstados = []
+
+    # Nombre resumido de los 32 estados
+    nombresEstados = ['Ags.', 'BC', 'BCS', 'Camp.', 'Chis.', 'Chih.', 'Coah.', 'Col.', 'CDMX', 'Dgo.', 'Gto.', 'Gro.', 'Hgo.', 'Jal.', 'Mich.', 'Mor.', 'Edo. Méx.', 'Nay.', 'NL', 'Oax.', 'Pue.', 'Qro.', 'QR', 'SLP', 'Sin.', 'Son.', 'Tab.', 'Tamps.', 'Tlax.', 'Ver.', 'Yuc.', 'Zac.']
 
     # Lee el archivo GeoJSON
     with open('dashBoards/mexico.geojson', encoding='utf-8') as f:
@@ -72,7 +76,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             ))
         
         # Almacenar el centro de cada region
-        nombresEstados.append(entidad)
+        # nombresEstados.append(entidad)
         longitudesCentrales.append(sum(longitudes) / len(longitudes))
         latitudesCentrales.append(sum(latitudes) / len(latitudes))
 
@@ -86,7 +90,7 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             text = nombresEstados[i],
             showlegend=False,
             hoverinfo='skip',  # Desactiva el cuadro de texto al pasar el cursor
-            textfont=dict(size=9)
+            textfont=dict(size=13, family="Verdana Bold")
         ))
         
     return estados
