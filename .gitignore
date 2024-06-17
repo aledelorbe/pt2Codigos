@@ -1,2 +1,5 @@
 *.csv
 *.pyc
+__pycache__/
+dashBoards/__pycache__/
+models/__pycache__/
