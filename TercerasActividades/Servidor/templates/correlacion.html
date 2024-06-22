@@ -7,21 +7,18 @@
 {% block contenidoPagina %}
     <div id="content-correlacion">
         <p class="parrafo"> 
-            A continuación, se muestran los mapas de calor para los parametros: 'Nivel escolar y cáncer'
-            y 'categoría de empleo y cáncer'.
+            A continuación, se muestran los mapas de calor para los parámetros 'Nivel escolar y cáncer' y 'categoría de empleo y cáncer'.
         </p>
 
         <!-- Mapa de calor de Nivel educativo y cancer -->
         <h3 class="title-mapaCalor"> 
-            Coeficientes de correlación de los Niveles 
-            educativos en comparación con los tipos de cáncer 
+            Coeficientes de correlación de los niveles educativos en comparación con los tipos de cáncer
         </h3>
         <img class="mapaCalor" src="{{ url_for('static', filename='img/correlacionEduCan.png') }}"/>  
         
         <!-- Mapa de calor de categoria de empleo y cancer -->
         <h3 class="title-mapaCalor"> 
-            Coeficientes de correlación de las Categorías 
-            de empleo en comparación con los tipos de cáncer 
+            Coeficientes de correlación de las categorías de empleo en comparación con los tipos de cáncer
         </h3>
         <img class="mapaCalor" src="{{ url_for('static', filename='img/correlacionEmpCan.png') }}"/>  
 
