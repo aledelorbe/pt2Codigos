@@ -10,7 +10,7 @@ config = {
     'user': 'root',
     'password': '12345678',
     'host': 'localhost',
-    'database': 'Sociodemografico',
+    'database': 'sociodemografico',
 }
 
 # Obtener las variables de entorno
