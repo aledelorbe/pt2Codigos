@@ -151,6 +151,9 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     # Consultar los datos que permiten la creacion de los graficos referentes a los tipos de cáncer
     estado, _, etiquetasCancer, cantidadesCancer, porcentajesCancer = db.consultaBarras('Tipo de Cancer', numeroId)
 
+    # Traduccion
+    etiquetasCancer = ['Vejiga', 'Hueso', 'Cerebro', 'Mama', 'Cérvix (Cuello del útero)', 'Colon y recto', 'Esófago', 'Ojos', 'Genitales femeninos', 'Vesícula biliar', 'Corazón', 'Linfoma de Hodgkin', 'Riñón', 'Laringe', 'Leucemia', 'Hígado', 'Pulmones', 'Linfoma', 'Genitales masculinos', 'Melanoma', 'Mesotelioma', 'Mieloma', 'Nervioso', 'Cavidad oral y faringe', 'Tracto respiratorio superior', 'Ovario', 'Páncreas', 'Próstata', 'Piel no melanoma', 'Tejido blando', 'Estómago', 'Testículo', 'Tiroides', 'Tráquea', 'Uréter', 'Otro tracto urinario']
+
     # Aplicar la función a cada etiqueta en la lista etiquetasParam
     etiquetasParam = insertar_salto_de_linea(etiquetasParam)
     alturaFiguras = 780
