@@ -91,10 +91,11 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             mode = 'text',
             text = nombresEstados[i],
             showlegend=False,
-            # hoverinfo='text',
-            # hovertext=nombresEstados[i],
-            hoverinfo='skip',  # Desactiva el cuadro de texto al pasar el cursor
-            textfont=dict(size=13, family="Verdana Bold")
+            hoverinfo='text',
+            hovertext=nombresEstados[i],
+            # hoverinfo='skip',  # Desactiva el cuadro de texto al pasar el cursor
+            textfont=dict(size=13, family="Verdana Bold"),
+            hoverlabel=dict(bgcolor="#235E3D", font=dict(color="#ffffff"))
         ))
         
     return estados
