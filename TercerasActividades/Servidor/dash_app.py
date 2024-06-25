@@ -51,8 +51,9 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
                 name=funcAux.gruposX[str(numCluster)],
                 legendgroup = funcAux.gruposX[str(numCluster)],
-                hoverinfo='text',
-                hovertext=entidad,
+                # hoverinfo='text',
+                # hovertext=entidad,
+                hoverinfo='skip', 
                 marker=dict(size=20, opacity=1)
             ))
 
@@ -69,8 +70,9 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
                 fillcolor = dictColoresMapaEstadoParametroX[str(numCluster)],
                 name=funcAux.gruposX[str(numCluster)],
                 legendgroup = funcAux.gruposX[str(numCluster)],
-                hoverinfo='text',
-                hovertext=entidad,
+                # hoverinfo='text',
+                # hovertext=entidad,
+                hoverinfo='skip', 
                 marker=dict(size=20, opacity=1),
                 showlegend=False
             ))
@@ -89,6 +91,8 @@ def generadorDeMapas(clustersEstadoParametroX, dictColoresMapaEstadoParametroX):
             mode = 'text',
             text = nombresEstados[i],
             showlegend=False,
+            # hoverinfo='text',
+            # hovertext=nombresEstados[i],
             hoverinfo='skip',  # Desactiva el cuadro de texto al pasar el cursor
             textfont=dict(size=13, family="Verdana Bold")
         ))
