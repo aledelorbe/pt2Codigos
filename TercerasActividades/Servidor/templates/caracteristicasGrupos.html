@@ -12,7 +12,7 @@
 
         <!-- Mapas de calor sobre el Nivel educativo  -->
         <h3 class="title-mapCalor"> 
-            Mapas de calor sobre las características de cada grupo en el parámetro Nivel Académico con cáncer
+            Mapas de calor sobre las características de cada grupo en el parámetro Nivel Académico y cáncer
         </h3>
         
         <img class="mapCalorEdu" src="{{ url_for('static', filename='img/mapCalorEduGrupos.png') }}"/>
@@ -20,14 +20,14 @@
 
         <!-- Mapas de calor sobre la categoria de empleo  -->
         <h3 class="title-mapCalor"> 
-            Mapas de calor sobre las características de cada grupo en el parámetro Categoría de Empleo con cáncer.
+            Mapas de calor sobre las características de cada grupo en el parámetro Categoría de Empleo y cáncer.
         </h3>
         
         <img class="mapCalorEmp" src="{{ url_for('static', filename='img/mapCalorEmpGrupos.png') }}"/>
         <img class="mapCalorEmp" src="{{ url_for('static', filename='img/mapCalorEmpCanGrupos.png') }}"/>
 
         <!-- Grupos de Nivel educativo  -->
-        <h3 class="title-caracteristicas"> Características de los grupos en el parámetro Nivel Académico </h3>
+        <h3 class="title-caracteristicas"> Características de los grupos en el parámetro Nivel Académico y cáncer </h3>
                    
         {% for i in range(1, 11, 1) %} 
             <div class="title-Grupos">Grupo {{i}}: {{nombresXgrupoEdu[i - 1]}}</div>
@@ -36,7 +36,7 @@
         {% endfor %}
         
         <!-- Grupos de Categoria de Empleo  -->
-        <h3 class="title-caracteristicas"> Características de los grupos en el parámetro Categoría de Empleo </h3>
+        <h3 class="title-caracteristicas"> Características de los grupos en el parámetro Categoría de Empleo y cáncer</h3>
                    
         {% for i in range(1, 14, 1) %} 
         <div class="title-Grupos">Grupo {{i}}: {{nombresXgrupoEmp[i - 1]}}</div>
