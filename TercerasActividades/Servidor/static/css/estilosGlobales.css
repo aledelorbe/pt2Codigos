@@ -71,10 +71,6 @@ body{
     width: 120px;
 }
 
-img {
-    cursor: pointer;
-}
-
 /* CONTENEDOR DEL TITULO */
 #content-titulo{
 	font-family: Verdana, Arial;
