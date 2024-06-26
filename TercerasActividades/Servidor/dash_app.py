@@ -117,7 +117,12 @@ def aplicarEstilosMapa(fig, tituloX):
 
     # Ajusta el título y las leyendas
     fig.update_layout(
-        title = tituloX,
+        title=dict(
+        text=tituloX,
+        font=dict(
+                family="Verdana",  # Tipo de letra
+            ),
+        ),
         geo = dict(
             scope='world',
             showland=True,
@@ -342,10 +347,8 @@ def crearDashApp(flask_app):
                             id='content-logos',
                             children=[
                                 html.Span(className='flotador', id='renglon1', children="d "),
-                                html.Span(className='flotador', id='separadorImg1', children="d "),
                                 html.Img(className='flotador', id='imgHeaderPol', src='/static/img/ipnLogo.png'),
-                                html.Span(className='flotador', id='separadorEntreImg', children="d "),
-                                html.Img(className='flotador', id='imgHeaderUpiita', src='https://www.upiita.ipn.mx/images/logo_upiita_ipn_varios_colores_logo_upiita_oro.png', alt='imagen'),
+                                html.Img(className='flotadorDer', id='imgHeaderUpiita', src='https://www.upiita.ipn.mx/images/logo_upiita_ipn_varios_colores_logo_upiita_oro.png', alt='imagen'),
                                 html.Div(className='limpiador')
                             ]
                         ),
@@ -456,7 +459,7 @@ def crearDashApp(flask_app):
                 # GRAFICOS PORCENTUALES
                 html.H2(
                     id="tituloPorcenData",
-                    children=' - Representacion porcentual de los datos - '
+                    children=' - Representación porcentual de los datos - '
                 ),
                 dcc.Graph(
                     id='barraParametro_0_1',

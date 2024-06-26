@@ -3,9 +3,14 @@
 	padding: 0px;
 }
 
-/* Para que multiples elementos floten */
+/* Para que multiples elementos floten a la izq*/
 .flotador{
 	float: left;
+}
+
+/* Para que multiples elementos floten a la der*/
+.flotadorDer{
+	float: right;
 }
 
 /* Para que limpie los elementos float */
@@ -48,27 +53,20 @@ body{
 	height: 20px;
 }
 
-/* Separador entre la pagina web y la pimer imagen (ipn) */
-#separadorImg1{
-	width: 50px;
-}
-
-/* Separador entre las dos imagenes  */
-#separadorEntreImg{
-	width: 578px;
-}
-
 /* Dimensiones de la imagen del ipn */
 #imgHeaderPol {
     height: 100px;
     width: 72px;
-	border-radius: 10px;
+	margin-left: 6%;
+	/* margin-top: 3%; */
 }
 
 /* Dimensiones de la imagen de upiita */
 #imgHeaderUpiita {
     height: 120px;
     width: 120px;
+	margin-right: 7%;
+	/* margin-top: 2%; */
 }
 
 /* CONTENEDOR DEL TITULO */

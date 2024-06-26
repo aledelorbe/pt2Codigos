@@ -3,9 +3,15 @@
 	padding: 0px;
 }
 
-/* Para que multiples elementos floten */
+/* Para que multiples elementos floten a la izq */
 .flotador{
 	float: left;
+	color: rgba(0, 0, 0, 0);
+}
+
+/* Para que multiples elementos floten a la der*/
+.flotadorDer{
+	float: right;
 	color: rgba(0, 0, 0, 0);
 }
 
@@ -49,32 +55,22 @@ body{
 	height: 20px;
 }
 
-/* Separador entre la pagina web y la pimer imagen (ipn) */
-#separadorImg1{
-	width: 50px;
-}
-
-/* Separador entre las dos imagenes  */
-#separadorEntreImg{
-	width: 578px;
-}
-
 /* Dimensiones de la imagen del ipn */
 #imgHeaderPol {
     height: 100px;
     width: 72px;
-	border-radius: 10px;
+	margin-left: 6%;
+	/* margin-top: 3%; */
 }
 
 /* Dimensiones de la imagen de upiita */
 #imgHeaderUpiita {
     height: 120px;
     width: 120px;
+	margin-right: 7%;
+	/* margin-top: 2%; */
 }
 
-img {
-    cursor: pointer;
-}
 
 /* CONTENEDOR DEL TITULO */
 #content-titulo{
@@ -160,6 +156,7 @@ img {
 	height: 108px;
 	text-transform: uppercase;
 	color: #1C1C1C;
+	padding-left: 2%;
 }
 
 /* Estilos de: representacion porcentual de los datos */
@@ -178,8 +175,10 @@ img {
 	margin-top: 4px;
 	height: 50px;
 	padding-top: 6px;
-    padding-left: 27px;
+    padding-left: 2%; /* Para hacerlo responsive */
+	padding-right: 3%; /* Para hacerlo responsive */
 }
+
 
 /* De la primer pareja de dropdowns */
 #contenedor{
@@ -189,9 +188,7 @@ img {
 /* De la segunda pareja de dropdowns */
 #contenedor2{
 	display: inline-flex;
-	padding-left: 74px; /* Mueve el espacio entre la primer pareja de dropdown (parametro) y la actual pareja de dropDown (estado) */
 	float: right;
-    margin-right: 65px;
 }
 
 /* estilos de los 2 textos de los selectores */
