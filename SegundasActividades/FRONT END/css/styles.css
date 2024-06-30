@@ -13,6 +13,48 @@
 	clear: left;
 }
 
+
+
+
+.letra{
+	font-family: 'Verdana', 'Arial';
+}
+
+.grupo{
+	margin-top: 15px;
+}
+
+.caracImportantes{
+    margin-top: 4px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+strong{
+	font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* FONDO DE LA PAGINA WEB */
 body{
 	background: url("https://p1.pxfuel.com/preview/234/634/343/leaves-foliage-tree-spring-leaves.jpg");
@@ -121,7 +163,7 @@ img {
 /* CONTENEDOR DE LOS CONTROLES */
 #content-controles{
 	margin-top: 4px;
-	height: 80px;
+	/* height: 80px; */
 }
 
 /* Espacio vertical entre el contenedor y el primer texto ('controles') */

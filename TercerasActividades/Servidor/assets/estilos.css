@@ -25,6 +25,8 @@
 	clear: left;
 }
 
+
+
 /* FONDO DE LA PAGINA WEB */
 body{
 	background: url("https://p1.pxfuel.com/preview/234/634/343/leaves-foliage-tree-spring-leaves.jpg");
@@ -153,10 +155,11 @@ body{
 	font-size: 24px;
 	letter-spacing: 4px;
 	line-height: 31px;
-	height: 108px;
+	/* height: 108px; */
 	text-transform: uppercase;
 	color: #1C1C1C;
 	padding-left: 2%;
+	padding-right: 2%;
 }
 
 /* Estilos de: representacion porcentual de los datos */

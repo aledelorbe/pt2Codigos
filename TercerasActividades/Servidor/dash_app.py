@@ -165,6 +165,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     alturaFiguras = 780
 
     # Crear la grafica de barras para el parametro seleccionado (forma cruda)
+    subtituloX = f'cada {parametroVerda} en el estado de {estado}'
+
     dataBarraParam = [go.Bar(x=etiquetasParam, 
                         y=cantidadesParam,
                         marker=dict(
@@ -172,8 +174,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraParam = go.Layout(
-        title=f"""         Cantidad de personas con cáncer en los años 2010 a 2019 por cada 
-                <br>       {parametroVerda} en el estado de {estado}""",
+        title=f"""         Cantidad de personas fallecidas por cáncer en los años 2010 a 2019 por
+                <br>{subtituloX.center(71, ' ')}""",
         xaxis=dict(title=parametroVerda,
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -195,6 +197,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     figuraParam = go.Figure(data=dataBarraParam, layout=estilosFiguraParam)
 
     # Crear la grafica de barras para los tipos de cancer (forma cruda)
+    subtituloX = f'cada Tipo de Cáncer en el estado de {estado}'
+
     dataBarraCancer = [go.Bar(x=etiquetasCancer, 
                         y=cantidadesCancer,
                         marker=dict(
@@ -202,8 +206,8 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraCancer = go.Layout(
-        title=f"""Cantidad de personas con cáncer en los años 2010 a 2019 por cada 
-                <br>       Tipo de Cáncer en el estado de {estado}""",
+        title=f"""Cantidad de personas fallecidas por cáncer en los años 2010 a 2019 por  
+                <br>{subtituloX.center(71, ' ')}""",
         xaxis=dict(title='Tipos de Cáncer',
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -234,6 +238,9 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     yticksValores = [i*increParam for i in range(0, int(maxiParam/increParam)+1)]
     yticksTexto = [str(round(i, 3)) for i in yticksValores]
 
+    subtituloX = f'2010 a 2019 por cada {parametroVerda} en el estado de'
+    subtituloX2 = f'{estado}'
+
     dataBarraParam_0_1 = [go.Bar(x=etiquetasParam, 
                         y=porcentajesParam,
                         marker=dict(
@@ -241,8 +248,9 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraParam_0_1 = go.Layout(
-        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 
-                <br>    por cada {parametroVerda} en el estado de {estado}""",
+        title=f"""Porcentaje de la cantidad de personas fallecidas por cáncer en los años 
+                <br>{subtituloX.center(71, ' ')}
+                <br>{subtituloX2.center(71, ' ')}""",
         xaxis=dict(title=parametroVerda,
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -262,7 +270,13 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=alturaFiguras 
+        height=alturaFiguras,
+        margin=dict(
+            l=50,  # margen izquierdo
+            r=50,  # margen derecho
+            b=50,  # margen inferior
+            t=150  # margen superior aumentado para el título largo
+        )
     )
     figuraParam_0_1 = go.Figure(data=dataBarraParam_0_1, layout=estilosFiguraParam_0_1)
 
@@ -272,6 +286,9 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
     yticksValores = [i*increCancer for i in range(0, int(maxiCancer/increCancer)+1)]
     yticksTexto = [str(round(i, 3)) for i in yticksValores]
 
+    subtituloX = f'2010 a 2019 por cada Tipo de Cáncer en el estado de'
+    subtituloX2 = f'{estado}'
+
     dataBarraCancer_0_1 = [go.Bar(x=etiquetasCancer, 
                         y=porcentajesCancer,
                         marker=dict(
@@ -279,8 +296,9 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
                             line=dict(color='black')  
                         ))] 
     estilosFiguraCancer_0_1 = go.Layout(
-        title=f"""Porcentaje de la cantidad de personas con cáncer en los años 2010 a 2019 
-                <br>    por cada Tipo de Cáncer en el estado de {estado}""",
+        title=f"""Porcentaje de la cantidad de personas fallecidas por cáncer en los años 
+                <br>{subtituloX.center(71, ' ')}
+                <br>{subtituloX2.center(71, ' ')}""",
         xaxis=dict(title='Tipo de Cáncer',
                     showgrid=True,  
                     gridcolor='lightgray', 
@@ -300,7 +318,13 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
             size=16,
             color='black'
         ),
-        height=alturaFiguras 
+        height=alturaFiguras,
+            margin=dict(
+            l=50,  # margen izquierdo
+            r=50,  # margen derecho
+            b=50,  # margen inferior
+            t=150  # margen superior aumentado para el título largo
+        )
     )
     figuraCancer_0_1 = go.Figure(data=dataBarraCancer_0_1, layout=estilosFiguraCancer_0_1)
 
@@ -309,7 +333,7 @@ def generadorGraficos(parametroVerda, numeroId, diccColores):
 
 def generadorTotal(numeroId):
     estado, total = db.consultaTotal(numeroId)
-    totalString = f'En los años 2010 a 2019 en {estado} se registrarón un total de {total:,} personas con algun tipo de cáncer'
+    totalString = f'En los años 2010 a 2019 en {estado} se registrarón un total de {total:,} personas fallecidas por algun tipo de cáncer'
 
     return totalString
 
